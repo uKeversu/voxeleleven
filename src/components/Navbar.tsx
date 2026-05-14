@@ -20,7 +20,7 @@ export default function Navbar() {
             position="fixed"
             elevation={0}
             sx={{
-                background: "backgroud.default",
+                background: "background.default",
                 backdropFilter: "blur(20px)",
                 borderBottom: "1px solid",
                 borderColor: "divider",
@@ -36,16 +36,33 @@ export default function Navbar() {
                     },
                 }}
             >
-                <Typography
-                    variant="h5"
+                <Box
+                    component="img"
+                    src="/v11-logo.png"
+                    alt="Voxel Eleven"
                     sx={{
-                        fontWeight: "bold",
-                        color: "primary.main",
-                        letterSpacing: 2,
+                        height: {
+                            xs: 40,
+                            md: 52,
+                        },
+
+                        width: "auto",
+                        objectFit: "contain",
+
+                        cursor: "pointer",
+
+                        transition: "0.3s",
+
+                        filter:
+                            "drop-shadow(0 0 2px #00c21aff)",
+
+                        "&:hover": {
+                            transform: "scale(1.03)",
+                            filter:
+                                "drop-shadow(0 0 2px #00ff40ff)",
+                        },
                     }}
-                >
-                    V11
-                </Typography>
+                />
 
                 <Box
                     sx={{
