@@ -17,6 +17,10 @@ export default function Hero() {
                     xs: "100vh",
                     md: "100vh",
                 },
+                position: "relative",
+                zIndex: 0,
+                isolation: "isolate",
+                pointerEvents: "auto",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -27,7 +31,6 @@ export default function Hero() {
                 pt: 10,
                 background:
                     "linear-gradient(to bottom, #050505, #0f0f0f)",
-                position: "relative",
                 overflow: "hidden",
             }}
         >
@@ -43,6 +46,7 @@ export default function Hero() {
                     borderRadius: "50%",
                     filter: "blur(180px)",
                     opacity: 0.2,
+                    pointerEvents: "none"
                 }}
             />
 
@@ -134,13 +138,9 @@ export default function Hero() {
                         md: "flex",
                     },
 
-                    width: 400,
+                    width: 450,
                     height: 500,
-                    borderRadius: 10,
-
-                    background: "linear-gradient(145deg, #111, #1a1a1a)",
-
-                    boxShadow: "0 0 20px #00c21aff",
+                    borderRadius: 5,
 
                     alignItems: "center",
                     justifyContent: "center",
@@ -164,7 +164,7 @@ export default function Hero() {
 
                         "&:hover": {
                             transform: "scale(1.05)",
-                            filter: "drop-shadow(0 0 15px #00ff40ff)",
+                            filter: "drop-shadow(0 0 2px #00ff40ff)",
                         },
                     }}
                 />

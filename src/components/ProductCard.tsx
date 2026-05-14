@@ -13,6 +13,8 @@ import {
     Button,
 } from "@mui/material";
 
+import Link from "next/link";
+
 import { Product } from "@/types/product";
 
 type Props = {
@@ -24,29 +26,25 @@ export default function ProductCard({
 }: Props) {
     return (
         <Card
+            component={Link}
+            href={`/produto/${product.slug}`}
             sx={{
                 position: "relative",
-
+                textDecoration: "none",
+                color: "inherit",
+                display: "block",
                 backgroundColor: "background.paper",
-
                 borderRadius: 3,
-
                 overflow: "hidden",
-
                 border: "1px solid",
                 borderColor: "divider",
-
                 transition:
                     "transform 0.3s ease, box-shadow 0.3s ease",
-
                 cursor: "pointer",
-
                 "&:hover": {
                     transform: "translateY(-8px)",
-
                     boxShadow:
                         "0 0 35px rgba(0,255,64,0.18)",
-
                     "& .product-image": {
                         transform: "scale(1.05)",
                     },
@@ -169,7 +167,7 @@ export default function ProductCard({
                                 px: 2,
                             }}
                         >
-                            Comprar
+                            Ver produto
                         </Button>
                     </Stack>
                 </Stack>

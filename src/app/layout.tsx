@@ -1,24 +1,36 @@
+// src/app/layout.tsx
+
 import type { Metadata } from "next";
 
-import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 import ThemeRegistry from "@/providers/ThemeRegistry";
 
 export const metadata: Metadata = {
-  title: "VoxelEleven",
-  description: "Football Culture",
+  title: "Voxel Eleven",
+  description:
+    "Camisas premium inspiradas no futebol mundial.",
 };
+
+type Props = {
+  children: React.ReactNode;
+};
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Props) {
   return (
-    <html lang="pt-br">
+    <html lang="pt-BR">
       <body>
         <ThemeRegistry>
+          <Navbar />
+
           {children}
+
+          <Footer />
         </ThemeRegistry>
       </body>
     </html>
