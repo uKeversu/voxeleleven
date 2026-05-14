@@ -6,14 +6,14 @@ const theme = createTheme({
     mode: "dark",
 
     primary: {
-      main: "#00ff40ff", // neon principal VE11
+      main: "#00ff40ff", // neon principal V11
       light: "#3dff4dff",
       dark: "#00c21aff",
       contrastText: "#000",
     },
 
     secondary: {
-      main: "#00E5FF", // azul energético (detalhes esportivos)
+      main: "#00E5FF",
     },
 
     background: {
@@ -25,6 +25,14 @@ const theme = createTheme({
       primary: "#FFFFFF",
       secondary: "#A0A0A0",
       disabled: "#666",
+    },
+
+    success: {
+      main: "#22c55e"
+    },
+
+    grey: {
+      900: "#0A0A0A"
     },
 
     divider: "rgba(255,255,255,0.08)",

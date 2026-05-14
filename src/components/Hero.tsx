@@ -13,7 +13,10 @@ export default function Hero() {
     return (
         <Box
             sx={{
-                minHeight: "100vh",
+                minHeight: {
+                    xs: "100vh",
+                    md: "100vh",
+                },
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -50,30 +53,38 @@ export default function Hero() {
                     maxWidth: 600,
                 }}
             >
-                <Typography
-                    variant="h2"
-                    sx={{
-                        fontWeight: "bold",
-                        fontSize: {
-                            xs: "2rem",
-                            md: "4.5rem",
-                        },
-                        lineHeight: 1,
-                    }}
-                >
-                    VISTA MAIS QUE
-                    <br />
-                    UMA CAMISA
-                    <br />
-                    <Typography sx={{
-                        fontWeight: "bold",
-                        fontSize: {
-                            xs: "2rem",
-                            md: "4.5rem",
-                        },
-                        color: "primary.main"
-                    }}>VISTA CULTURA</Typography>
-                </Typography>
+                <Box>
+                    <Typography
+                        variant="h2"
+                        sx={{
+                            fontWeight: "bold",
+                            fontSize: {
+                                xs: "2rem",
+                                md: "4.5rem",
+                            },
+                            lineHeight: 1,
+                        }}
+                    >
+                        VISTA MAIS QUE
+                        <br />
+                        UMA CAMISA
+                    </Typography>
+
+                    <Typography
+                        variant="h2"
+                        sx={{
+                            fontWeight: "bold",
+                            fontSize: {
+                                xs: "2rem",
+                                md: "4.5rem",
+                            },
+                            lineHeight: 1,
+                            color: "primary.main",
+                        }}
+                    >
+                        VISTA CULTURA
+                    </Typography>
+                </Box>
 
                 <Typography
                     sx={{
@@ -146,7 +157,7 @@ export default function Hero() {
                     alt="Voxel Eleven"
                     sx={{
                         width: "100%",
-                        height: "100%", 
+                        height: "100%",
                         objectFit: "cover",
 
                         transition: "0.3s",

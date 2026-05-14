@@ -42,8 +42,8 @@ export default function Navbar() {
                     alt="Voxel Eleven"
                     sx={{
                         height: {
-                            xs: 40,
-                            md: 52,
+                            xs: 30,
+                            md: 40,
                         },
 
                         width: "auto",
