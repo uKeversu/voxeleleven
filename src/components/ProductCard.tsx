@@ -33,7 +33,7 @@ export default function ProductCard({
                 textDecoration: "none",
                 color: "inherit",
                 display: "block",
-                backgroundColor: "background.paper",
+                backgroundColor: "black",
                 borderRadius: 3,
                 overflow: "hidden",
                 border: "1px solid",
@@ -135,7 +135,7 @@ export default function ProductCard({
                             fontSize: "0.95rem",
                         }}
                     >
-                        Camisa premium edição 2025
+                        {product.description}
                     </Typography>
 
                     <Stack

@@ -6,6 +6,10 @@ import { useState, useEffect } from "react";
 
 import Link from "next/link";
 
+import { useCart } from "@/context/CartContext";
+
+import CartDrawer from "@/components/CartDrawer";
+
 import {
     AppBar,
     Toolbar,
@@ -15,6 +19,7 @@ import {
     Drawer,
     Stack,
     Typography,
+    Badge,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -26,14 +31,17 @@ const navItems = [
         label: "Catálogo",
         href: "/catalogo",
     },
+
     {
         label: "Brasileiros",
         href: "/catalogo",
     },
+
     {
         label: "Europeus",
         href: "/catalogo",
     },
+
     {
         label: "Seleções",
         href: "/catalogo",
@@ -41,7 +49,13 @@ const navItems = [
 ];
 
 export default function Navbar() {
-    const [open, setOpen] = useState(false);
+    const { cartCount } = useCart();
+
+    const [mobileMenuOpen, setMobileMenuOpen] =
+        useState(false);
+
+    const [cartOpen, setCartOpen] =
+        useState(false);
 
     const [scrolled, setScrolled] =
         useState(false);
@@ -65,26 +79,37 @@ export default function Navbar() {
 
     return (
         <>
+            {/* NAVBAR */}
             <AppBar
                 position="fixed"
+                elevation={0}
                 sx={{
                     zIndex: 2000,
-                    background: scrolled
-                        ? "rgba(5,5,5,0.85)"
-                        : "transparent",
-                    backdropFilter: "blur(20px)",
-                    touchAction: "manipulation",
 
+                    background: scrolled
+                        ? "rgba(5,5,5,0.88)"
+                        : "transparent",
+
+                    backdropFilter:
+                        "blur(20px)",
+
+                    borderBottom:
+                        scrolled
+                            ? "1px solid rgba(255,255,255,0.06)"
+                            : "1px solid transparent",
+
+                    transition:
+                        "all 0.3s ease",
                 }}
             >
                 <Toolbar
                     sx={{
+                        minHeight: 80,
+
                         display: "flex",
 
                         justifyContent:
                             "space-between",
-
-                        minHeight: 80,
 
                         px: {
                             xs: 2,
@@ -98,8 +123,12 @@ export default function Navbar() {
                         href="/"
                         sx={{
                             display: "flex",
+
                             alignItems:
                                 "center",
+
+                            textDecoration:
+                                "none",
                         }}
                     >
                         <Box
@@ -108,8 +137,8 @@ export default function Navbar() {
                             alt="Voxel Eleven"
                             sx={{
                                 height: {
-                                    xs: 32,
-                                    md: 40,
+                                    xs: 34,
+                                    md: 42,
                                 },
 
                                 width: "auto",
@@ -121,20 +150,20 @@ export default function Navbar() {
                                     "0.3s",
 
                                 filter:
-                                    "drop-shadow(0 0 2px #00c21aff)",
+                                    "drop-shadow(0 0 2px #00c21a)",
 
                                 "&:hover": {
                                     transform:
                                         "scale(1.03)",
 
                                     filter:
-                                        "drop-shadow(0 0 3px #00ff40ff)",
+                                        "drop-shadow(0 0 4px #00ff40)",
                                 },
                             }}
                         />
                     </Box>
 
-                    {/* DESKTOP */}
+                    {/* MENU DESKTOP */}
                     <Stack
                         direction="row"
                         spacing={1}
@@ -152,21 +181,23 @@ export default function Navbar() {
                                 href={item.href}
                                 color="inherit"
                                 sx={{
-                                    px: 2,
+                                    px: 2.5,
+
+                                    py: 1,
 
                                     borderRadius: 3,
+
+                                    fontWeight: 600,
 
                                     color:
                                         "text.primary",
 
-                                    fontWeight: 600,
-
                                     transition:
-                                        "0.3s",
+                                        "0.25s",
 
                                     "&:hover": {
                                         backgroundColor:
-                                            "rgba(255,255,255,0.04)",
+                                            "rgba(255,255,255,0.05)",
 
                                         color:
                                             "primary.main",
@@ -187,40 +218,58 @@ export default function Navbar() {
                                 "center",
                         }}
                     >
-                        <IconButton
-                            sx={{
-                                border:
-                                    "1px solid",
-
-                                borderColor:
-                                    "divider",
-
-                                backgroundColor:
-                                    "rgba(255,255,255,0.02)",
-
-                                transition:
-                                    "0.3s",
-
-                                "&:hover": {
-                                    backgroundColor:
-                                        "primary.main",
-
-                                    color:
-                                        "primary.contrastText",
-
-                                    transform:
-                                        "translateY(-2px)",
-                                },
-                            }}
+                        {/* CARRINHO */}
+                        <Badge
+                            badgeContent={
+                                cartCount
+                            }
+                            color="primary"
                         >
-                            <ShoppingBagOutlinedIcon />
-                        </IconButton>
+                            <IconButton
+                                onClick={() =>
+                                    setCartOpen(
+                                        true
+                                    )
+                                }
+                                sx={{
+                                    border:
+                                        "1px solid",
 
-                        {/* MOBILE MENU */}
+                                    borderColor:
+                                        "divider",
+
+                                    backgroundColor:
+                                        "rgba(255,255,255,0.03)",
+
+                                    transition:
+                                        "0.3s",
+
+                                    "&:hover": {
+                                        backgroundColor:
+                                            "primary.main",
+
+                                        color:
+                                            "primary.contrastText",
+
+                                        transform:
+                                            "translateY(-2px)",
+
+                                        boxShadow:
+                                            "0 0 20px rgba(0,255,64,0.35)",
+                                    },
+                                }}
+                            >
+                                <ShoppingBagOutlinedIcon />
+                            </IconButton>
+                        </Badge>
+
+                        {/* MENU MOBILE */}
                         <IconButton
-                            onClick={() => {
-                                setOpen(true);
-                            }}
+                            onClick={() =>
+                                setMobileMenuOpen(
+                                    true
+                                )
+                            }
                             sx={{
                                 display: {
                                     xs: "flex",
@@ -234,7 +283,7 @@ export default function Navbar() {
                                     "divider",
 
                                 backgroundColor:
-                                    "rgba(255,255,255,0.02)",
+                                    "rgba(255,255,255,0.03)",
                             }}
                         >
                             <MenuIcon />
@@ -243,17 +292,22 @@ export default function Navbar() {
                 </Toolbar>
             </AppBar>
 
-            {/* DRAWER */}
+            {/* DRAWER MOBILE */}
             <Drawer
                 anchor="right"
-                open={open}
-                onClose={() => setOpen(false)}
+                open={mobileMenuOpen}
+                onClose={() =>
+                    setMobileMenuOpen(
+                        false
+                    )
+                }
                 slotProps={{
                     paper: {
                         sx: {
                             width: 320,
 
-                            background: "#050505",
+                            background:
+                                "#050505",
 
                             borderLeft:
                                 "1px solid rgba(255,255,255,0.08)",
@@ -276,7 +330,7 @@ export default function Navbar() {
                             "column",
                     }}
                 >
-                    {/* TOP */}
+                    {/* HEADER */}
                     <Box
                         sx={{
                             display: "flex",
@@ -293,7 +347,7 @@ export default function Navbar() {
                         <Typography
                             variant="h6"
                             sx={{
-                                fontWeight: 700,
+                                fontWeight: 800,
 
                                 color:
                                     "primary.main",
@@ -304,7 +358,9 @@ export default function Navbar() {
 
                         <IconButton
                             onClick={() =>
-                                setOpen(false)
+                                setMobileMenuOpen(
+                                    false
+                                )
                             }
                         >
                             <CloseIcon />
@@ -319,7 +375,7 @@ export default function Navbar() {
                                 component={Link}
                                 href={item.href}
                                 onClick={() =>
-                                    setOpen(
+                                    setMobileMenuOpen(
                                         false
                                     )
                                 }
@@ -327,7 +383,7 @@ export default function Navbar() {
                                     justifyContent:
                                         "flex-start",
 
-                                    py: 1.5,
+                                    py: 1.7,
 
                                     px: 2,
 
@@ -339,7 +395,7 @@ export default function Navbar() {
                                     fontSize:
                                         "1rem",
 
-                                    fontWeight: 600,
+                                    fontWeight: 700,
 
                                     transition:
                                         "0.3s",
@@ -352,7 +408,7 @@ export default function Navbar() {
                                             "primary.main",
 
                                         transform:
-                                            "translateX(6px)",
+                                            "translateX(5px)",
                                     },
                                 }}
                             >
@@ -383,6 +439,14 @@ export default function Navbar() {
                     </Box>
                 </Box>
             </Drawer>
+
+            {/* DRAWER CARRINHO */}
+            <CartDrawer
+                open={cartOpen}
+                onClose={() =>
+                    setCartOpen(false)
+                }
+            />
         </>
     );
 }

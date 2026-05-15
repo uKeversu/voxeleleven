@@ -2,58 +2,142 @@
 
 "use client";
 
+import { useMemo, useState } from "react";
+
 import {
     Box,
     Typography,
     Grid,
-    TextField,
-    InputAdornment,
-    Chip,
-    Stack,
+    Button,
+    Drawer,
+    IconButton,
 } from "@mui/material";
 
-import SearchIcon from "@mui/icons-material/Search";
-
-import { useMemo, useState } from "react";
+import TuneIcon from "@mui/icons-material/Tune";
+import CloseIcon from "@mui/icons-material/Close";
 
 import ProductCard from "@/components/ProductCard";
 
+import FiltersSidebar from "@/components/FiltersSidebar";
+
 import { products } from "@/data/products";
 
-const categories = [
-    "Todos",
-    "Brasileiros",
-    "Europeus",
-    "Seleções",
-    "Retrô",
-];
-
 export default function CatalogoPage() {
-    const [search, setSearch] = useState("");
+    const [search, setSearch] =
+        useState("");
 
     const [selectedCategory, setSelectedCategory] =
         useState("Todos");
 
+    const [selectedTeam, setSelectedTeam] =
+        useState("Todos");
+
+    const [sortBy, setSortBy] =
+        useState("recentes");
+
+    const [priceRange, setPriceRange] =
+        useState<number[]>(([0, 300]));
+
+    const [onlyFeatured, setOnlyFeatured] =
+        useState(false);
+
+    const [
+        mobileFiltersOpen,
+        setMobileFiltersOpen,
+    ] = useState(false);
+
     const filteredProducts = useMemo(() => {
-        return products.filter((product) => {
-            const matchesSearch =
+        let filtered = [...products];
+
+        // SEARCH
+        filtered = filtered.filter(
+            (product) =>
                 product.name
                     .toLowerCase()
-                    .includes(search.toLowerCase()) ||
+                    .includes(
+                        search.toLowerCase()
+                    ) ||
                 product.team
                     .toLowerCase()
-                    .includes(search.toLowerCase());
+                    .includes(
+                        search.toLowerCase()
+                    )
+        );
 
-            const matchesCategory =
-                selectedCategory === "Todos" ||
-                product.category === selectedCategory;
-
-            return (
-                matchesSearch &&
-                matchesCategory
+        // CATEGORY
+        if (
+            selectedCategory !== "Todos"
+        ) {
+            filtered = filtered.filter(
+                (product) =>
+                    product.category ===
+                    selectedCategory
             );
-        });
-    }, [search, selectedCategory]);
+        }
+
+        // TEAM
+        if (selectedTeam !== "Todos") {
+            filtered = filtered.filter(
+                (product) =>
+                    product.team ===
+                    selectedTeam
+            );
+        }
+
+        // PRICE
+        filtered = filtered.filter(
+            (product) =>
+                product.price >=
+                priceRange[0] &&
+                product.price <=
+                priceRange[1]
+        );
+
+        // FEATURED
+        if (onlyFeatured) {
+            filtered = filtered.filter(
+                (product) =>
+                    product.featured
+            );
+        }
+
+        // SORT
+        switch (sortBy) {
+            case "menor-preco":
+                filtered.sort(
+                    (a, b) =>
+                        a.price - b.price
+                );
+                break;
+
+            case "maior-preco":
+                filtered.sort(
+                    (a, b) =>
+                        b.price - a.price
+                );
+                break;
+
+            case "az":
+                filtered.sort((a, b) =>
+                    a.name.localeCompare(
+                        b.name
+                    )
+                );
+                break;
+
+            default:
+                break;
+        }
+
+        return filtered;
+    }, [
+        search,
+        selectedCategory,
+        selectedTeam,
+        sortBy,
+        priceRange,
+        onlyFeatured,
+    ]);
 
     return (
         <Box
@@ -64,8 +148,9 @@ export default function CatalogoPage() {
                     "background.default",
 
                 px: {
-                    xs: 3,
-                    md: 10,
+                    xs: 2,
+                    md: 6,
+                    xl: 10,
                 },
 
                 py: 14,
@@ -80,9 +165,14 @@ export default function CatalogoPage() {
                 <Typography
                     variant="h2"
                     sx={{
-                        fontWeight: 800,
+                        fontWeight: 900,
 
                         mb: 2,
+
+                        fontSize: {
+                            xs: "2.5rem",
+                            md: "4rem",
+                        },
                     }}
                 >
                     Catálogo
@@ -90,163 +180,305 @@ export default function CatalogoPage() {
 
                 <Typography
                     sx={{
-                        color: "text.secondary",
+                        color:
+                            "text.secondary",
+
                         maxWidth: 700,
+
+                        fontSize: {
+                            xs: "1rem",
+                            md: "1.1rem",
+                        },
                     }}
                 >
-                    Explore a coleção completa da
-                    Voxel Eleven.
+                    Explore toda a coleção
+                    premium da Voxel Eleven.
                 </Typography>
             </Box>
 
-            {/* FILTROS */}
-            <Stack
-                spacing={3}
+            {/* MOBILE BUTTON */}
+            <Button
+                startIcon={<TuneIcon />}
+                variant="outlined"
+                onClick={() =>
+                    setMobileFiltersOpen(
+                        true
+                    )
+                }
                 sx={{
-                    mb: 6,
+                    display: {
+                        xs: "flex",
+                        lg: "none",
+                    },
+
+                    mb: 4,
+
+                    borderRadius: 999,
+
+                    px: 3,
+                    py: 1.2,
                 }}
             >
-                {/* Busca */}
-                <TextField
-                    fullWidth
-                    variant="outlined"
-                    placeholder="Buscar camisa, time ou coleção..."
-                    value={search}
-                    onChange={(e) =>
-                        setSearch(e.target.value)
-                    }
-                    slotProps={{
-                        input: {
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <SearchIcon />
-                                </InputAdornment>
-                            ),
-                        },
+                Filtros
+            </Button>
+
+            <Grid
+                container
+                spacing={4}
+                sx={{
+                    alignItems: "flex-start",
+                }}
+            >
+                {/* SIDEBAR */}
+                <Grid
+                    size={{
+                        xs: 12,
+                        lg: 3,
                     }}
                     sx={{
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: 4,
-
-                            backgroundColor:
-                                "background.paper",
+                        display: {
+                            xs: "none",
+                            lg: "block",
                         },
-                    }}
-                />
-
-                {/* Categorias */}
-                <Stack
-                    direction="row"
-                    spacing={1.5}
-                    useFlexGap
-                    sx={{
-                        flexWrap: "wrap",
                     }}
                 >
-                    {categories.map((category) => {
-                        const active =
-                            selectedCategory ===
-                            category;
+                    <Box
+                        sx={{
+                            position:
+                                "sticky",
 
-                        return (
-                            <Chip
-                                key={category}
-                                label={category}
-                                clickable
-                                onClick={() =>
-                                    setSelectedCategory(
-                                        category
-                                    )
-                                }
-                                sx={{
-                                    px: 1,
+                            top: 100,
 
-                                    height: 38,
+                            display: "flex",
 
-                                    borderRadius: 999,
+                            flexDirection:
+                                "column",
 
-                                    fontWeight: 600,
+                            gap: 3,
+                        }}
+                    >
+                        <FiltersSidebar
+                            search={search}
+                            setSearch={setSearch}
+                            selectedCategory={
+                                selectedCategory
+                            }
+                            setSelectedCategory={
+                                setSelectedCategory
+                            }
+                            selectedTeam={
+                                selectedTeam
+                            }
+                            setSelectedTeam={
+                                setSelectedTeam
+                            }
+                            sortBy={sortBy}
+                            setSortBy={setSortBy}
+                            priceRange={
+                                priceRange
+                            }
+                            setPriceRange={
+                                setPriceRange
+                            }
+                            onlyFeatured={
+                                onlyFeatured
+                            }
+                            setOnlyFeatured={
+                                setOnlyFeatured
+                            }
+                        />
+                    </Box>
+                </Grid>
 
-                                    backgroundColor:
-                                        active
-                                            ? "primary.main"
-                                            : "background.paper",
+                {/* PRODUTOS */}
+                <Grid
+                    size={{
+                        xs: 12,
+                        lg: 9,
+                    }}
+                >
+                    {/* TOP BAR */}
+                    <Box
+                        sx={{
+                            mb: 4,
 
-                                    color: active
-                                        ? "primary.contrastText"
-                                        : "text.primary",
+                            display: "flex",
 
-                                    border:
-                                        "1px solid",
+                            justifyContent:
+                                "space-between",
 
-                                    borderColor: active
-                                        ? "primary.main"
-                                        : "divider",
+                            alignItems:
+                                "center",
 
-                                    transition:
-                                        "0.2s",
+                            flexWrap: "wrap",
 
-                                    "&:hover": {
-                                        backgroundColor:
-                                            active
-                                                ? "primary.main"
-                                                : "rgba(255,255,255,0.05)",
-                                    },
-                                }}
-                            />
-                        );
-                    })}
-                </Stack>
-            </Stack>
+                            gap: 2,
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                color:
+                                    "text.secondary",
 
-            {/* GRID */}
-            <Grid container spacing={3}>
-                {filteredProducts.map(
-                    (product) => (
-                        <Grid
-                            key={product.id}
-                            size={{
-                                xs: 12,
-                                sm: 6,
-                                md: 4,
-                                lg: 3,
+                                fontWeight: 500,
                             }}
                         >
-                            <ProductCard
-                                product={product}
-                            />
-                        </Grid>
-                    )
-                )}
+                            {
+                                filteredProducts.length
+                            }{" "}
+                            produtos encontrados
+                        </Typography>
+                    </Box>
+
+                    {/* GRID */}
+                    <Grid
+                        container
+                        spacing={3}
+                    >
+                        {filteredProducts.map(
+                            (product) => (
+                                <Grid
+                                    key={
+                                        product.id
+                                    }
+                                    size={{
+                                        xs: 12,
+                                        sm: 6,
+                                        xl: 4,
+                                    }}
+                                >
+                                    <ProductCard
+                                        product={
+                                            product
+                                        }
+                                    />
+                                </Grid>
+                            )
+                        )}
+                    </Grid>
+
+                    {/* EMPTY */}
+                    {filteredProducts.length ===
+                        0 && (
+                            <Box
+                                sx={{
+                                    py: 14,
+
+                                    textAlign:
+                                        "center",
+                                }}
+                            >
+                                <Typography
+                                    variant="h5"
+                                    sx={{
+                                        mb: 2,
+
+                                        fontWeight: 700,
+                                    }}
+                                >
+                                    Nenhum produto
+                                    encontrado
+                                </Typography>
+
+                                <Typography
+                                    sx={{
+                                        color:
+                                            "text.secondary",
+                                    }}
+                                >
+                                    Tente alterar os
+                                    filtros ou buscar
+                                    outro termo.
+                                </Typography>
+                            </Box>
+                        )}
+                </Grid>
             </Grid>
 
-            {/* EMPTY */}
-            {filteredProducts.length === 0 && (
+            {/* MOBILE DRAWER */}
+            <Drawer
+                anchor="left"
+                open={mobileFiltersOpen}
+                onClose={() =>
+                    setMobileFiltersOpen(
+                        false
+                    )
+                }
+                slotProps={{
+                    paper: {
+                        sx: {
+                            width: 320,
+
+                            p: 3,
+
+                            background:
+                                "#050505",
+                        },
+                    },
+                }}
+            >
                 <Box
                     sx={{
-                        py: 10,
-                        textAlign: "center",
+                        display: "flex",
+
+                        alignItems:
+                            "center",
+
+                        justifyContent:
+                            "space-between",
+
+                        mb: 4,
                     }}
                 >
                     <Typography
                         variant="h5"
                         sx={{
-                            mb: 1,
+                            fontWeight: 800,
                         }}
                     >
-                        Nenhum produto encontrado
+                        Filtros
                     </Typography>
 
-                    <Typography
-                        sx={{
-                            color: "text.secondary",
-                        }}
+                    <IconButton
+                        onClick={() =>
+                            setMobileFiltersOpen(
+                                false
+                            )
+                        }
                     >
-                        Tente outro termo ou
-                        categoria.
-                    </Typography>
+                        <CloseIcon />
+                    </IconButton>
                 </Box>
-            )}
+
+                <FiltersSidebar
+                    search={search}
+                    setSearch={setSearch}
+                    selectedCategory={
+                        selectedCategory
+                    }
+                    setSelectedCategory={
+                        setSelectedCategory
+                    }
+                    selectedTeam={
+                        selectedTeam
+                    }
+                    setSelectedTeam={
+                        setSelectedTeam
+                    }
+                    sortBy={sortBy}
+                    setSortBy={setSortBy}
+                    priceRange={priceRange}
+                    setPriceRange={
+                        setPriceRange
+                    }
+                    onlyFeatured={
+                        onlyFeatured
+                    }
+                    setOnlyFeatured={
+                        setOnlyFeatured
+                    }
+                />
+            </Drawer>
         </Box>
     );
 }

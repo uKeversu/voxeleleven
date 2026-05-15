@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { CartProvider } from "@/context/CartContext";
 
 import ThemeRegistry from "@/providers/ThemeRegistry";
 
@@ -25,14 +26,16 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
-        <ThemeRegistry>
-          <Navbar />
+    <ThemeRegistry>
+        <CartProvider>
+            <Navbar />
 
-          {children}
+            {children}
 
-          <Footer />
-        </ThemeRegistry>
-      </body>
+            <Footer />
+        </CartProvider>
+    </ThemeRegistry>
+</body>
     </html>
   );
 }

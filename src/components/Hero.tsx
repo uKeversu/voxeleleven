@@ -153,7 +153,7 @@ export default function Hero() {
             >
                 <Box
                     component="img"
-                    src="/camisa-brasil26.png"
+                    src="/brasil-amarela-26.png"
                     alt="Voxel Eleven"
                     sx={{
                         width: "100%",
