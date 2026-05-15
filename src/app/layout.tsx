@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
+import { SnackbarProvider } from "@/context/SnackbarContext";
 
 import ThemeRegistry from "@/providers/ThemeRegistry";
 
@@ -26,16 +27,18 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
-    <ThemeRegistry>
-        <CartProvider>
-            <Navbar />
+        <ThemeRegistry>
+          <CartProvider>
+            <SnackbarProvider>
+              <Navbar />
 
-            {children}
+              {children}
 
-            <Footer />
-        </CartProvider>
-    </ThemeRegistry>
-</body>
+              <Footer />
+            </SnackbarProvider>
+          </CartProvider>
+        </ThemeRegistry>
+      </body>
     </html>
   );
 }

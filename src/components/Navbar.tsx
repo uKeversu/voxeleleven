@@ -49,7 +49,7 @@ const navItems = [
 ];
 
 export default function Navbar() {
-    const { cartCount } = useCart();
+    const { totalItems } = useCart();
 
     const [mobileMenuOpen, setMobileMenuOpen] =
         useState(false);
@@ -221,7 +221,7 @@ export default function Navbar() {
                         {/* CARRINHO */}
                         <Badge
                             badgeContent={
-                                cartCount
+                                totalItems
                             }
                             color="primary"
                         >

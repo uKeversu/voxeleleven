@@ -35,7 +35,7 @@ export default function CartDrawer({
     const {
         cartItems,
 
-        subtotal,
+        totalPrice,
 
         removeFromCart,
 
@@ -477,7 +477,7 @@ export default function CartDrawer({
                                         "primary.main",
                                 }}
                             >
-                                {subtotal.toLocaleString(
+                                {totalPrice.toLocaleString(
                                     "pt-BR",
                                     {
                                         style:
@@ -499,6 +499,8 @@ export default function CartDrawer({
                         {/* BUTTONS */}
                         <Stack spacing={1.5}>
                             <Button
+                                component={Link}
+                                href="/carrinho"
                                 variant="contained"
                                 color="primary"
                                 size="large"
@@ -521,7 +523,7 @@ export default function CartDrawer({
                                     },
                                 }}
                             >
-                                Finalizar compra
+                                Ver carrinho
                             </Button>
 
                             <Button

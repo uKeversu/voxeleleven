@@ -1,5 +1,3 @@
-// src/context/CartContext.tsx
-
 "use client";
 
 import {
@@ -16,9 +14,9 @@ import { Product } from "@/types/product";
 export type CartItem = {
     product: Product;
 
-    quantity: number;
-
     size: string;
+
+    quantity: number;
 };
 
 type CartContextType = {
@@ -46,9 +44,9 @@ type CartContextType = {
 
     clearCart: () => void;
 
-    cartCount: number;
+    totalItems: number;
 
-    subtotal: number;
+    totalPrice: number;
 };
 
 const CartContext =
@@ -64,11 +62,15 @@ export function CartProvider({
     const [cartItems, setCartItems] =
         useState<CartItem[]>([]);
 
-    // LOAD LOCALSTORAGE
+    /*
+     =========================
+     LOAD LOCALSTORAGE
+     =========================
+    */
     useEffect(() => {
         const storedCart =
             localStorage.getItem(
-                "voxeleven-cart"
+                "voxel-cart"
             );
 
         if (storedCart) {
@@ -78,15 +80,23 @@ export function CartProvider({
         }
     }, []);
 
-    // SAVE LOCALSTORAGE
+    /*
+     =========================
+     SAVE LOCALSTORAGE
+     =========================
+    */
     useEffect(() => {
         localStorage.setItem(
-            "voxeleven-cart",
+            "voxel-cart",
             JSON.stringify(cartItems)
         );
     }, [cartItems]);
 
-    // ADD
+    /*
+     =========================
+     ADD
+     =========================
+    */
     const addToCart = (
         product: Product,
         size: string
@@ -96,40 +106,41 @@ export function CartProvider({
                 prev.find(
                     (item) =>
                         item.product.id ===
-                            product.id &&
+                        product.id &&
                         item.size === size
                 );
 
-            // JA EXISTE
             if (existingItem) {
                 return prev.map((item) =>
                     item.product.id ===
                         product.id &&
-                    item.size === size
+                        item.size === size
                         ? {
-                              ...item,
-
-                              quantity:
-                                  item.quantity +
-                                  1,
-                          }
+                            ...item,
+                            quantity:
+                                item.quantity +
+                                1,
+                        }
                         : item
                 );
             }
 
-            // NOVO ITEM
             return [
                 ...prev,
                 {
                     product,
-                    quantity: 1,
                     size,
+                    quantity: 1,
                 },
             ];
         });
     };
 
-    // REMOVE
+    /*
+     =========================
+     REMOVE
+     =========================
+    */
     const removeFromCart = (
         productId: number,
         size: string
@@ -139,14 +150,18 @@ export function CartProvider({
                 (item) =>
                     !(
                         item.product.id ===
-                            productId &&
+                        productId &&
                         item.size === size
                     )
             )
         );
     };
 
-    // INCREASE
+    /*
+     =========================
+     INCREASE
+     =========================
+    */
     const increaseQuantity = (
         productId: number,
         size: string
@@ -155,19 +170,22 @@ export function CartProvider({
             prev.map((item) =>
                 item.product.id ===
                     productId &&
-                item.size === size
+                    item.size === size
                     ? {
-                          ...item,
-
-                          quantity:
-                              item.quantity + 1,
-                      }
+                        ...item,
+                        quantity:
+                            item.quantity + 1,
+                    }
                     : item
             )
         );
     };
 
-    // DECREASE
+    /*
+     =========================
+     DECREASE
+     =========================
+    */
     const decreaseQuantity = (
         productId: number,
         size: string
@@ -177,14 +195,13 @@ export function CartProvider({
                 .map((item) =>
                     item.product.id ===
                         productId &&
-                    item.size === size
+                        item.size === size
                         ? {
-                              ...item,
-
-                              quantity:
-                                  item.quantity -
-                                  1,
-                          }
+                            ...item,
+                            quantity:
+                                item.quantity -
+                                1,
+                        }
                         : item
                 )
                 .filter(
@@ -194,13 +211,21 @@ export function CartProvider({
         );
     };
 
-    // CLEAR
+    /*
+     =========================
+     CLEAR
+     =========================
+    */
     const clearCart = () => {
         setCartItems([]);
     };
 
-    // TOTAL ITENS
-    const cartCount = useMemo(() => {
+    /*
+     =========================
+     TOTAL ITEMS
+     =========================
+    */
+    const totalItems = useMemo(() => {
         return cartItems.reduce(
             (acc, item) =>
                 acc + item.quantity,
@@ -208,13 +233,17 @@ export function CartProvider({
         );
     }, [cartItems]);
 
-    // SUBTOTAL
-    const subtotal = useMemo(() => {
+    /*
+     =========================
+     TOTAL PRICE
+     =========================
+    */
+    const totalPrice = useMemo(() => {
         return cartItems.reduce(
             (acc, item) =>
                 acc +
                 item.product.price *
-                    item.quantity,
+                item.quantity,
             0
         );
     }, [cartItems]);
@@ -234,9 +263,9 @@ export function CartProvider({
 
                 clearCart,
 
-                cartCount,
+                totalItems,
 
-                subtotal,
+                totalPrice,
             }}
         >
             {children}

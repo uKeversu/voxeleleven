@@ -24,6 +24,7 @@ import ReplayOutlinedIcon from "@mui/icons-material/ReplayOutlined";
 
 import ProductCard from "@/components/ProductCard";
 import { useCart } from "@/context/CartContext";
+import { useSnackbar } from "@/context/SnackbarContext";
 
 import { notFound } from "next/navigation";
 
@@ -73,6 +74,7 @@ function ProductContent({
     }, [product]);
 
     const { addToCart } = useCart();
+    const { showSnackbar } = useSnackbar();
 
     return (
         <Box
@@ -538,12 +540,13 @@ function ProductContent({
 
                                     fontWeight: 700,
                                 }}
-                                onClick={() =>
-                                    addToCart(
-                                        product,
-                                        selectedSize
-                                    )
-                                }
+                                onClick={() => {
+                                    addToCart(product, selectedSize);
+
+                                    showSnackbar(
+                                        "Produto adicionado ao carrinho!"
+                                    );
+                                }}
                             >
                                 Adicionar ao
                                 carrinho
@@ -720,6 +723,6 @@ function ProductContent({
                     )}
                 </Grid>
             </Box>
-        </Box>
+        </Box >
     );
 }
