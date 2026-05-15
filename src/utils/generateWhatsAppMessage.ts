@@ -43,6 +43,6 @@ ${totalPrice.toLocaleString("pt-BR", {
 
 ----------------------------
 
-Olá! Quero finalizar esse pedido 👊
+Olá! Quero finalizar esse pedido!
 `;
 }
