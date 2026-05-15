@@ -31,7 +31,7 @@ export const products: Product[] = [
         image: "/atleticomineiro-preto-branco.jpeg",
         description:
             "Modelo premium do Atlético Mineiro 2026",
-        featured: true,
+        featured: false,
         sizes: ["M", "G", "GG"],
     },
 
@@ -63,7 +63,7 @@ export const products: Product[] = [
         image: "/brasil-dourada.jpeg",
         description:
             "Edição especial dourada da seleção brasileira 2022",
-        featured: true,
+        featured: false,
         sizes: ["M", "G"],
     },
 
@@ -79,7 +79,7 @@ export const products: Product[] = [
         image: "/corinthians-retro.PNG",
         description:
             "Modelo premium retrô do Corinthians 1998",
-        featured: true,
+        featured: false,
         sizes: ["P", "M", "G"],
     },
 
@@ -95,7 +95,7 @@ export const products: Product[] = [
         image: "/flamengo-preto.png",
         description:
             "Modelo premium do Flamengo 2025",
-        featured: true,
+        featured: false,
         sizes: ["M", "G", "GG", "XGG"],
     },
 
@@ -143,7 +143,7 @@ export const products: Product[] = [
         image: "/palmeiras-verde.jpeg",
         description:
             "Modelo premium do Palmeiras 2026",
-        featured: true,
+        featured: false,
         sizes: ["M", "G", "GG"],
     },
 
@@ -175,7 +175,7 @@ export const products: Product[] = [
         image: "/roma-bege.jpeg",
         description:
             "Modelo premium da Roma 2020",
-        featured: true,
+        featured: false,
         sizes: ["M", "G"],
     },
 
@@ -191,7 +191,7 @@ export const products: Product[] = [
         image: "/saopaulo-branco.jpeg",
         description:
             "Modelo premium do São Paulo 2026",
-        featured: true,
+        featured: false,
         sizes: ["P", "M", "G", "GG"],
     },
 

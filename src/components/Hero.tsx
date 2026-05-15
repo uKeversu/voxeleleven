@@ -1,103 +1,72 @@
-// src/components/Hero.tsx
-
 "use client";
 
-import {
-    Box,
-    Typography,
-    Button,
-    Stack,
-} from "@mui/material";
+import { Box, Typography, Button, Stack } from "@mui/material";
 
 export default function Hero() {
     return (
         <Box
             sx={{
-                minHeight: {
-                    xs: "100vh",
-                    md: "100vh",
-                },
-                position: "relative",
-                zIndex: 0,
-                isolation: "isolate",
-                pointerEvents: "auto",
+                minHeight: "100vh",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                px: {
-                    xs: 3,
-                    md: 10,
-                },
-                pt: 10,
-                background:
-                    "linear-gradient(to bottom, #050505, #0f0f0f)",
+                px: { xs: 3, md: 10 },
+                background: "linear-gradient(180deg, #050505, #0d0d0d)",
                 overflow: "hidden",
+                position: "relative",
             }}
         >
-            {/* Glow */}
+            {/* GLOW */}
             <Box
                 sx={{
-                    width: 400,
-                    height: 400,
-                    background: "#3dff4dff",
                     position: "absolute",
-                    right: -100,
-                    top: 100,
-                    borderRadius: "50%",
+                    width: 500,
+                    height: 500,
+                    background: "#00ff40",
                     filter: "blur(180px)",
-                    opacity: 0.2,
-                    pointerEvents: "none"
+                    opacity: 0.12,
+                    top: "20%",
+                    right: "-10%",
                 }}
             />
 
-            {/* Texto */}
+            {/* TEXTO (ESQUERDA) */}
             <Box
                 sx={{
                     zIndex: 2,
                     maxWidth: 600,
                 }}
             >
-                <Box>
-                    <Typography
-                        variant="h2"
-                        sx={{
-                            fontWeight: "bold",
-                            fontSize: {
-                                xs: "2rem",
-                                md: "4.5rem",
-                            },
-                            lineHeight: 1,
-                        }}
-                    >
-                        VISTA MAIS QUE
-                        <br />
-                        UMA CAMISA
-                    </Typography>
+                <Typography
+                    sx={{
+                        fontSize: { xs: "2.2rem", md: "4rem" },
+                        fontWeight: 900,
+                        lineHeight: 1,
+                    }}
+                >
+                    VISTA MAIS QUE
+                    <br />
+                    UMA CAMISA.
+                </Typography>
 
-                    <Typography
-                        variant="h2"
-                        sx={{
-                            fontWeight: "bold",
-                            fontSize: {
-                                xs: "2rem",
-                                md: "4.5rem",
-                            },
-                            lineHeight: 1,
-                            color: "primary.main",
-                        }}
-                    >
-                        VISTA CULTURA
-                    </Typography>
-                </Box>
+                <Typography
+                    sx={{
+                        fontSize: { xs: "2.2rem", md: "4rem" },
+                        fontWeight: 900,
+                        color: "primary.main",
+                    }}
+                >
+                    VISTA CULTURA.
+                </Typography>
 
                 <Typography
                     sx={{
                         mt: 3,
-                        color: "#999",
+                        color: "#aaa",
                         fontSize: "1.1rem",
                     }}
                 >
-                    Camisas premium inspiradas no futebol mundial.
+                    Edições inspiradas nos maiores clubes e seleções do futebol mundial.
                 </Typography>
 
                 <Stack
@@ -105,67 +74,59 @@ export default function Hero() {
                     spacing={2}
                     sx={{ mt: 4 }}
                 >
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        sx={{
-                            px: 4,
-                            py: 1.5,
-                            borderRadius: 2,
-                        }}
-                    >
-                        Explorar
+                    <Button variant="contained" sx={{ px: 4, py: 1.5 }}>
+                        Explorar coleção
                     </Button>
 
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        sx={{
-                            px: 4,
-                            py: 1.5,
-                        }}
-                    >
-                        Ver coleção
+                    <Button variant="outlined" sx={{ px: 4, py: 1.5 }}>
+                        Ver lançamentos
                     </Button>
                 </Stack>
             </Box>
 
-            {/* Imagem mock */}
+            {/* IMAGEM (DIREITA) */}
             <Box
                 sx={{
-                    display: {
-                        xs: "none",
-                        md: "flex",
-                    },
-
+                    display: { xs: "none", md: "flex" },
                     width: 450,
-                    height: 500,
+                    height: 520,
                     borderRadius: 5,
-
-                    alignItems: "center",
-                    justifyContent: "center",
-
                     overflow: "hidden",
+                    zIndex: 2,
 
                     position: "relative",
-                    zIndex: 2,
+
+                    // 👇 importante: só anima UM transform
+                    animation: "floatHero 6s ease-in-out infinite",
+
+                    willChange: "transform",
+
+                    "@keyframes floatHero": {
+                        "0%": { transform: "translateY(0px)" },
+                        "50%": { transform: "translateY(-10px)" },
+                        "100%": { transform: "translateY(0px)" },
+                    },
                 }}
             >
                 <Box
                     component="img"
                     src="/brasil-amarela-26.png"
-                    alt="Voxel Eleven"
+                    alt="Camisa Voxel Eleven"
                     sx={{
                         width: "100%",
                         height: "100%",
                         objectFit: "cover",
 
-                        transition: "0.3s",
+                        // ❌ remove transform do hover (isso causava conflito)
+                        transition: "transform 0.4s ease",
 
                         "&:hover": {
-                            transform: "scale(1.05)",
-                            filter: "drop-shadow(0 0 2px #00ff40ff)",
+                            transform: "scale(1.03)",
                         },
+
+                        // melhora renderização (remove “quebra de pixel”)
+                        backfaceVisibility: "hidden",
+                        transform: "translateZ(0)",
                     }}
                 />
             </Box>

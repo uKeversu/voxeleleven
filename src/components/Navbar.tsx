@@ -1,13 +1,8 @@
-// src/components/Navbar.tsx
-
 "use client";
 
 import { useState, useEffect } from "react";
-
 import Link from "next/link";
-
 import { useCart } from "@/context/CartContext";
-
 import CartDrawer from "@/components/CartDrawer";
 
 import {
@@ -27,180 +22,84 @@ import CloseIcon from "@mui/icons-material/Close";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 const navItems = [
-    {
-        label: "Catálogo",
-        href: "/catalogo",
-    },
-
-    {
-        label: "Brasileiros",
-        href: "/catalogo",
-    },
-
-    {
-        label: "Europeus",
-        href: "/catalogo",
-    },
-
-    {
-        label: "Seleções",
-        href: "/catalogo",
-    },
+    { label: "Catálogo", href: "/catalogo" },
+    { label: "Brasileiros", href: "/catalogo?cat=br" },
+    { label: "Europeus", href: "/catalogo?cat=eu" },
+    { label: "Seleções", href: "/catalogo?cat=selecoes" },
 ];
 
 export default function Navbar() {
     const { totalItems } = useCart();
 
-    const [mobileMenuOpen, setMobileMenuOpen] =
-        useState(false);
-
-    const [cartOpen, setCartOpen] =
-        useState(false);
-
-    const [scrolled, setScrolled] =
-        useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [cartOpen, setCartOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-
-        window.addEventListener(
-            "scroll",
-            handleScroll
-        );
-
-        return () =>
-            window.removeEventListener(
-                "scroll",
-                handleScroll
-            );
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     return (
         <>
-            {/* NAVBAR */}
             <AppBar
                 position="fixed"
                 elevation={0}
                 sx={{
                     zIndex: 2000,
-
                     background: scrolled
-                        ? "rgba(5,5,5,0.88)"
+                        ? "rgba(5,5,5,0.72)"
                         : "transparent",
-
-                    backdropFilter:
-                        "blur(20px)",
-
-                    borderBottom:
-                        scrolled
-                            ? "1px solid rgba(255,255,255,0.06)"
-                            : "1px solid transparent",
-
-                    transition:
-                        "all 0.3s ease",
+                    backdropFilter: "blur(24px)",
+                    borderBottom: scrolled
+                        ? "1px solid rgba(255,255,255,0.06)"
+                        : "1px solid transparent",
+                    transition: "0.3s ease",
                 }}
             >
                 <Toolbar
                     sx={{
                         minHeight: 80,
-
                         display: "flex",
-
-                        justifyContent:
-                            "space-between",
-
-                        px: {
-                            xs: 2,
-                            md: 6,
-                        },
+                        justifyContent: "space-between",
+                        px: { xs: 2, md: 6 },
                     }}
                 >
                     {/* LOGO */}
-                    <Box
-                        component={Link}
-                        href="/"
-                        sx={{
-                            display: "flex",
-
-                            alignItems:
-                                "center",
-
-                            textDecoration:
-                                "none",
-                        }}
-                    >
+                    <Box component={Link} href="/" sx={{ display: "flex" }}>
                         <Box
                             component="img"
                             src="/v11-logo.png"
                             alt="Voxel Eleven"
                             sx={{
-                                height: {
-                                    xs: 34,
-                                    md: 42,
-                                },
-
-                                width: "auto",
-
-                                objectFit:
-                                    "contain",
-
-                                transition:
-                                    "0.3s",
-
-                                filter:
-                                    "drop-shadow(0 0 2px #00c21a)",
-
-                                "&:hover": {
-                                    transform:
-                                        "scale(1.03)",
-
-                                    filter:
-                                        "drop-shadow(0 0 4px #00ff40)",
-                                },
+                                height: { xs: 32, md: 42 },
+                                transition: "0.3s",
+                                filter: "drop-shadow(0 0 2px #00ff40)",
+                                "&:hover": { transform: "scale(1.05)" },
                             }}
                         />
                     </Box>
 
-                    {/* MENU DESKTOP */}
+                    {/* DESKTOP NAV */}
                     <Stack
                         direction="row"
                         spacing={1}
-                        sx={{
-                            display: {
-                                xs: "none",
-                                md: "flex",
-                            },
-                        }}
+                        sx={{ display: { xs: "none", md: "flex" } }}
                     >
                         {navItems.map((item) => (
                             <Button
                                 key={item.label}
                                 component={Link}
                                 href={item.href}
-                                color="inherit"
                                 sx={{
-                                    px: 2.5,
-
-                                    py: 1,
-
-                                    borderRadius: 3,
-
+                                    color: "text.primary",
                                     fontWeight: 600,
-
-                                    color:
-                                        "text.primary",
-
-                                    transition:
-                                        "0.25s",
-
+                                    px: 2,
+                                    borderRadius: 2,
                                     "&:hover": {
-                                        backgroundColor:
-                                            "rgba(255,255,255,0.05)",
-
-                                        color:
-                                            "primary.main",
+                                        color: "primary.main",
+                                        backgroundColor: "rgba(255,255,255,0.04)",
                                     },
                                 }}
                             >
@@ -210,52 +109,16 @@ export default function Navbar() {
                     </Stack>
 
                     {/* ACTIONS */}
-                    <Stack
-                        direction="row"
-                        spacing={1}
-                        sx={{
-                            alignItems:
-                                "center",
-                        }}
-                    >
-                        {/* CARRINHO */}
-                        <Badge
-                            badgeContent={
-                                totalItems
-                            }
-                            color="primary"
-                        >
+                    <Stack direction="row" spacing={1}>
+                        <Badge badgeContent={totalItems} color="primary">
                             <IconButton
-                                onClick={() =>
-                                    setCartOpen(
-                                        true
-                                    )
-                                }
+                                onClick={() => setCartOpen(true)}
                                 sx={{
-                                    border:
-                                        "1px solid",
-
-                                    borderColor:
-                                        "divider",
-
-                                    backgroundColor:
-                                        "rgba(255,255,255,0.03)",
-
-                                    transition:
-                                        "0.3s",
-
+                                    border: "1px solid rgba(255,255,255,0.1)",
+                                    backgroundColor: "rgba(255,255,255,0.03)",
                                     "&:hover": {
-                                        backgroundColor:
-                                            "primary.main",
-
-                                        color:
-                                            "primary.contrastText",
-
-                                        transform:
-                                            "translateY(-2px)",
-
-                                        boxShadow:
-                                            "0 0 20px rgba(0,255,64,0.35)",
+                                        backgroundColor: "primary.main",
+                                        color: "#000",
                                     },
                                 }}
                             >
@@ -263,28 +126,9 @@ export default function Navbar() {
                             </IconButton>
                         </Badge>
 
-                        {/* MENU MOBILE */}
                         <IconButton
-                            onClick={() =>
-                                setMobileMenuOpen(
-                                    true
-                                )
-                            }
-                            sx={{
-                                display: {
-                                    xs: "flex",
-                                    md: "none",
-                                },
-
-                                border:
-                                    "1px solid",
-
-                                borderColor:
-                                    "divider",
-
-                                backgroundColor:
-                                    "rgba(255,255,255,0.03)",
-                            }}
+                            onClick={() => setMobileMenuOpen(true)}
+                            sx={{ display: { xs: "flex", md: "none" } }}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -292,28 +136,16 @@ export default function Navbar() {
                 </Toolbar>
             </AppBar>
 
-            {/* DRAWER MOBILE */}
+            {/* MOBILE */}
             <Drawer
                 anchor="right"
                 open={mobileMenuOpen}
-                onClose={() =>
-                    setMobileMenuOpen(
-                        false
-                    )
-                }
+                onClose={() => setMobileMenuOpen(false)}
                 slotProps={{
                     paper: {
                         sx: {
                             width: 320,
-
-                            background:
-                                "#050505",
-
-                            borderLeft:
-                                "1px solid rgba(255,255,255,0.08)",
-
-                            backdropFilter:
-                                "blur(20px)",
+                            background: "#050505",
                         },
                     },
                 }}
@@ -321,94 +153,49 @@ export default function Navbar() {
                 <Box
                     sx={{
                         p: 3,
-
-                        height: "100%",
-
-                        display: "flex",
-
-                        flexDirection:
-                            "column",
                     }}
                 >
-                    {/* HEADER */}
                     <Box
                         sx={{
                             display: "flex",
-
-                            alignItems:
-                                "center",
-
-                            justifyContent:
-                                "space-between",
-
-                            mb: 5,
+                            justifyContent: "space-between",
+                            alignItems: "center",
                         }}
                     >
                         <Typography
-                            variant="h6"
                             sx={{
                                 fontWeight: 800,
-
-                                color:
-                                    "primary.main",
+                                color: "primary.main",
                             }}
                         >
                             MENU
                         </Typography>
 
-                        <IconButton
-                            onClick={() =>
-                                setMobileMenuOpen(
-                                    false
-                                )
-                            }
-                        >
+                        <IconButton onClick={() => setMobileMenuOpen(false)}>
                             <CloseIcon />
                         </IconButton>
                     </Box>
 
-                    {/* LINKS */}
-                    <Stack spacing={2}>
+                    <Stack
+                        sx={{
+                            mt: 4,
+                        }}
+                        spacing={2}
+                    >
                         {navItems.map((item) => (
                             <Button
                                 key={item.label}
                                 component={Link}
                                 href={item.href}
-                                onClick={() =>
-                                    setMobileMenuOpen(
-                                        false
-                                    )
-                                }
+                                onClick={() => setMobileMenuOpen(false)}
                                 sx={{
-                                    justifyContent:
-                                        "flex-start",
-
-                                    py: 1.7,
-
-                                    px: 2,
-
-                                    borderRadius: 3,
-
-                                    color:
-                                        "text.primary",
-
-                                    fontSize:
-                                        "1rem",
-
+                                    justifyContent: "flex-start",
+                                    color: "text.primary",
                                     fontWeight: 700,
-
-                                    transition:
-                                        "0.3s",
-
+                                    transition: "0.25s",
                                     "&:hover": {
-                                        backgroundColor:
-                                            "rgba(255,255,255,0.04)",
-
-                                        color:
-                                            "primary.main",
-
-                                        transform:
-                                            "translateX(5px)",
+                                        transform: "translateX(5px)",
+                                        color: "primary.main",
                                     },
                                 }}
                             >
@@ -416,37 +203,10 @@ export default function Navbar() {
                             </Button>
                         ))}
                     </Stack>
-
-                    {/* FOOTER */}
-                    <Box
-                        sx={{
-                            mt: "auto",
-
-                            pt: 4,
-                        }}
-                    >
-                        <Typography
-                            sx={{
-                                color:
-                                    "text.secondary",
-
-                                fontSize:
-                                    "0.9rem",
-                            }}
-                        >
-                            © 2026 Voxel Eleven
-                        </Typography>
-                    </Box>
                 </Box>
             </Drawer>
 
-            {/* DRAWER CARRINHO */}
-            <CartDrawer
-                open={cartOpen}
-                onClose={() =>
-                    setCartOpen(false)
-                }
-            />
+            <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
         </>
     );
 }

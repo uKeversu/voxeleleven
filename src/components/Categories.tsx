@@ -1,40 +1,25 @@
-// src/components/Categories.tsx
-
 "use client";
 
-import {
-    Box,
-    Typography,
-    Grid,
-    Paper,
-} from "@mui/material";
+import { Box, Typography, Grid, Paper } from "@mui/material";
 
 const categories = [
-    "Tailandesas 1.1",
-    "Premium Gold",
+    "Brasileiros",
+    "Europeus",
+    "Seleções",
+    "Retrô",
     "Conjuntos",
     "Agasalhos",
-    "Boné",
+    "Bonés",
     "Basquete",
-    "Tênis",
-    "Outros",
 ];
 
 export default function Categories() {
     return (
-        <Box
-            sx={{
-                px: {
-                    xs: 3,
-                    md: 10,
-                },
-                py: 10,
-            }}
-        >
+        <Box sx={{ py: 10, px: { xs: 3, md: 10 } }}>
             <Typography
                 variant="h4"
                 sx={{
-                    fontWeight: "bold",
+                    fontWeight: 800,
                     mb: 4,
                 }}
             >
@@ -46,23 +31,35 @@ export default function Categories() {
                     <Grid size={{ xs: 12, md: 3 }} key={item}>
                         <Paper
                             sx={{
-                                height: 70,
-                                borderRadius: 4,
-                                background: "linear-gradient(145deg, #0F0F0F, #141414)",
-                                display: "flex",
-                                alignItems: "flex-end",
                                 p: 3,
-                                transition: "0.3s",
+                                height: 90,
+                                borderRadius: 4,
+                                background:
+                                    "linear-gradient(135deg, rgba(0,255,64,0.06), #111)",
+                                border: "1px solid rgba(255,255,255,0.05)",
                                 cursor: "pointer",
-
+                                transition: "0.3s",
                                 "&:hover": {
                                     transform: "translateY(-6px)",
-                                    boxShadow: "0 0 30px #00ff40ff",
+                                    boxShadow: "0 0 25px rgba(0,255,64,0.2)",
                                 },
                             }}
                         >
-                            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                            <Typography
+                                sx={{
+                                    fontWeight: 700,
+                                }}
+                            >
                                 {item}
+                            </Typography>
+
+                            <Typography
+                                sx={{
+                                    fontSize: 12,
+                                    color: "text.secondary",
+                                }}
+                            >
+                                Explorar coleção →
                             </Typography>
                         </Paper>
                     </Grid>
