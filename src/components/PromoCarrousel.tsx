@@ -8,6 +8,11 @@ import {
     Stack,
 } from "@mui/material";
 
+import { useRouter } from "next/navigation";
+
+// ajuste conforme seu contexto/carrinho
+import { useCart } from "@/context/CartContext";
+
 const slides = [
     {
         title: "BRASIL - HOME 26/27",
@@ -15,25 +20,34 @@ const slides = [
         description: "Por apenas R$ 119.90",
         image: "/brasil-home-26-67-Photoroom.png",
         button: "Comprar agora",
+        action: "buy",
     },
+
     {
         title: "3 CAMISAS = 30% OFF",
         subtitle: "PROMOÇÃO ESPECIAL",
         description: "Monte sua coleção e economize no carrinho.",
         image: "/colecao.png",
         button: "Montar carrinho",
+        action: "catalog",
     },
+
     {
-        title: "COLEÇÃO RETRÔ PREMIUM GOLD",
+        title: "COLEÇÃO RETRÔ PREMIUM",
         subtitle: "EDIÇÃO LIMITADA",
         description: "Os mantos que marcaram época por todo o mundo.",
         image: "/retros.png",
         button: "Ver coleção",
+        action: "retro",
     },
 ];
 
 export default function PromoCarousel() {
     const [current, setCurrent] = useState(0);
+
+    const router = useRouter();
+
+    const { addToCart } = useCart();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -42,6 +56,44 @@ export default function PromoCarousel() {
 
         return () => clearInterval(interval);
     }, []);
+
+    const handleAction = () => {
+        const slide = slides[current];
+
+        // OFERTA IMPERDÍVEL
+        if (slide.action === "buy") {
+            addToCart(
+                {
+                    id: 3,
+                    name: "Brasil - Home 26/27",
+                    slug: "brasil-amarela-26",
+                    team: "Brasil",
+                    category: "Seleções",
+                    season: "26",
+                    price: 119.9,
+                    badge: "NEW",
+                    image: "/brasil-home-26-67-Photoroom.png",
+                    description:
+                        "Modelo premium da seleção brasileira 2026",
+                    featured: true,
+                    sizes: ["P", "M", "G", "GG", "XGG"],
+                },
+                "M"
+            );
+
+            router.push("/carrinho");
+        }
+
+        // PROMOÇÃO 30%
+        if (slide.action === "catalog") {
+            router.push("/catalogo");
+        }
+
+        // RETRÔ
+        if (slide.action === "retro") {
+            router.push("/catalogo?categoria=Retrô");
+        }
+    };
 
     return (
         <Box
@@ -154,6 +206,7 @@ export default function PromoCarousel() {
                     >
                         <Button
                             variant="contained"
+                            onClick={handleAction}
                             sx={{
                                 px: 4,
                                 py: 1.5,
