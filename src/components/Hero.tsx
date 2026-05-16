@@ -110,21 +110,19 @@ export default function Hero() {
             >
                 <Box
                     component="img"
-                    src="/brasil-amarela-26.png"
+                    src="/brasil-dourada-Photoroom.png"
                     alt="Camisa Voxel Eleven"
                     sx={{
                         width: "100%",
                         height: "100%",
                         objectFit: "cover",
 
-                        // ❌ remove transform do hover (isso causava conflito)
                         transition: "transform 0.4s ease",
 
                         "&:hover": {
                             transform: "scale(1.03)",
                         },
 
-                        // melhora renderização (remove “quebra de pixel”)
                         backfaceVisibility: "hidden",
                         transform: "translateZ(0)",
                     }}

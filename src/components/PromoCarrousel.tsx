@@ -1,0 +1,209 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import {
+    Box,
+    Typography,
+    Button,
+    Stack,
+} from "@mui/material";
+
+const slides = [
+    {
+        title: "BRASIL - HOME 26/27",
+        subtitle: "OFERTA IMPERDÍVEL",
+        description: "Por apenas R$ 119.90",
+        image: "/brasil-home-26-67-Photoroom.png",
+        button: "Comprar agora",
+    },
+    {
+        title: "3 CAMISAS = 30% OFF",
+        subtitle: "PROMOÇÃO ESPECIAL",
+        description: "Monte sua coleção e economize no carrinho.",
+        image: "/colecao.png",
+        button: "Montar carrinho",
+    },
+    {
+        title: "COLEÇÃO RETRÔ PREMIUM GOLD",
+        subtitle: "EDIÇÃO LIMITADA",
+        description: "Os mantos que marcaram época por todo o mundo.",
+        image: "/retros.png",
+        button: "Ver coleção",
+    },
+];
+
+export default function PromoCarousel() {
+    const [current, setCurrent] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrent((prev) => (prev + 1) % slides.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <Box
+            sx={{
+                position: "relative",
+                background: "linear-gradient(180deg, #050505, #0a0a0a)",
+                py: 8,
+                px: { xs: 2, md: 8 },
+                overflow: "hidden",
+            }}
+        >
+            {/* Glow */}
+            <Box
+                sx={{
+                    position: "absolute",
+                    width: 400,
+                    height: 400,
+                    background: "#00ff40",
+                    filter: "blur(180px)",
+                    opacity: 0.08,
+                    top: "10%",
+                    left: "-10%",
+                }}
+            />
+
+            <Box
+                sx={{
+                    position: "relative",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    background: "rgba(255,255,255,0.03)",
+                    backdropFilter: "blur(10px)",
+                    borderRadius: 6,
+                    overflow: "hidden",
+                    minHeight: 420,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    px: { xs: 3, md: 8 },
+                    py: 4,
+                }}
+            >
+                {/* TEXTO */}
+                <Box
+                    sx={{
+                        zIndex: 2,
+                        maxWidth: 500,
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            color: "primary.main",
+                            fontWeight: 800,
+                            letterSpacing: 2,
+                            mb: 1,
+                        }}
+                    >
+                        {slides[current].subtitle}
+                    </Typography>
+
+                    <Typography
+                        sx={{
+                            fontSize: { xs: "2.2rem", md: "4rem" },
+                            fontWeight: 900,
+                            lineHeight: 1,
+                        }}
+                    >
+                        {slides[current].title}
+                    </Typography>
+
+                    <Typography
+                        sx={{
+                            mt: 3,
+                            color: "#aaa",
+                            fontSize: "1.1rem",
+                        }}
+                    >
+                        {slides[current].description}
+                    </Typography>
+
+                    <Stack
+                        direction="row"
+                        spacing={2}
+                        sx={{ mt: 4 }}
+                    >
+                        <Button
+                            variant="contained"
+                            sx={{
+                                px: 4,
+                                py: 1.5,
+                            }}
+                        >
+                            {slides[current].button}
+                        </Button>
+                    </Stack>
+                </Box>
+
+                {/* IMAGEM */}
+                <Box
+                    sx={{
+                        display: { xs: "none", md: "flex" },
+                        width: 380,
+                        height: 380,
+                        position: "relative",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        animation: "floatPromo 6s ease-in-out infinite",
+
+                        "@keyframes floatPromo": {
+                            "0%": { transform: "translateY(0px)" },
+                            "50%": { transform: "translateY(-10px)" },
+                            "100%": { transform: "translateY(0px)" },
+                        },
+                    }}
+                >
+                    <Box
+                        component="img"
+                        src={slides[current].image}
+                        alt={slides[current].title}
+                        sx={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "contain",
+                            transition: "0.4s ease",
+                            filter: "drop-shadow(0 0 30px rgba(0,255,64,0.2))",
+
+                            "&:hover": {
+                                transform: "scale(1.03)",
+                            },
+                        }}
+                    />
+                </Box>
+
+                {/* Indicadores */}
+                <Stack
+                    direction="row"
+                    spacing={1}
+                    sx={{
+                        position: "absolute",
+                        bottom: 20,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                    }}
+                >
+                    {slides.map((_, index) => (
+                        <Box
+                            key={index}
+                            onClick={() => setCurrent(index)}
+                            sx={{
+                                width: current === index ? 30 : 10,
+                                height: 10,
+                                borderRadius: 10,
+                                background:
+                                    current === index
+                                        ? "#00ff40"
+                                        : "rgba(255,255,255,0.2)",
+                                transition: "0.3s",
+                                cursor: "pointer",
+                            }}
+                        />
+                    ))}
+                </Stack>
+            </Box>
+        </Box>
+    );
+}

@@ -42,9 +42,9 @@ export const products: Product[] = [
         team: "Brasil",
         category: "Seleções",
         season: "26",
-        price: 109.90,
+        price: 119.90,
         badge: "NEW",
-        image: "/brasil-amarela-26.png",
+        image: "/brasil-home-26-27.jpg",
         description:
             "Modelo premium da seleção brasileira 2026",
         featured: true,
@@ -176,7 +176,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da Roma 2020",
         featured: false,
-        sizes: ["M", "G"],
+        sizes: ["P", "M", "G"],
     },
 
     {
@@ -208,6 +208,150 @@ export const products: Product[] = [
         description:
             "Modelo premium Vasco da Gama 2026",
         featured: true,
-        sizes: ["G", "GG", "XGG"],
+        sizes: ["M", "G", "GG"],
+    },
+
+    {
+        id: 14,
+        name: "Manchester United - Away 24/25",
+        slug: "manchester-united-away-24-25",
+        team: "Manchester United",
+        category: "Europeus",
+        season: "24",
+        price: 119.90,
+        badge: "LIMITED",
+        image: "/manchester-united-away-24-25.png",
+        description:
+            "Modelo premium alternativo do Manchester United 2024",
+        featured: true,
+        sizes: ["P", "M", "G", "GG"],
+    },
+
+    {
+        id: 15,
+        name: "Vasco Da Gama - Away 26/27",
+        slug: "vasco-away-26-27",
+        team: "Vasco da Gama",
+        category: "Brasileiros",
+        season: "26",
+        price: 89.90,
+        badge: "NEW",
+        image: "/vasco-away-26-27.jpg",
+        description:
+            "Modelo premium alternativo do Vasco da Gama 2026",
+        featured: true,
+        sizes: ["P", "M", "G", "GG"],
+    },
+
+    {
+        id: 16,
+        name: "Santos - Away 25/26",
+        slug: "santos-away-25-26",
+        team: "Santos",
+        category: "Brasileiros",
+        season: "25",
+        price: 89.90,
+        badge: "NEW",
+        image: "/santos-away-25-26.jpg",
+        description:
+            "Modelo premium alternativo do Santos 2025",
+        featured: false,
+        sizes: ["P", "M", "G", "GG"],
+    },
+
+    {
+        id: 17,
+        name: "Fluminense - Away 25/26",
+        slug: "fluminense-away-25-26",
+        team: "Fluminense",
+        category: "Brasileiros",
+        season: "25",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/fluminense-away-25-26.jpg",
+        description:
+            "Modelo premium alternativo do Fluminense 2025",
+        featured: false,
+        sizes: ["M", "G", "GG"],
+    },
+
+    {
+        id: 18,
+        name: "Flamengo - Away 25/26",
+        slug: "flamengo-away-25-26",
+        team: "Flamengo",
+        category: "Brasileiros",
+        season: "25",
+        price: 99.90,
+        badge: "BEST SELLER",
+        image: "/flamengo-away-25-26.jpg",
+        description:
+            "Modelo premium alternativo do Flamengo 2025",
+        featured: true,
+        sizes: ["P", "M", "G", "GG"],
+    },
+
+    {
+        id: 19,
+        name: "Corinthians - Away 25/26",
+        slug: "corinthians-away-25-26",
+        team: "Corinthians",
+        category: "Brasileiros",
+        season: "25",
+        price: 89.90,
+        badge: "NEW",
+        image: "/corinthians-away-25-26.jpg",
+        description:
+            "Modelo premium alternativo do Corinthians 2025",
+        featured: false,
+        sizes: ["P", "M", "G", "GG"],
+    },
+
+    {
+        id: 20,
+        name: "Portugal - Home 26/27",
+        slug: "portugal-home-26-27",
+        team: "Portugal",
+        category: "Seleções",
+        season: "26",
+        price: 109.90,
+        badge: "NEW",
+        image: "/portugal-home-26-27.jpg",
+        description:
+            "Modelo premium da seleção portuguesa 2026",
+        featured: true,
+        sizes: ["P", "M", "G"],
+    },
+
+    {
+        id: 21,
+        name: "Brasil - Retrô 98",
+        slug: "brasil-retro-98",
+        team: "Brasil",
+        category: "Retrô",
+        season: "1998",
+        price: 99.90,
+        badge: "RETRO",
+        image: "/brasil-retro-98.jpg",
+        description:
+            "Modelo premium retrô da seleção brasileira 1998",
+        featured: true,
+        sizes: ["P", "M", "G"],
+    },
+
+    {
+        id: 22,
+        name: "Roma - Home 25/26",
+        slug: "roma-home-25-26",
+        team: "Roma",
+        category: "Europeus",
+        season: "25",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/roma-home-25-26.jpg",
+        description:
+            "Modelo premium titular da Roma 2025",
+        featured: false,
+        sizes: ["M", "G", "GG"],
     },
 ];
