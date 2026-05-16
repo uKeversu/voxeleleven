@@ -175,7 +175,7 @@ export const products: Product[] = [
         image: "/roma-bege.jpeg",
         description:
             "Modelo premium da Roma 2020",
-        featured: false,
+        featured: true,
         sizes: ["P", "M", "G"],
     },
 
@@ -207,7 +207,7 @@ export const products: Product[] = [
         image: "/vasco-preto-26.png",
         description:
             "Modelo premium Vasco da Gama 2026",
-        featured: true,
+        featured: false,
         sizes: ["M", "G", "GG"],
     },
 
@@ -319,7 +319,7 @@ export const products: Product[] = [
         image: "/portugal-home-26-27.jpg",
         description:
             "Modelo premium da seleção portuguesa 2026",
-        featured: true,
+        featured: false,
         sizes: ["P", "M", "G"],
     },
 
@@ -335,7 +335,7 @@ export const products: Product[] = [
         image: "/brasil-retro-98.jpg",
         description:
             "Modelo premium retrô da seleção brasileira 1998",
-        featured: true,
+        featured: false,
         sizes: ["P", "M", "G"],
     },
 

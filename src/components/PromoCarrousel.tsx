@@ -53,7 +53,7 @@ export default function PromoCarousel() {
                 overflow: "hidden",
             }}
         >
-            {/* Glow */}
+            {/* GLOW */}
             <Box
                 sx={{
                     position: "absolute",
@@ -76,9 +76,15 @@ export default function PromoCarousel() {
                     borderRadius: 6,
                     overflow: "hidden",
                     minHeight: 420,
+
                     display: "flex",
+                    flexDirection: { xs: "column", md: "row" },
+
                     alignItems: "center",
                     justifyContent: "space-between",
+
+                    gap: 4,
+
                     px: { xs: 3, md: 8 },
                     py: 4,
                 }}
@@ -88,6 +94,7 @@ export default function PromoCarousel() {
                     sx={{
                         zIndex: 2,
                         maxWidth: 500,
+                        textAlign: { xs: "center", md: "left" },
                     }}
                 >
                     <Typography
@@ -96,6 +103,10 @@ export default function PromoCarousel() {
                             fontWeight: 800,
                             letterSpacing: 2,
                             mb: 1,
+                            fontSize: {
+                                xs: "0.9rem",
+                                md: "1rem",
+                            },
                         }}
                     >
                         {slides[current].subtitle}
@@ -103,7 +114,12 @@ export default function PromoCarousel() {
 
                     <Typography
                         sx={{
-                            fontSize: { xs: "2.2rem", md: "4rem" },
+                            fontSize: {
+                                xs: "1.8rem",
+                                sm: "2rem",
+                                md: "2.5rem",
+                            },
+
                             fontWeight: 900,
                             lineHeight: 1,
                         }}
@@ -115,7 +131,10 @@ export default function PromoCarousel() {
                         sx={{
                             mt: 3,
                             color: "#aaa",
-                            fontSize: "1.1rem",
+                            fontSize: {
+                                xs: "1rem",
+                                md: "1.1rem",
+                            },
                         }}
                     >
                         {slides[current].description}
@@ -124,13 +143,22 @@ export default function PromoCarousel() {
                     <Stack
                         direction="row"
                         spacing={2}
-                        sx={{ mt: 4 }}
+                        sx={{
+                            mt: 4,
+
+                            justifyContent: {
+                                xs: "center",
+                                md: "flex-start",
+                            },
+                        }}
                     >
                         <Button
                             variant="contained"
                             sx={{
                                 px: 4,
                                 py: 1.5,
+                                borderRadius: 3,
+                                fontWeight: 700,
                             }}
                         >
                             {slides[current].button}
@@ -141,18 +169,42 @@ export default function PromoCarousel() {
                 {/* IMAGEM */}
                 <Box
                     sx={{
-                        display: { xs: "none", md: "flex" },
-                        width: 380,
-                        height: 380,
+                        display: "flex",
+
+                        width: {
+                            xs: 260,
+                            sm: 320,
+                            md: 380,
+                        },
+
+                        height: {
+                            xs: 260,
+                            sm: 320,
+                            md: 380,
+                        },
+
                         position: "relative",
+
                         justifyContent: "center",
                         alignItems: "center",
-                        animation: "floatPromo 6s ease-in-out infinite",
+
+                        mx: "auto",
+
+                        zIndex: 2,
+
+                        animation:
+                            "floatPromo 6s ease-in-out infinite",
 
                         "@keyframes floatPromo": {
-                            "0%": { transform: "translateY(0px)" },
-                            "50%": { transform: "translateY(-10px)" },
-                            "100%": { transform: "translateY(0px)" },
+                            "0%": {
+                                transform: "translateY(0px)",
+                            },
+                            "50%": {
+                                transform: "translateY(-10px)",
+                            },
+                            "100%": {
+                                transform: "translateY(0px)",
+                            },
                         },
                     }}
                 >
@@ -164,8 +216,14 @@ export default function PromoCarousel() {
                             width: "100%",
                             height: "100%",
                             objectFit: "contain",
+
                             transition: "0.4s ease",
-                            filter: "drop-shadow(0 0 30px rgba(0,255,64,0.2))",
+
+                            filter:
+                                "drop-shadow(0 0 30px rgba(0,255,64,0.25))",
+
+                            backfaceVisibility: "hidden",
+                            transform: "translateZ(0)",
 
                             "&:hover": {
                                 transform: "scale(1.03)",
@@ -174,7 +232,7 @@ export default function PromoCarousel() {
                     />
                 </Box>
 
-                {/* Indicadores */}
+                {/* INDICADORES */}
                 <Stack
                     direction="row"
                     spacing={1}
@@ -190,13 +248,20 @@ export default function PromoCarousel() {
                             key={index}
                             onClick={() => setCurrent(index)}
                             sx={{
-                                width: current === index ? 30 : 10,
+                                width:
+                                    current === index
+                                        ? 30
+                                        : 10,
+
                                 height: 10,
+
                                 borderRadius: 10,
+
                                 background:
                                     current === index
                                         ? "#00ff40"
                                         : "rgba(255,255,255,0.2)",
+
                                 transition: "0.3s",
                                 cursor: "pointer",
                             }}
