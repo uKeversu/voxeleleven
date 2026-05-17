@@ -234,7 +234,7 @@ export const products: Product[] = [
         team: "Vasco da Gama",
         category: "Brasileiros",
         season: "26",
-        price: 1.50,
+        price: 89.90,
         badge: "NEW",
         image: "/vasco-away-26-27.jpg",
         description:
