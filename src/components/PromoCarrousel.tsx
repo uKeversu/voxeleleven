@@ -24,7 +24,7 @@ const slides = [
     },
 
     {
-        title: "3 CAMISAS = 30% OFF",
+        title: "3 CAMISAS = 25% OFF",
         subtitle: "PROMOÇÃO ESPECIAL",
         description: "Monte sua coleção e economize no carrinho.",
         image: "/colecao.png",
@@ -84,7 +84,7 @@ export default function PromoCarousel() {
             router.push("/carrinho");
         }
 
-        // PROMOÇÃO 30%
+        // PROMOÇÃO 25%
         if (slide.action === "catalog") {
             router.push("/catalogo");
         }
