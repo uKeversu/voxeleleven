@@ -66,15 +66,19 @@ export default function CarrinhoPage() {
 
                     body: JSON.stringify({
                         items: cartItems,
-                        total: totalPrice,
                     }),
                 }
             );
 
             const data = await response.json();
-            console.log(data);
 
-            window.location.href = data.link;
+            console.log(data);
+            console.log(JSON.stringify(data, null, 2));
+
+            if (data.url) {
+                window.location.href = data.url;
+            }
+
         };
 
     if (cartItems.length === 0) {
