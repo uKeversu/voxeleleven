@@ -52,6 +52,31 @@ export default function CarrinhoPage() {
         window.open(url, "_blank");
     };
 
+    const handleInfiniteCheckout =
+        async () => {
+            const response = await fetch(
+                "/api/create-checkout",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                    },
+
+                    body: JSON.stringify({
+                        items: cartItems,
+                        total: totalPrice,
+                    }),
+                }
+            );
+
+            const data = await response.json();
+            console.log(data);
+
+            window.location.href = data.link;
+        };
+
     if (cartItems.length === 0) {
         return (
             <Box
@@ -536,6 +561,14 @@ export default function CarrinhoPage() {
                                         mt: 2,
                                     }}
                                 />
+
+                                <Button
+                                    variant="contained"
+                                    size="large"
+                                    onClick={handleInfiniteCheckout}
+                                >
+                                    Finalizar compra
+                                </Button>
 
                                 <Button
                                     variant="contained"
