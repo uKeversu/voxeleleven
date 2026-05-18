@@ -16,7 +16,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da seleção argentina 2026",
         featured: true,
-        sizes: ["P", "M", "G", "GG"],
+        sizes: ["P", "M", "G"],
     },
 
     {
@@ -48,7 +48,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da seleção brasileira 2026",
         featured: true,
-        sizes: ["P", "M", "G", "GG", "XGG"],
+        sizes: ["P", "M", "G", "GG"],
     },
 
     {
@@ -64,7 +64,7 @@ export const products: Product[] = [
         description:
             "Edição especial dourada da seleção brasileira 2022",
         featured: false,
-        sizes: ["M", "G"],
+        sizes: ["M", "G", "GG"],
     },
 
     {
@@ -80,7 +80,7 @@ export const products: Product[] = [
         description:
             "Modelo premium retrô do Corinthians 1998",
         featured: false,
-        sizes: ["P", "M", "G"],
+        sizes: ["P"],
     },
 
     {
@@ -96,7 +96,7 @@ export const products: Product[] = [
         description:
             "Modelo premium do Flamengo 2025",
         featured: false,
-        sizes: ["M", "G", "GG", "XGG"],
+        sizes: ["M"],
     },
 
     {
@@ -112,7 +112,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Manchester City 2025",
         featured: true,
-        sizes: ["P", "M", "GG"],
+        sizes: ["P"],
     },
 
     {
@@ -144,7 +144,7 @@ export const products: Product[] = [
         description:
             "Modelo premium do Palmeiras 2026",
         featured: false,
-        sizes: ["M", "G", "GG"],
+        sizes: ["P", "M", "G", "GG"],
     },
 
     {
@@ -160,7 +160,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativa do PSG 2025",
         featured: true,
-        sizes: ["P", "M", "G", "GG", "XGG"],
+        sizes: ["P"],
     },
 
     {
@@ -176,7 +176,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da Roma 2020",
         featured: true,
-        sizes: ["P", "M", "G"],
+        sizes: ["M"],
     },
 
     {
@@ -208,7 +208,7 @@ export const products: Product[] = [
         description:
             "Modelo premium Vasco da Gama 2026",
         featured: false,
-        sizes: ["M", "G", "GG"],
+        sizes: ["P", "G"],
     },
 
     {
@@ -224,7 +224,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Manchester United 2024",
         featured: true,
-        sizes: ["P", "M", "G", "GG"],
+        sizes: ["P", "M", "G"],
     },
 
     {
@@ -240,7 +240,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Vasco da Gama 2026",
         featured: true,
-        sizes: ["P", "M", "G", "GG"],
+        sizes: ["M", "GG"],
     },
 
     {
@@ -256,7 +256,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Santos 2025",
         featured: false,
-        sizes: ["P", "M", "G", "GG"],
+        sizes: ["M", "GG"],
     },
 
     {
@@ -272,7 +272,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Fluminense 2025",
         featured: false,
-        sizes: ["M", "G", "GG"],
+        sizes: ["P"],
     },
 
     {
@@ -282,7 +282,7 @@ export const products: Product[] = [
         team: "Flamengo",
         category: "Brasileiros",
         season: "25",
-        price: 99.90,
+        price: 89.90,
         badge: "BEST SELLER",
         image: "/flamengo-away-25-26.jpg",
         description:
@@ -304,7 +304,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Corinthians 2025",
         featured: false,
-        sizes: ["P", "M", "G", "GG"],
+        sizes: ["M", "G", "GG"],
     },
 
     {
@@ -320,7 +320,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da seleção portuguesa 2026",
         featured: false,
-        sizes: ["P", "M", "G"],
+        sizes: ["P", "M", "G", "GG"],
     },
 
     {
@@ -336,7 +336,7 @@ export const products: Product[] = [
         description:
             "Modelo premium retrô da seleção brasileira 1998",
         featured: false,
-        sizes: ["P", "M", "G"],
+        sizes: ["P", "M", "G", "GG"],
     },
 
     {
@@ -352,6 +352,166 @@ export const products: Product[] = [
         description:
             "Modelo premium titular da Roma 2025",
         featured: false,
+        sizes: ["M", "G"],
+    },
+
+    {
+        id: 23,
+        name: "Brasil - Polo Preta 26/27",
+        slug: "brasil-polo-preta-26-27",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 99.90,
+        badge: "PREMIUM",
+        image: "/brasil-polo-preta-26-27.jpg",
+        description:
+            "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
+        featured: false,
+        sizes: ["P", "M", "G", "GG"],
+    },
+
+    {
+        id: 24,
+        name: "Liverpool - Goleiro 25/26",
+        slug: "liverpool-goleiro-25-26",
+        team: "Liverpool",
+        category: "Europeus",
+        season: "25",
+        price: 89.90,
+        badge: "NEW",
+        image: "/liverpool-goleiro-25-26.jpg",
+        description:
+            "Modelo de goleiro do Liverpool 2025/26 com design marcante e tecido dry fit premium",
+        featured: true,
+        sizes: ["M"],
+    },
+
+    {
+        id: 25,
+        name: "Brasil - Azul 26/27",
+        slug: "brasil-azul-26-27",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 99.90,
+        badge: "NEW",
+        image: "/brasil-azul-26-27.jpg",
+        description:
+            "Camisa reserva da Seleção Brasileira 2026 com visual clássico em azul vibrante",
+        featured: false,
+        sizes: ["P", "G"],
+    },
+
+    {
+        id: 26,
+        name: "Real Madrid - Away 25/26",
+        slug: "real-madrid-away-25-26",
+        team: "Real Madrid",
+        category: "Europeus",
+        season: "25",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/real-madrid-away-25-26.jpg",
+        description:
+            "Modelo away do Real Madrid 2025/26 com detalhes premium e caimento confortável",
+        featured: false,
+        sizes: ["M", "G"],
+    },
+
+    {
+        id: 27,
+        name: "Brasil - Away 26/27",
+        slug: "brasil-away-26-27",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 119.90,
+        badge: "NEW",
+        image: "/brasil-away-26-27.jpg",
+        description:
+            "Versão visitante da Seleção Brasileira 2026 com tecido leve e acabamento premium",
+        featured: false,
+        sizes: ["P", "M", "G", "GG"],
+    },
+
+    {
+        id: 28,
+        name: "Cruzeiro - Away 25/26",
+        slug: "cruzeiro-away-25-26",
+        team: "Cruzeiro",
+        category: "Brasileiros",
+        season: "25",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/cruzeiro-away-25-26.jpg",
+        description:
+            "Camisa visitante do Cruzeiro 2025/26 inspirada na tradição celeste do clube",
+        featured: false,
+        sizes: ["P", "G", "GG"],
+    },
+
+    {
+        id: 29,
+        name: "Flamengo - Home 26/27",
+        slug: "flamengo-home-26-27",
+        team: "Flamengo",
+        category: "Brasileiros",
+        season: "26",
+        price: 99.90,
+        badge: "BESTSELLER",
+        image: "/flamengo-home-26-27.jpg",
+        description:
+            "Modelo titular do Flamengo 2026/27 com listras clássicas e acabamento premium",
+        featured: false,
+        sizes: ["P", "M", "G", "GG"],
+    },
+
+    {
+        id: 30,
+        name: "Liverpool - Home 25/26",
+        slug: "liverpool-home-25-26",
+        team: "Liverpool",
+        category: "Europeus",
+        season: "25",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/liverpool-home-25-26.jpg",
+        description:
+            "Camisa titular do Liverpool 2025/26 com design clássico e detalhes sofisticados",
+        featured: false,
+        sizes: ["P"],
+    },
+
+    {
+        id: 31,
+        name: "Brasil - Home 26/27 - DTF",
+        slug: "brasil-home-26-27-dtf",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 99.90,
+        badge: "NEW",
+        image: "/brasil-amarela-dtf-26-27.jpg",
+        description:
+            "Versão com símobolo em DTF da camisa da seleção brasileira 2026",
+        featured: false,
         sizes: ["M", "G", "GG"],
+    },
+
+    {
+        id: 32,
+        name: "Brasil - Dryfit Preta",
+        slug: "brasil-dryfit-preta",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 59.90,
+        badge: "DRY-FIT",
+        image: "/brasil-dryfit-preta.jpg",
+        description:
+            "Camisa dryfit preta inspirada na Seleção Brasileira com visual urbano e moderno",
+        featured: false,
+        sizes: ["P", "M", "G"],
     },
 ];

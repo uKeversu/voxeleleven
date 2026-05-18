@@ -12,6 +12,9 @@ export async function POST(req: Request) {
             redirect_url:
                 "https://voxeleleven.vercel.app/pagamento/sucesso",
 
+            webhook_url:
+                "https://voxeleleven.vercel.app/api/webhook/infinitepay",
+
             items: body.items.map((item: any) => ({
                 quantity: Number(item.quantity),
 

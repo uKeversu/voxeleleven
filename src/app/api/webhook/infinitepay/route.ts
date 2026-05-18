@@ -1,21 +1,30 @@
+//api/webhook/infinitepay/route.ts
+
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
 
-        console.log("Pagamento recebido:", body);
+        console.log("Pagamento aprovado:", body);
 
-        // aqui você marca pedido como pago
+        // salvar pedido no banco aqui
 
-        return NextResponse.json(
-            { success: true },
-            { status: 200 }
-        );
+        // enviar email aqui
+
+        return NextResponse.json({
+            success: true,
+        });
     } catch (error) {
+        console.error(error);
+
         return NextResponse.json(
-            { error: true },
-            { status: 400 }
+            {
+                success: false,
+            },
+            {
+                status: 500,
+            }
         );
     }
 }
