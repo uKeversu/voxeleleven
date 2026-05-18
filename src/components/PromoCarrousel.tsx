@@ -101,7 +101,12 @@ export default function PromoCarousel() {
 
         // RETRÔ
         if (slide.action === "retro") {
-            router.push("/catalogo?categoria=Retrô");
+            router.push("/catalogo");
+        }
+
+        // DRY-FIT
+        if (slide.action === "drtfit") {
+            router.push("/catalogo");
         }
     };
 
