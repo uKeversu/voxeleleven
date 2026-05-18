@@ -364,7 +364,7 @@ export const products: Product[] = [
         season: "26",
         price: 99.90,
         badge: "PREMIUM",
-        image: "/brasil-polo-preta-26-27.jpg",
+        image: "/brasil-polo-preta-26-27.jpeg",
         description:
             "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
         featured: false,
@@ -380,10 +380,10 @@ export const products: Product[] = [
         season: "25",
         price: 89.90,
         badge: "NEW",
-        image: "/liverpool-goleiro-25-26.jpg",
+        image: "/liverpool-goleiro-25-26.jpeg",
         description:
             "Modelo de goleiro do Liverpool 2025/26 com design marcante e tecido dry fit premium",
-        featured: true,
+        featured: false,
         sizes: ["M"],
     },
 
@@ -396,7 +396,7 @@ export const products: Product[] = [
         season: "26",
         price: 99.90,
         badge: "NEW",
-        image: "/brasil-azul-26-27.jpg",
+        image: "/brasil-azul-26-27.jpeg",
         description:
             "Camisa reserva da Seleção Brasileira 2026 com visual clássico em azul vibrante",
         featured: false,
@@ -412,7 +412,7 @@ export const products: Product[] = [
         season: "25",
         price: 89.90,
         badge: "LIMITED",
-        image: "/real-madrid-away-25-26.jpg",
+        image: "/real-madrid-away-25-26.jpeg",
         description:
             "Modelo away do Real Madrid 2025/26 com detalhes premium e caimento confortável",
         featured: false,
@@ -428,7 +428,7 @@ export const products: Product[] = [
         season: "26",
         price: 119.90,
         badge: "NEW",
-        image: "/brasil-away-26-27.jpg",
+        image: "/brasil-away-26-27.jpeg",
         description:
             "Versão visitante da Seleção Brasileira 2026 com tecido leve e acabamento premium",
         featured: false,
@@ -444,7 +444,7 @@ export const products: Product[] = [
         season: "25",
         price: 89.90,
         badge: "LIMITED",
-        image: "/cruzeiro-away-25-26.jpg",
+        image: "/cruzeiro-away-25-26.jpeg",
         description:
             "Camisa visitante do Cruzeiro 2025/26 inspirada na tradição celeste do clube",
         featured: false,
@@ -460,7 +460,7 @@ export const products: Product[] = [
         season: "26",
         price: 99.90,
         badge: "BESTSELLER",
-        image: "/flamengo-home-26-27.jpg",
+        image: "/flamengo-home-26-27.jpeg",
         description:
             "Modelo titular do Flamengo 2026/27 com listras clássicas e acabamento premium",
         featured: false,
@@ -476,7 +476,7 @@ export const products: Product[] = [
         season: "25",
         price: 89.90,
         badge: "LIMITED",
-        image: "/liverpool-home-25-26.jpg",
+        image: "/liverpool-home-25-26.jpeg",
         description:
             "Camisa titular do Liverpool 2025/26 com design clássico e detalhes sofisticados",
         featured: false,
@@ -492,7 +492,7 @@ export const products: Product[] = [
         season: "26",
         price: 99.90,
         badge: "NEW",
-        image: "/brasil-amarela-dtf-26-27.jpg",
+        image: "/brasil-amarela-dtf-26-27.jpeg",
         description:
             "Versão com símobolo em DTF da camisa da seleção brasileira 2026",
         featured: false,
@@ -508,7 +508,7 @@ export const products: Product[] = [
         season: "26",
         price: 59.90,
         badge: "DRY-FIT",
-        image: "/brasil-dryfit-preta.jpg",
+        image: "/brasil-dryfit-preta.jpeg",
         description:
             "Camisa dryfit preta inspirada na Seleção Brasileira com visual urbano e moderno",
         featured: false,
