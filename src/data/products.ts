@@ -524,7 +524,7 @@ export const products: Product[] = [
         season: "26",
         price: 59.90,
         badge: "DRY-FIT",
-        image: "/brasil-dryfit-verde.png",
+        image: "/brasil-dryfit-verde.jpg",
         description:
             "Camisa dryfit verde da Seleção Brasileira com tecido leve e visual esportivo premium",
         featured: false,
@@ -540,7 +540,7 @@ export const products: Product[] = [
         season: "26",
         price: 59.90,
         badge: "DRY-FIT",
-        image: "/brasil-dryfit-azul.png",
+        image: "/brasil-dryfit-azul.jpg",
         description:
             "Modelo dryfit azul inspirado na tradição da Seleção Brasileira com conforto e respirabilidade",
         featured: false,
@@ -556,7 +556,7 @@ export const products: Product[] = [
         season: "26",
         price: 59.90,
         badge: "DRY-FIT",
-        image: "/brasil-dryfit-branca.png",
+        image: "/brasil-dryfit-branca.jpg",
         description:
             "Camisa dryfit branca com design clean e acabamento moderno inspirado na Seleção Brasileira",
         featured: false,
@@ -572,7 +572,7 @@ export const products: Product[] = [
         season: "26",
         price: 59.90,
         badge: "DRY-FIT",
-        image: "/brasil-dryfit-amarela.png",
+        image: "/brasil-dryfit-amarela.jpg",
         description:
             "Versão dryfit amarela da Seleção Brasileira com tecido premium e estilo esportivo marcante",
         featured: true,
