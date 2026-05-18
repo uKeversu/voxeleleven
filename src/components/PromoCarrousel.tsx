@@ -45,7 +45,7 @@ const slides = [
         title: "BRASIL DRY-FIT",
         subtitle: "PERFORMANCE & ESTILO",
         description:
-            "Modelos premium da Seleção Brasileira com tecnologia dry-fit e visual moderno.",
+            "Modelos dry-fit da Seleção Brasileira por R$ 59.90.",
         image: "/modelos-dryfit.png",
         button: "Explorar coleção",
         action: "dryfit",
