@@ -514,4 +514,68 @@ export const products: Product[] = [
         featured: false,
         sizes: ["P", "M", "G"],
     },
+
+    {
+        id: 33,
+        name: "Brasil - Dryfit Verde",
+        slug: "brasil-dryfit-verde",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 59.90,
+        badge: "DRY-FIT",
+        image: "/brasil-dryfit-verde.png",
+        description:
+            "Camisa dryfit verde da Seleção Brasileira com tecido leve e visual esportivo premium",
+        featured: false,
+        sizes: ["P", "M", "G"],
+    },
+
+    {
+        id: 34,
+        name: "Brasil - Dryfit Azul",
+        slug: "brasil-dryfit-azul",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 59.90,
+        badge: "DRY-FIT",
+        image: "/brasil-dryfit-azul.png",
+        description:
+            "Modelo dryfit azul inspirado na tradição da Seleção Brasileira com conforto e respirabilidade",
+        featured: false,
+        sizes: ["P", "M", "G"],
+    },
+
+    {
+        id: 35,
+        name: "Brasil - Dryfit Branca",
+        slug: "brasil-dryfit-branca",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 59.90,
+        badge: "DRY-FIT",
+        image: "/brasil-dryfit-branca.png",
+        description:
+            "Camisa dryfit branca com design clean e acabamento moderno inspirado na Seleção Brasileira",
+        featured: false,
+        sizes: ["P", "M", "G"],
+    },
+
+    {
+        id: 36,
+        name: "Brasil - Dryfit Amarela",
+        slug: "brasil-dryfit-amarela",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 59.90,
+        badge: "DRY-FIT",
+        image: "/brasil-dryfit-amarela.png",
+        description:
+            "Versão dryfit amarela da Seleção Brasileira com tecido premium e estilo esportivo marcante",
+        featured: true,
+        sizes: ["P", "M", "G"],
+    },
 ];

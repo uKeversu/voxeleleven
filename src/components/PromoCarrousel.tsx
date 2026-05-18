@@ -40,6 +40,16 @@ const slides = [
         button: "Ver coleção",
         action: "retro",
     },
+
+    {
+        title: "BRASIL DRY-FIT",
+        subtitle: "PERFORMANCE & ESTILO",
+        description:
+            "Modelos premium da Seleção Brasileira com tecnologia dry-fit e visual moderno.",
+        image: "/modelos-dryfit.png",
+        button: "Explorar coleção",
+        action: "dryfit",
+    },
 ];
 
 export default function PromoCarousel() {
