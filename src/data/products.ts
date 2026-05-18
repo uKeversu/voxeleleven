@@ -560,7 +560,7 @@ export const products: Product[] = [
         description:
             "Camisa dryfit branca com design clean e acabamento moderno inspirado na Seleção Brasileira",
         featured: false,
-        sizes: ["P", "M", "G"],
+        sizes: ["P", "G", "GG"],
     },
 
     {
