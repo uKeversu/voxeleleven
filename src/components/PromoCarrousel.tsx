@@ -105,7 +105,7 @@ export default function PromoCarousel() {
         }
 
         // DRY-FIT
-        if (slide.action === "drtfit") {
+        if (slide.action === "dryfit") {
             router.push("/catalogo");
         }
     };
