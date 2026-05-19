@@ -578,4 +578,36 @@ export const products: Product[] = [
         featured: true,
         sizes: ["P", "M", "G"],
     },
+
+    {
+        id: 37,
+        name: "Brasil - Polo amarela 26/27",
+        slug: "brasil-polo-amarela-26-27",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 99.90,
+        badge: "PREMIUM",
+        image: "/brasil-polo-amarela-26-27.jpg",
+        description:
+            "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
+        featured: false,
+        sizes: ["P", "M", "G"],
+    },
+
+    {
+        id: 38,
+        name: "Arsenal - Away 25/26",
+        slug: "arsenal-away-25-26",
+        team: "Arsenal",
+        category: "Europeus",
+        season: "26",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/arsenal-away-25-26.jpg",
+        description:
+            "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
+        featured: false,
+        sizes: ["M"],
+    },
 ];
