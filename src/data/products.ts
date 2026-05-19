@@ -606,7 +606,7 @@ export const products: Product[] = [
         badge: "LIMITED",
         image: "/arsenal-away-25-26.jpg",
         description:
-            "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
+            "Camisa alternativa do Arsenal 25/26 com visual ousado, tecido leve e acabamento premium.",
         featured: false,
         sizes: ["M"],
     },
