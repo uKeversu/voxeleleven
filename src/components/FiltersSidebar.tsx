@@ -80,6 +80,12 @@ type Props = {
     setOnlyFeatured: (
         value: boolean
     ) => void;
+
+    updateFiltersInUrl: (
+        categoria: string,
+        time: string,
+        featured: boolean
+    ) => void;
 };
 
 export default function FiltersSidebar({
@@ -100,6 +106,8 @@ export default function FiltersSidebar({
 
     onlyFeatured,
     setOnlyFeatured,
+
+    updateFiltersInUrl,
 }: Props) {
     return (
         <Box
@@ -203,11 +211,15 @@ export default function FiltersSidebar({
                                     category
                                 }
                                 clickable
-                                onClick={() =>
-                                    setSelectedCategory(
-                                        category
-                                    )
-                                }
+                                onClick={() => {
+                                    setSelectedCategory(category);
+
+                                    updateFiltersInUrl(
+                                        category,
+                                        selectedTeam,
+                                        onlyFeatured
+                                    );
+                                }}
                                 sx={{
                                     borderRadius: 999,
 
@@ -250,11 +262,17 @@ export default function FiltersSidebar({
                     value={
                         selectedTeam
                     }
-                    onChange={(e) =>
-                        setSelectedTeam(
-                            e.target.value
-                        )
-                    }
+                    onChange={(e) => {
+                        const value = e.target.value;
+
+                        setSelectedTeam(value);
+
+                        updateFiltersInUrl(
+                            selectedCategory,
+                            value,
+                            onlyFeatured
+                        );
+                    }}
                     sx={{
                         borderRadius: 4,
                     }}
@@ -361,12 +379,18 @@ export default function FiltersSidebar({
                         checked={
                             onlyFeatured
                         }
-                        onChange={(e) =>
-                            setOnlyFeatured(
-                                e.target
-                                    .checked
-                            )
-                        }
+                        onChange={(e) => {
+                            const checked =
+                                e.target.checked;
+
+                            setOnlyFeatured(checked);
+
+                            updateFiltersInUrl(
+                                selectedCategory,
+                                selectedTeam,
+                                checked
+                            );
+                        }}
                     />
                 }
                 label="Somente destaques"

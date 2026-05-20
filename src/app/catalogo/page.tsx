@@ -3,6 +3,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import {
     Box,
@@ -23,14 +24,27 @@ import FiltersSidebar from "@/components/FiltersSidebar";
 import { products } from "@/data/products";
 
 export default function CatalogoPage() {
+
+    const searchParams = useSearchParams();
+    const router = useRouter();
+
     const [search, setSearch] =
         useState("");
 
     const [selectedCategory, setSelectedCategory] =
-        useState("Todos");
+        useState(
+            searchParams.get("categoria") || "Todos"
+        );
 
     const [selectedTeam, setSelectedTeam] =
-        useState("Todos");
+        useState(
+            searchParams.get("time") || "Todos"
+        );
+
+    const [onlyFeatured, setOnlyFeatured] =
+        useState(
+            searchParams.get("featured") === "true" || false
+        );
 
     const [sortBy, setSortBy] =
         useState("recentes");
@@ -38,13 +52,32 @@ export default function CatalogoPage() {
     const [priceRange, setPriceRange] =
         useState<number[]>(([0, 300]));
 
-    const [onlyFeatured, setOnlyFeatured] =
-        useState(false);
-
     const [
         mobileFiltersOpen,
         setMobileFiltersOpen,
     ] = useState(false);
+
+    const updateFiltersInUrl = (
+        categoria: string,
+        time: string,
+        featured: boolean
+    ) => {
+        const params = new URLSearchParams();
+
+        if (categoria !== "Todos") {
+            params.set("categoria", categoria);
+        }
+
+        if (time !== "Todos") {
+            params.set("time", time);
+        }
+
+        if (featured) {
+            params.set("featured", "true");
+        }
+
+        router.replace(`/catalogo?${params.toString()}`);
+    };
 
     const filteredProducts = useMemo(() => {
         let filtered = [...products];
@@ -286,6 +319,9 @@ export default function CatalogoPage() {
                             setOnlyFeatured={
                                 setOnlyFeatured
                             }
+                            updateFiltersInUrl={
+                                updateFiltersInUrl
+                            }
                         />
                     </Box>
                 </Grid>
@@ -467,7 +503,9 @@ export default function CatalogoPage() {
                     }
                     sortBy={sortBy}
                     setSortBy={setSortBy}
-                    priceRange={priceRange}
+                    priceRange={
+                        priceRange
+                    }
                     setPriceRange={
                         setPriceRange
                     }
@@ -476,6 +514,9 @@ export default function CatalogoPage() {
                     }
                     setOnlyFeatured={
                         setOnlyFeatured
+                    }
+                    updateFiltersInUrl={
+                        updateFiltersInUrl
                     }
                 />
             </Drawer>

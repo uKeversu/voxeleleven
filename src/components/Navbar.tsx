@@ -22,10 +22,25 @@ import CloseIcon from "@mui/icons-material/Close";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 const navItems = [
-    { label: "Catálogo", href: "/catalogo" },
-    { label: "Brasileiros", href: "/catalogo?cat=br" },
-    { label: "Europeus", href: "/catalogo?cat=eu" },
-    { label: "Seleções", href: "/catalogo?cat=selecoes" },
+    {
+        label: "Catálogo",
+        href: "/catalogo",
+    },
+
+    {
+        label: "Brasileiros",
+        href: "/catalogo?categoria=Brasileiros",
+    },
+
+    {
+        label: "Europeus",
+        href: "/catalogo?categoria=Europeus",
+    },
+
+    {
+        label: "Seleções",
+        href: "/catalogo?categoria=Seleções",
+    },
 ];
 
 export default function Navbar() {
