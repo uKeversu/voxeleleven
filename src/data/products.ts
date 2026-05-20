@@ -198,13 +198,13 @@ export const products: Product[] = [
     {
         id: 13,
         name: "Vasco Da Gama - Home 26/27",
-        slug: "vasco-preto-26",
+        slug: "vasco-home-26-27",
         team: "Vasco da Gama",
         category: "Brasileiros",
         season: "26",
         price: 89.90,
         badge: "NEW",
-        image: "/vasco-preto-26.png",
+        image: "/vasco-home-26-27.jpg",
         description:
             "Modelo premium Vasco da Gama 2026",
         featured: false,
@@ -380,7 +380,7 @@ export const products: Product[] = [
         season: "25",
         price: 89.90,
         badge: "NEW",
-        image: "/liverpool-goleiro-25-26.jpeg",
+        image: "/liverpool-goleiro-25-26.jpg",
         description:
             "Modelo de goleiro do Liverpool 2025/26 com design marcante e tecido dry fit premium",
         featured: false,
@@ -592,7 +592,7 @@ export const products: Product[] = [
         description:
             "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
         featured: false,
-        sizes: ["P", "M", "G"],
+        sizes: ["M", "G"],
     },
 
     {
@@ -609,5 +609,101 @@ export const products: Product[] = [
             "Camisa alternativa do Arsenal 25/26 com visual ousado, tecido leve e acabamento premium.",
         featured: false,
         sizes: ["M"],
+    },
+
+    {
+        id: 39,
+        name: "Grêmio - Home 25/26",
+        slug: "gremio-home-25-26",
+        team: "Grêmio",
+        category: "Brasileiros",
+        season: "25/26",
+        price: 89.90,
+        badge: "NEW",
+        image: "/gremio-home-25-26.jpg",
+        description:
+            "Camisa home do Grêmio 25/26 com listras tradicionais, tecido leve e acabamento premium.",
+        featured: false,
+        sizes: ["M"],
+    },
+
+    {
+        id: 40,
+        name: "Borussia - Away 25/26",
+        slug: "borussia-home-24-25",
+        team: "Borussia Dortmund",
+        category: "Europeus",
+        season: "24/25",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/borussia-home-24-25.jpg",
+        description:
+            "Camisa do Borussia 24/25 com design moderno, caimento confortável e detalhes premium.",
+        featured: false,
+        sizes: ["M"],
+    },
+
+    {
+        id: 41,
+        name: "Vasco - Retro 2000",
+        slug: "vasco-retro-2000",
+        team: "Vasco",
+        category: "Retrô",
+        season: "2000",
+        price: 199.90,
+        badge: "CLASSIC",
+        image: "/vasco-retro-2000.jpg",
+        description:
+            "Camisa retrô do Vasco inspirada na temporada 2000, com visual clássico e acabamento premium.",
+        featured: false,
+        sizes: ["M"],
+    },
+
+    {
+        id: 42,
+        name: "Fluminense - Home 25/26",
+        slug: "fluminense-home-26-27",
+        team: "Fluminense",
+        category: "Brasileiros",
+        season: "26/27",
+        price: 89.90,
+        badge: "NEW",
+        image: "/fluminense-home-26-27.jpg",
+        description:
+            "Camisa home do Fluminense 26/27 com visual tradicional, tecido leve e ótimo conforto.",
+        featured: false,
+        sizes: ["M"],
+    },
+
+    {
+        id: 43,
+        name: "Ajax- Away 25/26",
+        slug: "ajax-home-25-26",
+        team: "Ajax",
+        category: "Europeus",
+        season: "25/26",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/ajax-home-25-26.jpg",
+        description:
+            "Camisa do Ajax 25/26 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        sizes: ["M"],
+    },
+
+    {
+        id: 44,
+        name: "Brasil - Polo Branca 26/27",
+        slug: "brasil-polo-branca-26-27",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26",
+        price: 99.90,
+        badge: "PREMIUM",
+        image: "/brasil-polo-branca-26-27.jpg",
+        description:
+            "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
+        featured: false,
+        sizes: ["P", "M", "G"],
     },
 ];
