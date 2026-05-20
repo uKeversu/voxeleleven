@@ -24,7 +24,7 @@ const slides = [
     },
 
     {
-        title: "3 CAMISAS = 25% OFF",
+        title: "3 CAMISAS = 20% OFF",
         subtitle: "PROMOÇÃO ESPECIAL",
         description: "Monte sua coleção e economize no carrinho.",
         image: "/colecao.png",
