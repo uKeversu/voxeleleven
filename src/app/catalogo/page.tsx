@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 import {
@@ -45,6 +45,21 @@ export default function CatalogoPage() {
         useState(
             searchParams.get("featured") === "true" || false
         );
+
+    useEffect(() => {
+        const categoria =
+            searchParams.get("categoria") || "Todos";
+
+        const time =
+            searchParams.get("time") || "Todos";
+
+        const featured =
+            searchParams.get("featured") === "true";
+
+        setSelectedCategory(categoria);
+        setSelectedTeam(time);
+        setOnlyFeatured(featured);
+    }, [searchParams]);
 
     const [sortBy, setSortBy] =
         useState("recentes");
