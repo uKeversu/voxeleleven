@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 import {
@@ -31,35 +31,14 @@ export default function CatalogoPage() {
     const [search, setSearch] =
         useState("");
 
-    const [selectedCategory, setSelectedCategory] =
-        useState(
-            searchParams.get("categoria") || "Todos"
-        );
+    const selectedCategory =
+        searchParams.get("categoria") || "Todos";
 
-    const [selectedTeam, setSelectedTeam] =
-        useState(
-            searchParams.get("time") || "Todos"
-        );
+    const selectedTeam =
+        searchParams.get("time") || "Todos";
 
-    const [onlyFeatured, setOnlyFeatured] =
-        useState(
-            searchParams.get("featured") === "true" || false
-        );
-
-    useEffect(() => {
-        const categoria =
-            searchParams.get("categoria") || "Todos";
-
-        const time =
-            searchParams.get("time") || "Todos";
-
-        const featured =
-            searchParams.get("featured") === "true";
-
-        setSelectedCategory(categoria);
-        setSelectedTeam(time);
-        setOnlyFeatured(featured);
-    }, [searchParams]);
+    const onlyFeatured =
+        searchParams.get("featured") === "true";
 
     const [sortBy, setSortBy] =
         useState("recentes");
@@ -311,14 +290,22 @@ export default function CatalogoPage() {
                             selectedCategory={
                                 selectedCategory
                             }
-                            setSelectedCategory={
-                                setSelectedCategory
+                            setSelectedCategory={(value) =>
+                                updateFiltersInUrl(
+                                    value,
+                                    selectedTeam,
+                                    onlyFeatured
+                                )
                             }
                             selectedTeam={
                                 selectedTeam
                             }
-                            setSelectedTeam={
-                                setSelectedTeam
+                            setSelectedTeam={(value) =>
+                                updateFiltersInUrl(
+                                    selectedCategory,
+                                    value,
+                                    onlyFeatured
+                                )
                             }
                             sortBy={sortBy}
                             setSortBy={setSortBy}
@@ -331,11 +318,12 @@ export default function CatalogoPage() {
                             onlyFeatured={
                                 onlyFeatured
                             }
-                            setOnlyFeatured={
-                                setOnlyFeatured
-                            }
-                            updateFiltersInUrl={
-                                updateFiltersInUrl
+                            setOnlyFeatured={(value) =>
+                                updateFiltersInUrl(
+                                    selectedCategory,
+                                    selectedTeam,
+                                    value
+                                )
                             }
                         />
                     </Box>
@@ -507,14 +495,22 @@ export default function CatalogoPage() {
                     selectedCategory={
                         selectedCategory
                     }
-                    setSelectedCategory={
-                        setSelectedCategory
+                    setSelectedCategory={(value) =>
+                        updateFiltersInUrl(
+                            value,
+                            selectedTeam,
+                            onlyFeatured
+                        )
                     }
                     selectedTeam={
                         selectedTeam
                     }
-                    setSelectedTeam={
-                        setSelectedTeam
+                    setSelectedTeam={(value) =>
+                        updateFiltersInUrl(
+                            selectedCategory,
+                            value,
+                            onlyFeatured
+                        )
                     }
                     sortBy={sortBy}
                     setSortBy={setSortBy}
@@ -527,11 +523,12 @@ export default function CatalogoPage() {
                     onlyFeatured={
                         onlyFeatured
                     }
-                    setOnlyFeatured={
-                        setOnlyFeatured
-                    }
-                    updateFiltersInUrl={
-                        updateFiltersInUrl
+                    setOnlyFeatured={(value) =>
+                        updateFiltersInUrl(
+                            selectedCategory,
+                            selectedTeam,
+                            value
+                        )
                     }
                 />
             </Drawer>

@@ -80,12 +80,6 @@ type Props = {
     setOnlyFeatured: (
         value: boolean
     ) => void;
-
-    updateFiltersInUrl: (
-        categoria: string,
-        time: string,
-        featured: boolean
-    ) => void;
 };
 
 export default function FiltersSidebar({
@@ -106,8 +100,6 @@ export default function FiltersSidebar({
 
     onlyFeatured,
     setOnlyFeatured,
-
-    updateFiltersInUrl,
 }: Props) {
     return (
         <Box
@@ -213,12 +205,6 @@ export default function FiltersSidebar({
                                 clickable
                                 onClick={() => {
                                     setSelectedCategory(category);
-
-                                    updateFiltersInUrl(
-                                        category,
-                                        selectedTeam,
-                                        onlyFeatured
-                                    );
                                 }}
                                 sx={{
                                     borderRadius: 999,
@@ -266,12 +252,6 @@ export default function FiltersSidebar({
                         const value = e.target.value;
 
                         setSelectedTeam(value);
-
-                        updateFiltersInUrl(
-                            selectedCategory,
-                            value,
-                            onlyFeatured
-                        );
                     }}
                     sx={{
                         borderRadius: 4,
@@ -384,12 +364,6 @@ export default function FiltersSidebar({
                                 e.target.checked;
 
                             setOnlyFeatured(checked);
-
-                            updateFiltersInUrl(
-                                selectedCategory,
-                                selectedTeam,
-                                checked
-                            );
                         }}
                     />
                 }
