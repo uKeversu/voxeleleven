@@ -647,7 +647,7 @@ export const products: Product[] = [
         id: 41,
         name: "Vasco - Retro 2000",
         slug: "vasco-retro-2000",
-        team: "Vasco",
+        team: "Vasco da Gama",
         category: "Retrô",
         season: "2000",
         price: 199.90,
