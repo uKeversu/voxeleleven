@@ -10,7 +10,7 @@ export const products: Product[] = [
         team: "Argentina",
         category: "Seleções",
         season: "26",
-        price: 89.90,
+        price: 99.90,
         badge: "NEW",
         image: "/argentina-azul-branco.png",
         description:
@@ -58,7 +58,7 @@ export const products: Product[] = [
         team: "Brasil",
         category: "Seleções",
         season: "22",
-        price: 89.90,
+        price: 99.90,
         badge: "LIMITED",
         image: "/brasil-dourada.jpeg",
         description:
@@ -74,7 +74,7 @@ export const products: Product[] = [
         team: "Corinthians",
         category: "Retrô",
         season: "Retrô",
-        price: 89.90,
+        price: 99.90,
         badge: "RETRO",
         image: "/corinthians-retro.PNG",
         description:
@@ -170,7 +170,7 @@ export const products: Product[] = [
         team: "Roma",
         category: "Europeus",
         season: "26",
-        price: 89.90,
+        price: 99.90,
         badge: "LIMITED",
         image: "/roma-bege.jpeg",
         description:
@@ -314,7 +314,7 @@ export const products: Product[] = [
         team: "Portugal",
         category: "Seleções",
         season: "26",
-        price: 109.90,
+        price: 99.90,
         badge: "NEW",
         image: "/portugal-home-26-27.jpg",
         description:
@@ -512,7 +512,7 @@ export const products: Product[] = [
         description:
             "Camisa dryfit preta inspirada na Seleção Brasileira com visual urbano e moderno",
         featured: false,
-        sizes: ["P", "M", "G"],
+        sizes: ["M"],
     },
 
     {
@@ -528,7 +528,7 @@ export const products: Product[] = [
         description:
             "Camisa dryfit verde da Seleção Brasileira com tecido leve e visual esportivo premium",
         featured: false,
-        sizes: ["P", "M", "G"],
+        sizes: ["G", "GG"],
     },
 
     {
@@ -544,7 +544,7 @@ export const products: Product[] = [
         description:
             "Modelo dryfit azul inspirado na tradição da Seleção Brasileira com conforto e respirabilidade",
         featured: false,
-        sizes: ["P", "M", "G"],
+        sizes: ["P"],
     },
 
     {
@@ -560,7 +560,7 @@ export const products: Product[] = [
         description:
             "Camisa dryfit branca com design clean e acabamento moderno inspirado na Seleção Brasileira",
         featured: false,
-        sizes: ["P", "G", "GG"],
+        sizes: ["GG"],
     },
 
     {
