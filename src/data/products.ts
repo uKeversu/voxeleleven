@@ -122,7 +122,7 @@ export const products: Product[] = [
         team: "Milan",
         category: "Retrô",
         season: "2002",
-        price: 89.90,
+        price: 99.90,
         badge: "RETRO",
         image: "/milan-retro.jpeg",
         description:
