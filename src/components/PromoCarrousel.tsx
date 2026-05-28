@@ -24,7 +24,7 @@ const slides = [
     },
 
     {
-        title: "3 CAMISAS = 20% OFF",
+        title: "3 CAMISAS = 15% OFF",
         subtitle: "PROMOÇÃO ESPECIAL",
         description: "Monte sua coleção e economize no carrinho.",
         image: "/colecao.png",
@@ -86,7 +86,7 @@ export default function PromoCarousel() {
                     description:
                         "Modelo premium da seleção brasileira 2026",
                     featured: true,
-                    sizes: ["P", "M", "G", "GG", "XGG"],
+                    sizes: ["P", "M", "G", "GG"],
                 },
                 "M"
             );
@@ -94,7 +94,7 @@ export default function PromoCarousel() {
             router.push("/carrinho");
         }
 
-        // PROMOÇÃO 25%
+        // PROMOÇÃO 15%
         if (slide.action === "catalog") {
             router.push("/catalogo");
         }
