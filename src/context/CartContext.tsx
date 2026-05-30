@@ -62,6 +62,25 @@ export function CartProvider({
     const [cartItems, setCartItems] =
         useState<CartItem[]>([]);
 
+    const getEstoqueDisponivel = (
+        product: Product,
+        size: string
+    ) => {
+        return product.stock[size] ?? 0;
+    };
+
+    const isNoLimiteEstoque = (
+        item: CartItem
+    ) => {
+        return (
+            item.quantity >=
+            getEstoqueDisponivel(
+                item.product,
+                item.size
+            )
+        );
+    };
+
     /*
      =========================
      LOAD LOCALSTORAGE
@@ -69,15 +88,22 @@ export function CartProvider({
     */
     useEffect(() => {
         const storedCart =
-            localStorage.getItem(
-                "voxel-cart"
-            );
+            localStorage.getItem("voxel-cart");
 
-        if (storedCart) {
-            setCartItems(
-                JSON.parse(storedCart)
-            );
-        }
+        if (!storedCart) return;
+
+        const parsed: CartItem[] =
+            JSON.parse(storedCart);
+
+        const carrinhoValido =
+            parsed.filter((item) => {
+                const estoque =
+                    item.product.stock[item.size] ?? 0;
+
+                return estoque > 0;
+            });
+
+        setCartItems(carrinhoValido);
     }, []);
 
     /*
@@ -102,27 +128,39 @@ export function CartProvider({
         size: string
     ) => {
         setCartItems((prev) => {
-            const existingItem =
-                prev.find(
-                    (item) =>
-                        item.product.id ===
-                        product.id &&
-                        item.size === size
-                );
+
+            const estoqueDisponivel =
+                product.stock[size] ?? 0;
+
+            const existingItem = prev.find(
+                (item) =>
+                    item.product.id === product.id &&
+                    item.size === size
+            );
 
             if (existingItem) {
+
+                if (
+                    existingItem.quantity >=
+                    estoqueDisponivel
+                ) {
+                    return prev;
+                }
+
                 return prev.map((item) =>
-                    item.product.id ===
-                        product.id &&
+                    item.product.id === product.id &&
                         item.size === size
                         ? {
                             ...item,
                             quantity:
-                                item.quantity +
-                                1,
+                                item.quantity + 1,
                         }
                         : item
                 );
+            }
+
+            if (estoqueDisponivel <= 0) {
+                return prev;
             }
 
             return [
@@ -167,17 +205,32 @@ export function CartProvider({
         size: string
     ) => {
         setCartItems((prev) =>
-            prev.map((item) =>
-                item.product.id ===
-                    productId &&
+            prev.map((item) => {
+
+                if (
+                    item.product.id === productId &&
                     item.size === size
-                    ? {
+                ) {
+
+                    const estoqueDisponivel =
+                        item.product.stock[size] ?? 0;
+
+                    if (
+                        item.quantity >=
+                        estoqueDisponivel
+                    ) {
+                        return item;
+                    }
+
+                    return {
                         ...item,
                         quantity:
                             item.quantity + 1,
-                    }
-                    : item
-            )
+                    };
+                }
+
+                return item;
+            })
         );
     };
 

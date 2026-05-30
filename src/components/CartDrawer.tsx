@@ -327,6 +327,14 @@ export default function CartDrawer({
                                                 </Typography>
 
                                                 <Typography
+                                                    variant="caption"
+                                                    color="text.secondary"
+                                                >
+                                                    Estoque disponível:{" "}
+                                                    {item.product.stock[item.size]}
+                                                </Typography>
+
+                                                <Typography
                                                     sx={{
                                                         color:
                                                             "primary.main",
@@ -414,12 +422,13 @@ export default function CartDrawer({
 
                                                         <IconButton
                                                             size="small"
+                                                            disabled={
+                                                                item.quantity >=
+                                                                item.product.stock[item.size]
+                                                            }
                                                             onClick={() =>
                                                                 increaseQuantity(
-                                                                    item
-                                                                        .product
-                                                                        .id,
-
+                                                                    item.product.id,
                                                                     item.size
                                                                 )
                                                             }

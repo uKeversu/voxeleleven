@@ -24,6 +24,12 @@ type Props = {
 export default function ProductCard({
     product,
 }: Props) {
+
+    const estoqueTotal = Object.values(product.stock)
+        .reduce((total, qtd) => total + qtd, 0);
+
+    const esgotado = estoqueTotal === 0;
+
     return (
         <Card
             component={Link}
@@ -41,14 +47,16 @@ export default function ProductCard({
                 transition:
                     "transform 0.3s ease, box-shadow 0.3s ease",
                 cursor: "pointer",
-                "&:hover": {
-                    transform: "translateY(-8px)",
-                    boxShadow:
-                        "0 0 35px rgba(0,255,64,0.18)",
-                    "& .product-image": {
-                        transform: "scale(1.05)",
+                "&:hover": esgotado
+                    ? {}
+                    : {
+                        transform: "translateY(-8px)",
+                        boxShadow:
+                            "0 0 35px rgba(0,255,64,0.18)",
+                        "& .product-image": {
+                            transform: "scale(1.05)",
+                        },
                     },
-                },
             }}
         >
             {/* IMAGEM */}
@@ -65,13 +73,12 @@ export default function ProductCard({
                     className="product-image"
                     sx={{
                         height: 360,
-
                         width: "100%",
-
                         objectFit: "cover",
+                        transition: "transform 0.4s ease",
 
-                        transition:
-                            "transform 0.4s ease",
+                        opacity: esgotado ? 0.45 : 1,
+                        filter: esgotado ? "grayscale(100%)" : "none",
                     }}
                 />
 
@@ -106,6 +113,19 @@ export default function ProductCard({
 
                             backdropFilter:
                                 "blur(10px)",
+                        }}
+                    />
+                )}
+
+                {esgotado && (
+                    <Chip
+                        label="ESGOTADO"
+                        color="error"
+                        sx={{
+                            position: "absolute",
+                            top: 32,
+                            right: 32,
+                            fontWeight: 700,
                         }}
                     />
                 )}
@@ -159,15 +179,33 @@ export default function ProductCard({
                             })}
                         </Typography>
 
+                        <Typography
+                            variant="caption"
+                            sx={{
+                                display: "block",
+                                color:
+                                    estoqueTotal <= 3
+                                        ? "warning.main"
+                                        : "text.secondary",
+                            }}
+                        >
+                            {estoqueTotal > 0
+                                ? `${estoqueTotal} unidades disponíveis`
+                                : "Produto esgotado"}
+                        </Typography>
+
                         <Button
                             variant="contained"
-                            color="primary"
+                            color={esgotado ? "error" : "primary"}
                             size="small"
+                            disabled={esgotado}
                             sx={{
                                 px: 2,
                             }}
                         >
-                            Ver produto
+                            {esgotado
+                                ? "Indisponível"
+                                : "Ver produto"}
                         </Button>
                     </Stack>
                 </Stack>

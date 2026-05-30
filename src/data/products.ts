@@ -2,6 +2,18 @@
 
 import { Product } from "@/types/product";
 
+const estoque = (
+    P = 0,
+    M = 0,
+    G = 0,
+    GG = 0
+) => ({
+    P,
+    M,
+    G,
+    GG,
+});
+
 export const products: Product[] = [
     {
         id: 1,
@@ -16,7 +28,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da seleção argentina 2026",
         featured: true,
-        sizes: ["P", "M", "G"],
+        stock: estoque(2, 1, 0, 0)
     },
 
     {
@@ -32,7 +44,7 @@ export const products: Product[] = [
         description:
             "Modelo premium do Atlético Mineiro 2026",
         featured: false,
-        sizes: ["M", "G", "GG"],
+        stock: estoque(0, 1, 1, 2)
     },
 
     {
@@ -48,7 +60,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da seleção brasileira 2026",
         featured: true,
-        sizes: ["P", "M", "G", "GG"],
+        stock: estoque(3, 12, 10, 7)
     },
 
     {
@@ -64,7 +76,7 @@ export const products: Product[] = [
         description:
             "Edição especial dourada da seleção brasileira 2022",
         featured: false,
-        sizes: ["M", "G", "GG"],
+        stock: estoque(2, 4, 5, 3)
     },
 
     {
@@ -80,7 +92,7 @@ export const products: Product[] = [
         description:
             "Modelo premium retrô do Corinthians 1998",
         featured: false,
-        sizes: ["P"],
+        stock: estoque(2, 0, 0, 0)
     },
 
     {
@@ -96,7 +108,7 @@ export const products: Product[] = [
         description:
             "Modelo premium do Flamengo 2025",
         featured: false,
-        sizes: ["M"],
+        stock: estoque(0, 2, 0, 0)
     },
 
     {
@@ -112,7 +124,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Manchester City 2025",
         featured: true,
-        sizes: ["P"],
+        stock: estoque(2, 0, 0, 0)
     },
 
     {
@@ -128,7 +140,7 @@ export const products: Product[] = [
         description:
             "Modelo premium retrô do Milan 2002 Kaká",
         featured: true,
-        sizes: ["P", "M", "G", "GG"],
+        stock: estoque(3, 4, 5, 2)
     },
 
     {
@@ -144,7 +156,7 @@ export const products: Product[] = [
         description:
             "Modelo premium do Palmeiras 2026",
         featured: false,
-        sizes: ["P", "M", "G", "GG"],
+        stock: estoque(2, 5, 4, 3)
     },
 
     {
@@ -160,7 +172,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativa do PSG 2025",
         featured: true,
-        sizes: ["P"],
+        stock: estoque(2, 0, 0, 0)
     },
 
     {
@@ -176,7 +188,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da Roma 2020",
         featured: true,
-        sizes: ["M"],
+        stock: estoque(0, 2, 0, 0)
     },
 
     {
@@ -192,7 +204,7 @@ export const products: Product[] = [
         description:
             "Modelo premium do São Paulo 2026",
         featured: false,
-        sizes: ["P", "M", "G", "GG"],
+        stock: estoque(1, 3, 2, 1)
     },
 
     {
@@ -208,7 +220,7 @@ export const products: Product[] = [
         description:
             "Modelo premium Vasco da Gama 2026",
         featured: false,
-        sizes: ["P", "G"],
+        stock: estoque(3, 0, 0, 0)
     },
 
     {
@@ -224,7 +236,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Manchester United 2024",
         featured: true,
-        sizes: ["P", "M", "G"],
+        stock: estoque(3, 4, 2, 0)
     },
 
     {
@@ -240,7 +252,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Vasco da Gama 2026",
         featured: true,
-        sizes: ["M", "GG"],
+        stock: estoque(0, 1, 0, 2)
     },
 
     {
@@ -256,7 +268,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Santos 2025",
         featured: false,
-        sizes: ["M", "GG"],
+        stock: estoque(0, 0, 0, 2)
     },
 
     {
@@ -272,7 +284,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Fluminense 2025",
         featured: false,
-        sizes: ["P"],
+        stock: estoque(2, 0, 0, 0)
     },
 
     {
@@ -288,7 +300,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Flamengo 2025",
         featured: true,
-        sizes: ["P", "M", "G", "GG"],
+        stock: estoque(1, 2, 3, 2)
     },
 
     {
@@ -304,7 +316,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Corinthians 2025",
         featured: false,
-        sizes: ["M", "G", "GG"],
+        stock: estoque(3, 2, 5, 3)
     },
 
     {
@@ -320,7 +332,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da seleção portuguesa 2026",
         featured: false,
-        sizes: ["P", "M", "G", "GG"],
+        stock: estoque(1, 2, 2, 2)
     },
 
     {
@@ -336,7 +348,7 @@ export const products: Product[] = [
         description:
             "Modelo premium retrô da seleção brasileira 1998",
         featured: false,
-        sizes: ["P", "M", "G", "GG"],
+        stock: estoque(1, 2, 3, 1)
     },
 
     {
@@ -352,7 +364,7 @@ export const products: Product[] = [
         description:
             "Modelo premium titular da Roma 2025",
         featured: false,
-        sizes: ["M", "G"],
+        stock: estoque(0, 1, 2, 0)
     },
 
     {
@@ -368,7 +380,7 @@ export const products: Product[] = [
         description:
             "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
         featured: false,
-        sizes: ["P", "M", "G", "GG"],
+        stock: estoque(0, 1, 3, 0)
     },
 
     {
@@ -384,7 +396,7 @@ export const products: Product[] = [
         description:
             "Modelo de goleiro do Liverpool 2025/26 com design marcante e tecido dry fit premium",
         featured: false,
-        sizes: ["M"],
+        stock: estoque(0, 1, 0, 0)
     },
 
     {
@@ -400,7 +412,7 @@ export const products: Product[] = [
         description:
             "Camisa reserva da Seleção Brasileira 2026 com visual clássico em azul vibrante",
         featured: false,
-        sizes: ["P", "G"],
+        stock: estoque(2, 0, 0, 0)
     },
 
     {
@@ -416,7 +428,7 @@ export const products: Product[] = [
         description:
             "Modelo away do Real Madrid 2025/26 com detalhes premium e caimento confortável",
         featured: false,
-        sizes: ["M", "G"],
+        stock: estoque(1, 2, 3, 2)
     },
 
     {
@@ -432,7 +444,7 @@ export const products: Product[] = [
         description:
             "Versão visitante da Seleção Brasileira 2026 com tecido leve e acabamento premium",
         featured: false,
-        sizes: ["P", "M", "G", "GG"],
+        stock: estoque(7, 16, 12, 8)
     },
 
     {
@@ -448,7 +460,7 @@ export const products: Product[] = [
         description:
             "Camisa visitante do Cruzeiro 2025/26 inspirada na tradição celeste do clube",
         featured: false,
-        sizes: ["P", "G", "GG"],
+        stock: estoque(2, 0, 0, 0)
     },
 
     {
@@ -464,7 +476,7 @@ export const products: Product[] = [
         description:
             "Modelo titular do Flamengo 2026/27 com listras clássicas e acabamento premium",
         featured: false,
-        sizes: ["P", "M", "G", "GG"],
+        stock: estoque(3, 6, 5, 7)
     },
 
     {
@@ -480,7 +492,7 @@ export const products: Product[] = [
         description:
             "Camisa titular do Liverpool 2025/26 com design clássico e detalhes sofisticados",
         featured: false,
-        sizes: ["P"],
+        stock: estoque(2, 0, 0, 0)
     },
 
     {
@@ -496,7 +508,7 @@ export const products: Product[] = [
         description:
             "Versão com símobolo em DTF da camisa da seleção brasileira 2026",
         featured: false,
-        sizes: ["M", "G", "GG"],
+        stock: estoque(0, 0, 0, 3)
     },
 
     {
@@ -512,7 +524,7 @@ export const products: Product[] = [
         description:
             "Camisa dryfit preta inspirada na Seleção Brasileira com visual urbano e moderno",
         featured: false,
-        sizes: ["M"],
+        stock: estoque(0, 1, 0, 0)
     },
 
     {
@@ -528,7 +540,7 @@ export const products: Product[] = [
         description:
             "Camisa dryfit verde da Seleção Brasileira com tecido leve e visual esportivo premium",
         featured: false,
-        sizes: ["G", "GG"],
+        stock: estoque(0, 0, 1, 0)
     },
 
     {
@@ -544,7 +556,7 @@ export const products: Product[] = [
         description:
             "Modelo dryfit azul inspirado na tradição da Seleção Brasileira com conforto e respirabilidade",
         featured: false,
-        sizes: ["P"],
+        stock: estoque(2, 0, 0, 0)
     },
 
     {
@@ -560,7 +572,7 @@ export const products: Product[] = [
         description:
             "Camisa dryfit branca com design clean e acabamento moderno inspirado na Seleção Brasileira",
         featured: false,
-        sizes: ["GG"],
+        stock: estoque(0, 0, 0, 1)
     },
 
     {
@@ -576,7 +588,7 @@ export const products: Product[] = [
         description:
             "Versão dryfit amarela da Seleção Brasileira com tecido premium e estilo esportivo marcante",
         featured: true,
-        sizes: ["P", "M", "G"],
+        stock: estoque(0, 4, 2, 3)
     },
 
     {
@@ -592,7 +604,7 @@ export const products: Product[] = [
         description:
             "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
         featured: false,
-        sizes: ["M", "G"],
+        stock: estoque(0, 2, 1, 3)
     },
 
     {
@@ -608,7 +620,7 @@ export const products: Product[] = [
         description:
             "Camisa alternativa do Arsenal 25/26 com visual ousado, tecido leve e acabamento premium.",
         featured: false,
-        sizes: ["M"],
+        stock: estoque(0, 2, 0, 0)
     },
 
     {
@@ -624,7 +636,7 @@ export const products: Product[] = [
         description:
             "Camisa home do Grêmio 25/26 com listras tradicionais, tecido leve e acabamento premium.",
         featured: false,
-        sizes: ["M"],
+        stock: estoque(0, 1, 0, 0)
     },
 
     {
@@ -640,7 +652,7 @@ export const products: Product[] = [
         description:
             "Camisa do Borussia 24/25 com design moderno, caimento confortável e detalhes premium.",
         featured: false,
-        sizes: ["M"],
+        stock: estoque(0, 1, 1, 0)
     },
 
     {
@@ -656,7 +668,7 @@ export const products: Product[] = [
         description:
             "Camisa retrô do Vasco inspirada na temporada 2000, com visual clássico e acabamento premium.",
         featured: false,
-        sizes: ["M"],
+        stock: estoque(0, 1, 0, 0)
     },
 
     {
@@ -672,7 +684,7 @@ export const products: Product[] = [
         description:
             "Camisa home do Fluminense 26/27 com visual tradicional, tecido leve e ótimo conforto.",
         featured: false,
-        sizes: ["M"],
+        stock: estoque(1, 0, 0, 0)
     },
 
     {
@@ -688,7 +700,7 @@ export const products: Product[] = [
         description:
             "Camisa do Ajax 25/26 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        sizes: ["M"],
+        stock: estoque(1, 0, 1, 0)
     },
 
     {
@@ -704,6 +716,6 @@ export const products: Product[] = [
         description:
             "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
         featured: false,
-        sizes: ["P", "M", "G"],
+        stock: estoque(1, 2, 0, 1)
     },
 ];

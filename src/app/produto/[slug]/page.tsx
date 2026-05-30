@@ -76,6 +76,18 @@ function ProductContent({
     const { addToCart } = useCart();
     const { showSnackbar } = useSnackbar();
 
+    const estoqueTotal = Object.values(
+        product.stock
+    ).reduce(
+        (total, qtd) => total + qtd,
+        0
+    );
+
+    const estoqueSelecionado =
+        selectedSize
+            ? product.stock[selectedSize] ?? 0
+            : 0;
+
     return (
         <Box
             sx={{
@@ -406,6 +418,17 @@ function ProductContent({
                             </Typography>
                         </Box>
 
+                        {estoqueTotal === 0 && (
+                            <Chip
+                                label="ESGOTADO"
+                                color="error"
+                                sx={{
+                                    mt: 2,
+                                    fontWeight: 700,
+                                }}
+                            />
+                        )}
+
                         {/* TAMANHOS */}
                         <Box>
                             <Typography
@@ -431,24 +454,23 @@ function ProductContent({
                                         "wrap",
                                 }}
                             >
-                                {product.sizes.map(
-                                    (
-                                        size
-                                    ) => {
+                                {Object.entries(product.stock).map(
+                                    ([size, quantidade]) => {
                                         const active =
-                                            selectedSize ===
-                                            size;
+                                            selectedSize === size;
+
+                                        const semEstoque =
+                                            quantidade === 0;
 
                                         return (
                                             <Button
-                                                key={
-                                                    size
-                                                }
-                                                onClick={() =>
-                                                    setSelectedSize(
-                                                        size
-                                                    )
-                                                }
+                                                key={size}
+                                                disabled={semEstoque}
+                                                onClick={() => {
+                                                    if (quantidade > 0) {
+                                                        setSelectedSize(size);
+                                                    }
+                                                }}
                                                 variant={
                                                     active
                                                         ? "contained"
@@ -457,30 +479,45 @@ function ProductContent({
                                                 color="primary"
                                                 sx={{
                                                     minWidth: 68,
-
                                                     height: 54,
-
                                                     borderRadius: 3,
-
                                                     fontWeight: 800,
-
-                                                    fontSize:
-                                                        "1rem",
-
-                                                    boxShadow:
-                                                        active
-                                                            ? "0 0 18px rgba(0,255,64,0.35)"
-                                                            : "none",
+                                                    fontSize: "1rem",
+                                                    opacity: semEstoque
+                                                        ? 0.4
+                                                        : 1,
                                                 }}
                                             >
-                                                {
-                                                    size
-                                                }
+                                                {size}
                                             </Button>
                                         );
                                     }
                                 )}
                             </Stack>
+                            {selectedSize && (
+                                <Typography
+                                    sx={{
+                                        mt: 2,
+                                        color: "text.secondary",
+                                    }}
+                                >
+                                    Disponíveis:{" "}
+                                    {estoqueSelecionado}
+                                </Typography>
+                            )}
+                            {selectedSize &&
+                                estoqueSelecionado <= 3 && (
+                                    <Typography
+                                        sx={{
+                                            color: "#ff9800",
+                                            mt: 1,
+                                            fontWeight: 600,
+                                        }}
+                                    >
+                                        Restam apenas{" "}
+                                        {estoqueSelecionado} unidade(s)
+                                    </Typography>
+                                )}
                         </Box>
 
                         {/* ACTIONS */}
@@ -496,7 +533,8 @@ function ProductContent({
                                 color="primary"
                                 size="large"
                                 disabled={
-                                    !selectedSize
+                                    !selectedSize ||
+                                    estoqueSelecionado === 0
                                 }
                                 startIcon={
                                     <ShoppingBagOutlinedIcon />
@@ -523,7 +561,9 @@ function ProductContent({
                                     },
                                 }}
                             >
-                                Comprar agora
+                                {estoqueTotal === 0
+                                    ? "Produto esgotado"
+                                    : "Comprar agora"}
                             </Button>
 
                             <Button
@@ -531,7 +571,8 @@ function ProductContent({
                                 color="primary"
                                 size="large"
                                 disabled={
-                                    !selectedSize
+                                    !selectedSize ||
+                                    estoqueSelecionado === 0
                                 }
                                 sx={{
                                     height: 60,
@@ -548,8 +589,9 @@ function ProductContent({
                                     );
                                 }}
                             >
-                                Adicionar ao
-                                carrinho
+                                {estoqueTotal === 0
+                                    ? "Produto esgotado"
+                                    : "Adicionar ao carrinho"}
                             </Button>
                         </Stack>
 
