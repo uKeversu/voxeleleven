@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 // ajuste conforme seu contexto/carrinho
 import { useCart } from "@/context/CartContext";
 
+import { products } from "@/data/products";
+
 const slides = [
     {
         title: "BRASIL - HOME 26/27",
@@ -72,24 +74,19 @@ export default function PromoCarousel() {
 
         // OFERTA IMPERDÍVEL
         if (slide.action === "buy") {
-            addToCart(
-                {
-                    id: 3,
-                    name: "Brasil - Home 26/27",
-                    slug: "brasil-amarela-26",
-                    team: "Brasil",
-                    category: "Seleções",
-                    season: "26",
-                    price: 119.9,
-                    badge: "NEW",
-                    image: "/brasil-home-26-67-Photoroom.png",
-                    description:
-                        "Modelo premium da seleção brasileira 2026",
-                    featured: true,
-                    stock: estoque(3, 12, 10, 7)
-                },
-                "M"
+            const brasilHome = products.find(
+                p => p.slug === "brasil-amarela-26"
             );
+
+            if (!brasilHome) return;
+
+            const tamanhoDisponivel = Object.entries(
+                brasilHome.stock
+            ).find(([_, qtd]) => qtd > 0)?.[0];
+
+            if (!tamanhoDisponivel) return;
+
+            addToCart(brasilHome, tamanhoDisponivel);
 
             router.push("/carrinho");
         }
