@@ -86,7 +86,7 @@ export default function PromoCarousel() {
                     description:
                         "Modelo premium da seleção brasileira 2026",
                     featured: true,
-                    sizes: ["P", "M", "G", "GG"],
+                    stock: estoque(3, 12, 10, 7)
                 },
                 "M"
             );
