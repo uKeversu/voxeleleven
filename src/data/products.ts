@@ -44,7 +44,7 @@ export const products: Product[] = [
         image: "/brasil-dourada.jpeg",
         description:
             "Edição especial dourada da seleção brasileira 2022",
-        featured: false,
+        featured: true,
         stock: estoque(2, 4, 5, 3)
     },
 
