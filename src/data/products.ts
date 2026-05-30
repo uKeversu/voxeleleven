@@ -15,40 +15,9 @@ const estoque = (
 });
 
 export const products: Product[] = [
+
     {
         id: 1,
-        name: "Argentina - Home 26/27",
-        slug: "argentina-azul-branco",
-        team: "Argentina",
-        category: "Seleções",
-        season: "26",
-        price: 99.90,
-        badge: "NEW",
-        image: "/argentina-azul-branco.png",
-        description:
-            "Modelo premium da seleção argentina 2026",
-        featured: true,
-        stock: estoque(2, 1, 0, 0)
-    },
-
-    {
-        id: 2,
-        name: "Atlético Mineiro - Home 26/27",
-        slug: "atletico-mineiro-preto-branco",
-        team: "Atlético Mineiro",
-        category: "Brasileiros",
-        season: "26",
-        price: 89.90,
-        badge: "NEW",
-        image: "/atleticomineiro-preto-branco.jpeg",
-        description:
-            "Modelo premium do Atlético Mineiro 2026",
-        featured: false,
-        stock: estoque(0, 1, 1, 2)
-    },
-
-    {
-        id: 3,
         name: "Brasil - Home 26/27",
         slug: "brasil-amarela-26",
         team: "Brasil",
@@ -64,7 +33,7 @@ export const products: Product[] = [
     },
 
     {
-        id: 4,
+        id: 2,
         name: "Brasil - Away 22/23",
         slug: "brasil-dourada",
         team: "Brasil",
@@ -77,6 +46,38 @@ export const products: Product[] = [
             "Edição especial dourada da seleção brasileira 2022",
         featured: false,
         stock: estoque(2, 4, 5, 3)
+    },
+
+    {
+        id: 3,
+        name: "Argentina - Home 26/27",
+        slug: "argentina-azul-branco",
+        team: "Argentina",
+        category: "Seleções",
+        season: "26",
+        price: 99.90,
+        badge: "NEW",
+        image: "/argentina-azul-branco.png",
+        description:
+            "Modelo premium da seleção argentina 2026",
+        featured: false,
+        stock: estoque(2, 1, 0, 0)
+    },
+
+    {
+        id: 4,
+        name: "Atlético Mineiro - Home 26/27",
+        slug: "atletico-mineiro-preto-branco",
+        team: "Atlético Mineiro",
+        category: "Brasileiros",
+        season: "26",
+        price: 89.90,
+        badge: "NEW",
+        image: "/atleticomineiro-preto-branco.jpeg",
+        description:
+            "Modelo premium do Atlético Mineiro 2026",
+        featured: false,
+        stock: estoque(0, 1, 1, 2)
     },
 
     {
@@ -171,7 +172,7 @@ export const products: Product[] = [
         image: "/psg-preto.jpeg",
         description:
             "Modelo premium alternativa do PSG 2025",
-        featured: true,
+        featured: false,
         stock: estoque(2, 0, 0, 0)
     },
 
@@ -219,7 +220,7 @@ export const products: Product[] = [
         image: "/vasco-home-26-27.jpg",
         description:
             "Modelo premium Vasco da Gama 2026",
-        featured: false,
+        featured: true,
         stock: estoque(3, 0, 0, 0)
     },
 
@@ -251,7 +252,7 @@ export const products: Product[] = [
         image: "/vasco-away-26-27.jpg",
         description:
             "Modelo premium alternativo do Vasco da Gama 2026",
-        featured: true,
+        featured: false,
         stock: estoque(0, 1, 0, 2)
     },
 
@@ -427,7 +428,7 @@ export const products: Product[] = [
         image: "/real-madrid-away-25-26.jpeg",
         description:
             "Modelo away do Real Madrid 2025/26 com detalhes premium e caimento confortável",
-        featured: false,
+        featured: true,
         stock: estoque(1, 2, 3, 2)
     },
 
@@ -587,7 +588,7 @@ export const products: Product[] = [
         image: "/brasil-dryfit-amarela.jpg",
         description:
             "Versão dryfit amarela da Seleção Brasileira com tecido premium e estilo esportivo marcante",
-        featured: true,
+        featured: false,
         stock: estoque(0, 4, 2, 3)
     },
 
