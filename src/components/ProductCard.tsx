@@ -183,7 +183,7 @@ export default function ProductCard({
                             variant="caption"
                             sx={{
                                 display: "block",
-                                fontSize: '0.8rem',
+                                fontSize: '0.6rem',
                                 color:
                                     estoqueTotal <= 3
                                         ? "warning.main"
