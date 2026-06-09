@@ -45,7 +45,7 @@ export const products: Product[] = [
         description:
             "Edição especial dourada da seleção brasileira 2022",
         featured: true,
-        stock: estoque(2, 4, 5, 3)
+        stock: estoque(0, 4, 0, 0)
     },
 
     {
@@ -61,7 +61,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da seleção argentina 2026",
         featured: false,
-        stock: estoque(2, 1, 0, 0)
+        stock: estoque(0, 1, 1, 0)
     },
 
     {
@@ -77,7 +77,7 @@ export const products: Product[] = [
         description:
             "Modelo premium do Atlético Mineiro 2026",
         featured: false,
-        stock: estoque(0, 1, 1, 2)
+        stock: estoque(0, 0, 1, 1)
     },
 
     {
@@ -157,7 +157,7 @@ export const products: Product[] = [
         description:
             "Modelo premium do Palmeiras 2026",
         featured: false,
-        stock: estoque(2, 5, 4, 3)
+        stock: estoque(2, 0, 1, 3)
     },
 
     {
@@ -253,7 +253,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Vasco da Gama 2026",
         featured: false,
-        stock: estoque(0, 1, 0, 2)
+        stock: estoque(1, 0, 0, 2)
     },
 
     {
@@ -445,7 +445,7 @@ export const products: Product[] = [
         description:
             "Versão visitante da Seleção Brasileira 2026 com tecido leve e acabamento premium",
         featured: false,
-        stock: estoque(7, 16, 12, 8)
+        stock: estoque(1, 3, 5, 2)
     },
 
     {
@@ -509,7 +509,7 @@ export const products: Product[] = [
         description:
             "Versão com símobolo em DTF da camisa da seleção brasileira 2026",
         featured: false,
-        stock: estoque(0, 0, 0, 3)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
@@ -717,6 +717,6 @@ export const products: Product[] = [
         description:
             "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
         featured: false,
-        stock: estoque(1, 2, 0, 1)
+        stock: estoque(0, 0, 0, 0)
     },
 ];
