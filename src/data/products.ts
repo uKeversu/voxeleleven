@@ -349,7 +349,7 @@ export const products: Product[] = [
         description:
             "Modelo premium retrô da seleção brasileira 1998",
         featured: false,
-        stock: estoque(1, 2, 3, 1)
+        stock: estoque(0, 0, 1, 1)
     },
 
     {
@@ -413,7 +413,7 @@ export const products: Product[] = [
         description:
             "Camisa reserva da Seleção Brasileira 2026 com visual clássico em azul vibrante",
         featured: false,
-        stock: estoque(2, 0, 0, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
@@ -429,7 +429,7 @@ export const products: Product[] = [
         description:
             "Modelo away do Real Madrid 2025/26 com detalhes premium e caimento confortável",
         featured: true,
-        stock: estoque(1, 2, 3, 2)
+        stock: estoque(0, 0, 3, 2)
     },
 
     {
@@ -461,7 +461,7 @@ export const products: Product[] = [
         description:
             "Camisa visitante do Cruzeiro 2025/26 inspirada na tradição celeste do clube",
         featured: false,
-        stock: estoque(2, 0, 0, 0)
+        stock: estoque(1, 0, 0, 0)
     },
 
     {
@@ -637,7 +637,7 @@ export const products: Product[] = [
         description:
             "Camisa home do Grêmio 25/26 com listras tradicionais, tecido leve e acabamento premium.",
         featured: false,
-        stock: estoque(0, 1, 0, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
@@ -669,7 +669,7 @@ export const products: Product[] = [
         description:
             "Camisa retrô do Vasco inspirada na temporada 2000, com visual clássico e acabamento premium.",
         featured: false,
-        stock: estoque(0, 1, 0, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
