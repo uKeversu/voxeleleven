@@ -414,7 +414,7 @@ function ProductContent({
                                     mt: 1,
                                 }}
                             >
-                                10% OFF no PIX
+                                5% OFF no PIX
                             </Typography>
                         </Box>
 
