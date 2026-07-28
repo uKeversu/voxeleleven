@@ -132,6 +132,24 @@ export default function CatalogoClient() {
                 break;
         }
 
+
+        // Sempre estoque zero no final
+        filtered.sort((a, b) => {
+
+            const estoqueA = Object.values(a.stock)
+                .some((qtd) => qtd > 0);
+
+            const estoqueB = Object.values(b.stock)
+                .some((qtd) => qtd > 0);
+
+            if (estoqueA && !estoqueB) return -1;
+
+            if (!estoqueA && estoqueB) return 1;
+
+            return 0;
+        });
+
+
         return filtered;
     }, [
         search,

@@ -761,7 +761,7 @@ export const products: Product[] = [
         season: "26/27",
         price: 89.90,
         badge: "NEW",
-        image: "/santos-home-26-27.jpg",
+        image: "/santos-home-26-27.png",
         description:
             "Camisa do Santos 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
@@ -777,7 +777,7 @@ export const products: Product[] = [
         season: "26/27",
         price: 89.90,
         badge: "NEW",
-        image: "/sao-paulo-away-26-27.jpg",
+        image: "/sao-paulo-away-26-27.png",
         description:
             "Camisa do São Paulo 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
@@ -793,7 +793,7 @@ export const products: Product[] = [
         season: "25/26",
         price: 89.90,
         badge: "LIMITED",
-        image: "/gremio-away-25-26.jpg",
+        image: "/gremio-away-25-26.png",
         description:
             "Camisa Polo do Grêmio 25/26 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
@@ -809,7 +809,7 @@ export const products: Product[] = [
         season: "26/27",
         price: 89.90,
         badge: "NEW",
-        image: "/flamengo-away-26-27.jpg",
+        image: "/flamengo-away-26-27.png",
         description:
             "Camisa Flamengo 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
@@ -825,7 +825,7 @@ export const products: Product[] = [
         season: "24/25",
         price: 89.90,
         badge: "LIMITED",
-        image: "/flamengo-balmain-24-25.jpg",
+        image: "/flamengo-balmain-24-25.png",
         description:
             "Camisa Flamengo Balmain 24/25 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
@@ -905,7 +905,7 @@ export const products: Product[] = [
         season: "26/27",
         price: 89.90,
         badge: "NEW",
-        image: "/franca-home-26-27.jpg",
+        image: "/franca-home-26-27.png",
         description:
             "Camisa da seleção francesa 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
@@ -921,7 +921,7 @@ export const products: Product[] = [
         season: "23/24",
         price: 89.90,
         badge: "LIMITED",
-        image: "/japao-home-23-24.jpg",
+        image: "/japao-away-23-24.png",
         description:
             "Camisa da seleção japonesa 23/24 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
@@ -944,22 +944,22 @@ export const products: Product[] = [
         stock: estoque(0, 1, 0, 0)
     },
 
-    {
-        id: 59,
-        name: "Barcelona - Away 23/24",
-        slug: "barcelona-away-23-24",
-        team: "Barcelona",
-        category: "Europeus",
-        season: "23",
-        price: 89.90,
-        badge: "LIMITED",
-        image: "/barcelona-away-23-24.jpeg",
-        description:
-            "Modelo premium alternativo do Barcelona 2023",
-        featured: true,
-        stock: estoque(0, 1, 0, 0)
-    },
-
+    /* {
+         id: 59,
+         name: "Barcelona - Away 23/24",
+         slug: "barcelona-away-23-24",
+         team: "Barcelona",
+         category: "Europeus",
+         season: "23",
+         price: 89.90,
+         badge: "LIMITED",
+         image: "/barcelona-away-23-24.jpeg",
+         description:
+             "Modelo premium alternativo do Barcelona 2023",
+         featured: true,
+         stock: estoque(0, 1, 0, 0)
+     },
+ */
     {
         id: 60,
         name: "Real Madrid - Home 26/27",
@@ -969,45 +969,46 @@ export const products: Product[] = [
         season: "26/27",
         price: 89.90,
         badge: "NEW",
-        image: "/real-madrid-home-26-27.jpeg",
+        image: "/real-madrid-home-26-27.png",
         description:
             "Modelo premium do Real Madrid 2026",
         featured: true,
         stock: estoque(0, 0, 1, 0)
     },
-
-    {
-        id: 61,
-        name: "Brasil Feminina - Home 26/27",
-        slug: "brasil-feminina-home-26-27",
-        team: "Brasil",
-        category: "Seleções",
-        season: "26/27",
-        price: 119.90,
-        badge: "NEW",
-        image: "/brasil-feminina-home-26-27.jpg",
-        description:
-            "Modelo feminino premium da seleção brasileira 2026",
-        featured: true,
-        stock: estoque(3, 3, 2, 0)
-    },
-
-    {
-        id: 62,
-        name: "Tailandesa 1.1 - Brasil - Home 26/27",
-        slug: "tailandesa-brasil-home-26-27",
-        team: "Brasil",
-        category: "Seleções",
-        season: "26/27",
-        price: 149.90,
-        badge: "NEW",
-        image: "/tailandesa-brasil-home-26-27.jpg",
-        description:
-            "Modelo tailandês da seleção brasileira 2026",
-        featured: true,
-        stock: estoque(0, 1, 1, 0)
-    },
-
+    /*
+        {
+            id: 61,
+            name: "Brasil Feminina - Home 26/27",
+            slug: "brasil-feminina-home-26-27",
+            team: "Brasil",
+            category: "Seleções",
+            season: "26/27",
+            price: 119.90,
+            badge: "NEW",
+            image: "/brasil-feminina-home-26-27.jpg",
+            description:
+                "Modelo feminino premium da seleção brasileira 2026",
+            featured: true,
+            stock: estoque(3, 3, 2, 0)
+        },
+        */
+    /*
+        {
+            id: 62,
+            name: "Tailandesa 1.1 - Brasil - Home 26/27",
+            slug: "tailandesa-brasil-home-26-27",
+            team: "Brasil",
+            category: "Seleções",
+            season: "26/27",
+            price: 149.90,
+            badge: "NEW",
+            image: "/tailandesa-brasil-home-26-27.jpg",
+            description:
+                "Modelo tailandês da seleção brasileira 2026",
+            featured: true,
+            stock: estoque(0, 1, 1, 0)
+        },
+    */
     {
         id: 63,
         name: "Tailandesa 1.1 - Oplympique de Marseille- Home 25/26",
@@ -1017,7 +1018,7 @@ export const products: Product[] = [
         season: "25/26",
         price: 149.90,
         badge: "LIMITED",
-        image: "/tailandesa-marseille-home-25-26.jpg",
+        image: "/tailandesa-marseille-home-25-26.png",
         description:
             "Modelo tailandês do clube frances Olympique de Marseille 2025",
         featured: true,
@@ -1033,7 +1034,7 @@ export const products: Product[] = [
         season: "25/26",
         price: 149.90,
         badge: "LIMITED",
-        image: "/tailandesa-bayern-munich-home-25-26.jpg",
+        image: "/tailandesa-bayern-munich-home-25-26.png",
         description:
             "Modelo tailandês do clube alemão Bayern Munich 2025",
         featured: true,
@@ -1065,7 +1066,7 @@ export const products: Product[] = [
         season: "25/26",
         price: 149.90,
         badge: "LIMITED",
-        image: "/tailandesa-barcelona-home-25-26.jpg",
+        image: "/tailandesa-barcelona-home-25-26.png",
         description:
             "Modelo tailandês do clube espanhol Barcelona 2025",
         featured: true,
