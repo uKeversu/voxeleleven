@@ -621,7 +621,7 @@ export const products: Product[] = [
         description:
             "Camisa alternativa do Arsenal 25/26 com visual ousado, tecido leve e acabamento premium.",
         featured: false,
-        stock: estoque(0, 1, 0, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
@@ -633,7 +633,7 @@ export const products: Product[] = [
         season: "26/27",
         price: 89.90,
         badge: "NEW",
-        image: "/gremio-home-26-27.jpg",
+        image: "/gremio-home-26-27.png",
         description:
             "Camisa home do Grêmio 26/27 com listras tradicionais, tecido leve e acabamento premium.",
         featured: false,
@@ -745,27 +745,11 @@ export const products: Product[] = [
         season: "26/27",
         price: 89.90,
         badge: "NEW",
-        image: "/internacional-home-26-27.jpg",
+        image: "/internacional-home-26-27.png",
         description:
             "Camisa do Internacional 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
         stock: estoque(0, 0, 1, 1)
-    },
-
-    {
-        id: 47,
-        name: "Santos - Home 26/27",
-        slug: "santos-home-26-27",
-        team: "Santos",
-        category: "Brasileiros",
-        season: "26/27",
-        price: 89.90,
-        badge: "NEW",
-        image: "/santos-home-26-27.jpg",
-        description:
-            "Camisa do Santos 26/27 com design moderno, tecido respirável e acabamento premium.",
-        featured: false,
-        stock: estoque(0, 0, 1, 0)
     },
 
     {
@@ -971,7 +955,7 @@ export const products: Product[] = [
         badge: "LIMITED",
         image: "/barcelona-away-23-24.jpeg",
         description:
-            "Modelo premium alternativo do Manchester City 2023",
+            "Modelo premium alternativo do Barcelona 2023",
         featured: true,
         stock: estoque(0, 1, 0, 0)
     },
