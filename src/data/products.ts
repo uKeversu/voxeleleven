@@ -29,7 +29,7 @@ export const products: Product[] = [
         description:
             "Modelo premium da seleção brasileira 2026",
         featured: true,
-        stock: estoque(0, 5, 6, 4)
+        stock: estoque(0, 5, 2, 1)
     },
 
     {
@@ -194,7 +194,7 @@ export const products: Product[] = [
 
     {
         id: 12,
-        name: "São Paulo - Away 26/27",
+        name: "São Paulo - Home 26/27",
         slug: "sao-paulo-branco",
         team: "São Paulo",
         category: "Brasileiros",
@@ -381,7 +381,7 @@ export const products: Product[] = [
         description:
             "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
         featured: false,
-        stock: estoque(0, 2, 2, 2)
+        stock: estoque(0, 1, 0, 0)
     },
 
     {
@@ -445,7 +445,7 @@ export const products: Product[] = [
         description:
             "Versão visitante da Seleção Brasileira 2026 com tecido leve e acabamento premium",
         featured: false,
-        stock: estoque(1, 0, 0, 0)
+        stock: estoque(1, 2, 4, 3)
     },
 
     {
@@ -626,18 +626,18 @@ export const products: Product[] = [
 
     {
         id: 39,
-        name: "Grêmio - Home 25/26",
-        slug: "gremio-home-25-26",
+        name: "Grêmio - Home 26/27",
+        slug: "gremio-home-26-27",
         team: "Grêmio",
         category: "Brasileiros",
-        season: "25/26",
+        season: "26/27",
         price: 89.90,
         badge: "NEW",
-        image: "/gremio-home-25-26.jpg",
+        image: "/gremio-home-26-27.jpg",
         description:
-            "Camisa home do Grêmio 25/26 com listras tradicionais, tecido leve e acabamento premium.",
+            "Camisa home do Grêmio 26/27 com listras tradicionais, tecido leve e acabamento premium.",
         featured: false,
-        stock: estoque(0, 0, 2, 2)
+        stock: estoque(0, 0, 2, 1)
     },
 
     {
@@ -690,33 +690,418 @@ export const products: Product[] = [
 
     {
         id: 43,
-        name: "Ajax- Away 25/26",
-        slug: "ajax-home-25-26",
+        name: "Ajax- Away 26/27",
+        slug: "ajax-away-26-27",
         team: "Ajax",
         category: "Europeus",
-        season: "25/26",
+        season: "26/27",
         price: 89.90,
         badge: "LIMITED",
-        image: "/ajax-home-25-26.jpg",
+        image: "/ajax-away-26-27.png",
         description:
-            "Camisa do Ajax 25/26 com design moderno, tecido respirável e acabamento premium.",
+            "Camisa do Ajax 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        stock: estoque(0, 0, 0, 0)
+        stock: estoque(0, 2, 0, 0)
     },
 
     {
         id: 44,
-        name: "Brasil - Polo Branca 26/27",
-        slug: "brasil-polo-branca-26-27",
+        name: "Botafogo- Away 25/26",
+        slug: "botafogo-away-25-26",
+        team: "Botafogo",
+        category: "Brasileiros",
+        season: "25/26",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/botafogo-away-25-26.png",
+        description:
+            "Camisa do Botafogo 25/26 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 45,
+        name: "Vasco- Away 24/25",
+        slug: "vasco-away-24-25",
+        team: "Vasco da Gama",
+        category: "Brasileiros",
+        season: "24/25",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/vasco-away-24-25.png",
+        description:
+            "Camisa do Vasco da Gama 24/25 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 46,
+        name: "Internacional- Home 26/27",
+        slug: "internacional-home-26-27",
+        team: "Internacional",
+        category: "Brasileiros",
+        season: "26/27",
+        price: 89.90,
+        badge: "NEW",
+        image: "/internacional-home-26-27.jpg",
+        description:
+            "Camisa do Internacional 26/27 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 1)
+    },
+
+    {
+        id: 47,
+        name: "Santos - Home 26/27",
+        slug: "santos-home-26-27",
+        team: "Santos",
+        category: "Brasileiros",
+        season: "26/27",
+        price: 89.90,
+        badge: "NEW",
+        image: "/santos-home-26-27.jpg",
+        description:
+            "Camisa do Santos 26/27 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 47,
+        name: "Santos - Home 26/27",
+        slug: "santos-home-26-27",
+        team: "Santos",
+        category: "Brasileiros",
+        season: "26/27",
+        price: 89.90,
+        badge: "NEW",
+        image: "/santos-home-26-27.jpg",
+        description:
+            "Camisa do Santos 26/27 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 48,
+        name: "São Paulo - Away 26/27",
+        slug: "sao-paulo-away-26-27",
+        team: "São Paulo",
+        category: "Brasileiros",
+        season: "26/27",
+        price: 89.90,
+        badge: "NEW",
+        image: "/sao-paulo-away-26-27.jpg",
+        description:
+            "Camisa do São Paulo 26/27 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 49,
+        name: "Grêmio - Away 25/26",
+        slug: "gremio-away-25-26",
+        team: "Grêmio",
+        category: "Brasileiros",
+        season: "25/26",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/gremio-away-25-26.jpg",
+        description:
+            "Camisa Polo do Grêmio 25/26 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 1)
+    },
+
+    {
+        id: 50,
+        name: "Flamengo - Away 26/27",
+        slug: "flamengo-away-26-27",
+        team: "Flamengo",
+        category: "Brasileiros",
+        season: "26/27",
+        price: 89.90,
+        badge: "NEW",
+        image: "/flamengo-away-26-27.jpg",
+        description:
+            "Camisa Flamengo 26/27 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 51,
+        name: "Flamengo - Balmain 24/25",
+        slug: "flamengo-balmain-24-25",
+        team: "Flamengo",
+        category: "Brasileiros",
+        season: "24/25",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/flamengo-balmain-24-25.jpg",
+        description:
+            "Camisa Flamengo Balmain 24/25 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 1, 1, 0)
+    },
+
+    {
+        id: 52,
+        name: "Corinthians - Home 20/21",
+        slug: "corinthians-home-20-21",
+        team: "Corinthians",
+        category: "Brasileiros",
+        season: "20/21",
+        price: 99.90,
+        badge: "LIMITED",
+        image: "/corinthians-polo-20-21.png",
+        description:
+            "Camisa Polo do Corinthians 20/21 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 1)
+    },
+
+    {
+        id: 53,
+        name: "Corinthians - Away 26/27",
+        slug: "corinthians-away-26-27",
+        team: "Corinthians",
+        category: "Brasileiros",
+        season: "26/27",
+        price: 89.90,
+        badge: "NEW",
+        image: "/corinthians-polo-26-27.png",
+        description:
+            "Camisa Polo do Corinthians 26/27 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 54,
+        name: "Corinthians - Away 24/25",
+        slug: "corinthians-away-24-25",
+        team: "Corinthians",
+        category: "Brasileiros",
+        season: "24/25",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/corinthians-away-24-25.jpg",
+        description:
+            "Camisa All Black do Corinthians 24/25 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 55,
+        name: "Corinthians - Home 24/25",
+        slug: "corinthians-home-24-25",
+        team: "Corinthians",
+        category: "Brasileiros",
+        season: "24/25",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/corinthians-home-24-25.jpg",
+        description:
+            "Camisa do Corinthians 24/25 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 56,
+        name: "França - Home 26/27",
+        slug: "franca-home-26-27",
+        team: "França",
+        category: "Seleções",
+        season: "26/27",
+        price: 89.90,
+        badge: "NEW",
+        image: "/franca-home-26-27.jpg",
+        description:
+            "Camisa da seleção francesa 26/27 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 1, 1, 0)
+    },
+
+    {
+        id: 57,
+        name: "Japão - Away 23/24",
+        slug: "japao-away-23-24",
+        team: "Japão",
+        category: "Seleções",
+        season: "23/24",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/japao-home-23-24.jpg",
+        description:
+            "Camisa da seleção japonesa 23/24 com design moderno, tecido respirável e acabamento premium.",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 58,
+        name: "Manchester City - Away 24/25",
+        slug: "manchester-city-away-24-25",
+        team: "Manchester City",
+        category: "Europeus",
+        season: "24",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/manchestercity-away-24-25.png",
+        description:
+            "Modelo premium alternativo do Manchester City 2024",
+        featured: true,
+        stock: estoque(0, 1, 0, 0)
+    },
+
+    {
+        id: 59,
+        name: "Barcelona - Away 23/24",
+        slug: "barcelona-away-23-24",
+        team: "Barcelona",
+        category: "Europeus",
+        season: "23",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/barcelona-away-23-24.jpeg",
+        description:
+            "Modelo premium alternativo do Manchester City 2023",
+        featured: true,
+        stock: estoque(0, 1, 0, 0)
+    },
+
+    {
+        id: 60,
+        name: "Real Madrid - Home 26/27",
+        slug: "real-madrid-home-26-27",
+        team: "Real Madrid",
+        category: "Europeus",
+        season: "26/27",
+        price: 89.90,
+        badge: "NEW",
+        image: "/real-madrid-home-26-27.jpeg",
+        description:
+            "Modelo premium do Real Madrid 2026",
+        featured: true,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 61,
+        name: "Brasil Feminina - Home 26/27",
+        slug: "brasil-feminina-home-26-27",
         team: "Brasil",
         category: "Seleções",
-        season: "26",
-        price: 99.90,
-        badge: "PREMIUM",
-        image: "/brasil-polo-branca-26-27.jpg",
+        season: "26/27",
+        price: 119.90,
+        badge: "NEW",
+        image: "/brasil-feminina-home-26-27.jpg",
         description:
-            "Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado",
-        featured: false,
-        stock: estoque(0, 0, 0, 0)
+            "Modelo feminino premium da seleção brasileira 2026",
+        featured: true,
+        stock: estoque(3, 3, 2, 0)
     },
+
+    {
+        id: 62,
+        name: "Tailandesa 1.1 - Brasil - Home 26/27",
+        slug: "tailandesa-brasil-home-26-27",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26/27",
+        price: 149.90,
+        badge: "NEW",
+        image: "/tailandesa-brasil-home-26-27.jpg",
+        description:
+            "Modelo tailandês da seleção brasileira 2026",
+        featured: true,
+        stock: estoque(0, 1, 1, 0)
+    },
+
+    {
+        id: 63,
+        name: "Tailandesa 1.1 - Oplympique de Marseille- Home 25/26",
+        slug: "tailandesa-marseille-home-25-26",
+        team: "Olympique de Marseille",
+        category: "Europeus",
+        season: "25/26",
+        price: 149.90,
+        badge: "LIMITED",
+        image: "/tailandesa-marseille-home-25-26.jpg",
+        description:
+            "Modelo tailandês do clube frances Olympique de Marseille 2025",
+        featured: true,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 64,
+        name: "Tailandesa 1.1 - Bayern Munich- Away 25/26",
+        slug: "tailandesa-bayern-munich-away-25-26",
+        team: "Bayern Munich",
+        category: "Europeus",
+        season: "25/26",
+        price: 149.90,
+        badge: "LIMITED",
+        image: "/tailandesa-bayern-munich-home-25-26.jpg",
+        description:
+            "Modelo tailandês do clube alemão Bayern Munich 2025",
+        featured: true,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 65,
+        name: "Tailandesa 1.1 - Arsenal - Home 25/26",
+        slug: "tailandesa-arsenal-home-25-26",
+        team: "Arsenal",
+        category: "Europeus",
+        season: "25/26",
+        price: 149.90,
+        badge: "LIMITED",
+        image: "/tailandesa-arsenal-home-25-26.png",
+        description:
+            "Modelo tailandês do clube inglês Arsenal 2025",
+        featured: true,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 66,
+        name: "Tailandesa 1.1 - Barcelona - Home 25/26",
+        slug: "tailandesa-barcelona-home-25-26",
+        team: "Barcelona",
+        category: "Europeus",
+        season: "25/26",
+        price: 149.90,
+        badge: "LIMITED",
+        image: "/tailandesa-barcelona-home-25-26.jpg",
+        description:
+            "Modelo tailandês do clube espanhol Barcelona 2025",
+        featured: true,
+        stock: estoque(0, 0, 0, 1)
+    },
+
+    {
+        id: 67,
+        name: "Brasil - Cristo Redentor 24/25",
+        slug: "brasil-cristo-24-25",
+        team: "Brasil",
+        category: "Seleções",
+        season: "24/25",
+        price: 79.90,
+        badge: "LIMITED",
+        image: "/brasil-cristo-24-25.png",
+        description:
+            "Modelo premium alternativo da seleção brasileira",
+        featured: true,
+        stock: estoque(0, 1, 1, 0)
+    },
+
 ];
