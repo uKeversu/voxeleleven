@@ -873,7 +873,7 @@ export const products: Product[] = [
         season: "24/25",
         price: 89.90,
         badge: "LIMITED",
-        image: "/corinthians-away-24-25.jpg",
+        image: "/corinthians-away-24-25.png",
         description:
             "Camisa All Black do Corinthians 24/25 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
@@ -889,7 +889,7 @@ export const products: Product[] = [
         season: "24/25",
         price: 89.90,
         badge: "LIMITED",
-        image: "/corinthians-home-24-25.jpg",
+        image: "/corinthians-home-24-25.png",
         description:
             "Camisa do Corinthians 24/25 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
