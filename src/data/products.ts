@@ -1054,7 +1054,7 @@ export const products: Product[] = [
         description:
             "Modelo tailandês do clube inglês Arsenal 2025",
         featured: true,
-        stock: estoque(0, 0, 1, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
