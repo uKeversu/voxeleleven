@@ -141,7 +141,7 @@ export const products: Product[] = [
         description:
             "Modelo premium retrô do Milan 2002 Kaká",
         featured: true,
-        stock: estoque(0, 0, 2, 2)
+        stock: estoque(0, 0, 1, 2)
     },
 
     {
@@ -701,7 +701,7 @@ export const products: Product[] = [
         description:
             "Camisa do Ajax 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        stock: estoque(0, 2, 0, 0)
+        stock: estoque(0, 1, 0, 0)
     },
 
     {
