@@ -1070,7 +1070,7 @@ export const products: Product[] = [
         description:
             "Modelo tailandês do clube espanhol Barcelona 2025",
         featured: true,
-        stock: estoque(0, 0, 0, 1)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
