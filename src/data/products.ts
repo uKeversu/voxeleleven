@@ -944,22 +944,22 @@ export const products: Product[] = [
         stock: estoque(0, 1, 0, 0)
     },
 
-     {
-         id: 59,
-         name: "Barcelona - Away 23/24",
-         slug: "barcelona-away-23-24",
-         team: "Barcelona",
-         category: "Europeus",
-         season: "23",
-         price: 89.90,
-         badge: "LIMITED",
-         image: "/barcelona-away-23-24.png",
-         description:
-             "Modelo premium alternativo do Barcelona 2023",
-         featured: true,
-         stock: estoque(0, 1, 0, 0)
-     },
- 
+    {
+        id: 59,
+        name: "Barcelona - Away 23/24",
+        slug: "barcelona-away-23-24",
+        team: "Barcelona",
+        category: "Europeus",
+        season: "23",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/barcelona-away-23-24.png",
+        description:
+            "Modelo premium alternativo do Barcelona 2023",
+        featured: true,
+        stock: estoque(0, 1, 0, 0)
+    },
+
     {
         id: 60,
         name: "Real Madrid - Home 26/27",
@@ -975,40 +975,39 @@ export const products: Product[] = [
         featured: true,
         stock: estoque(0, 0, 1, 0)
     },
-    /*
-        {
-            id: 61,
-            name: "Brasil Feminina - Home 26/27",
-            slug: "brasil-feminina-home-26-27",
-            team: "Brasil",
-            category: "Seleções",
-            season: "26/27",
-            price: 119.90,
-            badge: "NEW",
-            image: "/brasil-feminina-home-26-27.jpg",
-            description:
-                "Modelo feminino premium da seleção brasileira 2026",
-            featured: true,
-            stock: estoque(3, 3, 2, 0)
-        },
-        */
-    /*
-        {
-            id: 62,
-            name: "Tailandesa 1.1 - Brasil - Home 26/27",
-            slug: "tailandesa-brasil-home-26-27",
-            team: "Brasil",
-            category: "Seleções",
-            season: "26/27",
-            price: 149.90,
-            badge: "NEW",
-            image: "/tailandesa-brasil-home-26-27.jpg",
-            description:
-                "Modelo tailandês da seleção brasileira 2026",
-            featured: true,
-            stock: estoque(0, 1, 1, 0)
-        },
-    */
+
+    {
+        id: 61,
+        name: "Brasil Feminina - Home 26/27",
+        slug: "brasil-feminina-home-26-27",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26/27",
+        price: 119.90,
+        badge: "NEW",
+        image: "/brasil-feminina-home-26-27.png",
+        description:
+            "Modelo feminino premium da seleção brasileira 2026",
+        featured: true,
+        stock: estoque(3, 3, 2, 0)
+    },
+
+    {
+        id: 62,
+        name: "Tailandesa 1.1 - Brasil - Home 26/27",
+        slug: "tailandesa-brasil-home-26-27",
+        team: "Brasil",
+        category: "Seleções",
+        season: "26/27",
+        price: 149.90,
+        badge: "NEW",
+        image: "/tailandesa-brasil-home-26-27.jpg",
+        description:
+            "Modelo tailandês da seleção brasileira 2026",
+        featured: true,
+        stock: estoque(0, 1, 1, 0)
+    },
+
     {
         id: 63,
         name: "Tailandesa 1.1 - Oplympique de Marseille- Home 25/26",
