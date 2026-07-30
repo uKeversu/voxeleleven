@@ -1001,7 +1001,7 @@ export const products: Product[] = [
         season: "26/27",
         price: 149.90,
         badge: "NEW",
-        image: "/tailandesa-brasil-home-26-27.jpg",
+        image: "/tailandesa-brasil-home-26-27.png",
         description:
             "Modelo tailandês da seleção brasileira 2026",
         featured: true,
