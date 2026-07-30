@@ -861,7 +861,7 @@ export const products: Product[] = [
         description:
             "Camisa Polo do Corinthians 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        stock: estoque(0, 0, 1, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
