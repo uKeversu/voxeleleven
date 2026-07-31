@@ -877,7 +877,7 @@ export const products: Product[] = [
         description:
             "Camisa All Black do Corinthians 24/25 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        stock: estoque(0, 0, 1, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
@@ -893,7 +893,7 @@ export const products: Product[] = [
         description:
             "Camisa do Corinthians 24/25 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        stock: estoque(0, 0, 1, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
