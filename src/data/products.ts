@@ -477,7 +477,7 @@ export const products: Product[] = [
         description:
             "Modelo titular do Flamengo 2026/27 com listras clássicas e acabamento premium",
         featured: false,
-        stock: estoque(0, 2, 0, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
@@ -813,7 +813,7 @@ export const products: Product[] = [
         description:
             "Camisa Flamengo 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        stock: estoque(0, 0, 1, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
@@ -829,7 +829,7 @@ export const products: Product[] = [
         description:
             "Camisa Flamengo Balmain 24/25 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        stock: estoque(0, 1, 1, 0)
+        stock: estoque(0, 0, 1, 0)
     },
 
     {
