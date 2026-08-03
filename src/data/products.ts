@@ -637,7 +637,7 @@ export const products: Product[] = [
         description:
             "Camisa home do Grêmio 26/27 com listras tradicionais, tecido leve e acabamento premium.",
         featured: false,
-        stock: estoque(0, 0, 2, 1)
+        stock: estoque(0, 0, 1, 1)
     },
 
     {
