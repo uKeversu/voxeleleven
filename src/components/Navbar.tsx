@@ -1,33 +1,46 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { useCart } from "@/context/CartContext";
-import CartDrawer from "@/components/CartDrawer";
+import {
+    useState,
+    useEffect,
+    useMemo,
+    useCallback,
+} from "react";
 
-import { products } from "@/data/products";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import {
     AppBar,
     Toolbar,
     Box,
-    Button,
-    IconButton,
-    Drawer,
     Stack,
-    Typography,
+    IconButton,
     Badge,
     Autocomplete,
-    Avatar,
     TextField,
+    Avatar,
+    Typography,
+    Drawer,
+    List,
+    ListItemButton,
+    ListItemText,
     Dialog,
+    Tooltip,
 } from "@mui/material";
+
 
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+
+
+import { products } from "@/data/products";
+import { useCart } from "@/context/CartContext";
+import CartDrawer from "@/components/CartDrawer";
+
 
 
 const navItems = [
@@ -35,275 +48,587 @@ const navItems = [
         label: "Catálogo",
         href: "/catalogo",
     },
-
     {
         label: "Brasileiros",
         href: "/catalogo?categoria=Brasileiros",
     },
-
     {
         label: "Europeus",
         href: "/catalogo?categoria=Europeus",
     },
-
     {
         label: "Seleções",
         href: "/catalogo?categoria=Seleções",
     },
 ];
 
-export default function Navbar() {
-    const { totalItems } = useCart();
 
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [cartOpen, setCartOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+
+export default function Navbar() {
 
     const router = useRouter();
 
-    const [search, setSearch] = useState("");
-    const [searchOpen, setSearchOpen] = useState(false);
+    const {
+        totalItems
+    } = useCart();
+
+
+
+    const [
+        scrolled,
+        setScrolled
+    ] = useState(false);
+
+
+    const [
+        menuOpen,
+        setMenuOpen
+    ] = useState(false);
+
+
+    const [
+        cartOpen,
+        setCartOpen
+    ] = useState(false);
+
+
+    const [
+        searchOpen,
+        setSearchOpen
+    ] = useState(false);
+
+
+
+    const [
+        search,
+        setSearch
+    ] = useState("");
+
+
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        const handleScroll = () => {
+
+            setScrolled(
+                window.scrollY > 30
+            );
+
+        };
+
+
+        window.addEventListener(
+            "scroll",
+            handleScroll
+        );
+
+
+        return () => {
+
+            window.removeEventListener(
+                "scroll",
+                handleScroll
+            );
+
+        };
+
+
     }, []);
 
-    const searchOptions = useMemo(() => {
-        if (!search.trim()) return [];
 
-        const q = search.toLowerCase();
+
+
+    const searchOptions = useMemo(() => {
+
+
+        const value =
+            search
+                .trim()
+                .toLowerCase();
+
+
+        if (!value)
+            return [];
+
 
         return products
-            .filter((product) => {
-                const text = [
+            .filter(product => {
+
+
+                const content = [
+
                     product.name,
                     product.team,
                     product.category,
                     product.description,
-                    product.price,
                     product.season,
                     product.badge,
+
                 ]
                     .filter(Boolean)
                     .join(" ")
                     .toLowerCase();
 
-                return text.includes(q);
+
+
+                return content.includes(value);
+
+
             })
-            .slice(0, 6);
+            .slice(0, 8);
+
+
     }, [search]);
 
-    const handleSearch = () => {
-        const value = search.trim();
 
-        if (!value) return;
+
+
+    const executeSearch = useCallback(() => {
+
+
+        const value =
+            search.trim();
+
+
+        if (!value)
+            return;
+
 
         setSearch("");
 
-        router.push(`/catalogo?q=${encodeURIComponent(value)}`);
-    };
 
-    return (
-        <>
-            <AppBar
-                position="fixed"
-                elevation={0}
-                sx={{
-                    zIndex: 2000,
-                    background: scrolled
-                        ? "rgba(5,5,5,0.72)"
-                        : "transparent",
-                    backdropFilter: "blur(24px)",
-                    borderBottom: scrolled
-                        ? "1px solid rgba(255,255,255,0.06)"
-                        : "1px solid transparent",
-                    transition: "0.3s ease",
-                }}
-            >
-                <Toolbar
-                    sx={{
-                        minHeight: 80,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        px: { xs: 2, md: 6 },
-                    }}
-                >
-                    {/* LOGO */}
-                    <Box component={Link} href="/" sx={{ display: "flex" }}>
-                        <Box
-                            component="img"
-                            src="/v11-logo.png"
-                            alt="Voxel Eleven"
-                            sx={{
-                                height: { xs: 32, md: 42 },
-                                transition: "0.3s",
-                                filter: "drop-shadow(0 0 2px #00ff40)",
-                                "&:hover": { transform: "scale(1.05)" },
-                            }}
-                        />
-                    </Box>
+        router.push(
+            `/catalogo?q=${encodeURIComponent(value)}`
+        );
 
-                    {/* DESKTOP NAV */}
-                    <Stack
-                        direction="row"
-                        spacing={1}
-                        sx={{ display: { xs: "none", md: "flex" } }}
-                    >
-                        {navItems.map((item) => (
-                            <Button
-                                key={item.label}
-                                component={Link}
-                                href={item.href}
-                                sx={{
-                                    color: "text.primary",
-                                    fontWeight: 600,
-                                    px: 2,
-                                    borderRadius: 2,
-                                    "&:hover": {
-                                        color: "primary.main",
-                                        backgroundColor: "rgba(255,255,255,0.04)",
-                                    },
-                                }}
-                            >
-                                {item.label}
-                            </Button>
-                        ))}
-                    </Stack>
+
+    }, [
+        search,
+        router
+    ]);
+
+
+
+
+
+    const selectProduct = useCallback(
+        (product: any) => {
+
+
+            setSearch("");
+
+            setSearchOpen(false);
+
+
+            router.push(
+                `/produto/${product.slug}`
+            );
+
+        },
+        [
+            router
+        ]
+    );
+
+
+
+
+
+    const SearchBox = () => (
+
+        <Autocomplete
+
+            freeSolo
+
+            options={searchOptions}
+
+            filterOptions={(x) => x}
+
+            inputValue={search}
+
+            onInputChange={
+                (_, value) =>
+                    setSearch(value)
+            }
+
+
+            getOptionLabel={
+                option =>
+                    typeof option === "string"
+                        ? option
+                        : option.name
+            }
+
+
+            onChange={
+                (_, value) => {
+
+                    if (
+                        value &&
+                        typeof value !== "string"
+                    ) {
+
+                        selectProduct(value);
+
+                    }
+
+                }
+            }
+
+
+
+            renderOption={
+                (props, option) => (
 
                     <Box
+
+                        component="li"
+
+                        {...props}
+
                         sx={{
-                            flexGrow: 1,
-                            maxWidth: 550,
-                            mx: 5,
+                            display: "flex",
+                            gap: 2,
+                            py: 1.5,
+                            borderRadius: 2,
+                        }}
+
+                    >
+
+                        <Avatar
+
+                            src={option.image}
+
+                            variant="rounded"
+
+                            sx={{
+                                width: 52,
+                                height: 52,
+                            }}
+
+                        />
+
+
+                        <Box sx={{ flex: 1 }}>
+
+                            <Typography
+                                sx={{ fontWeight: 700 }}
+                            >
+                                {option.name}
+                            </Typography>
+
+
+                            <Typography
+                                variant="body2"
+                                color="text.secondary"
+                            >
+                                {option.team}
+                            </Typography>
+
+
+                        </Box>
+
+
+                        <Typography
+                            sx={{ color: "primary.main", fontWeight: 800 }}
+                        >
+
+                            R$ {option.price.toFixed(2)}
+
+                        </Typography>
+
+
+                    </Box>
+
+                )
+            }
+
+
+
+            renderInput={
+                params => (
+
+                    <TextField
+
+                        {...params}
+
+                        placeholder="Buscar camisa, time ou jogador..."
+
+                        onKeyDown={
+                            e => {
+
+                                if (e.key === "Enter")
+                                    executeSearch();
+
+                            }
+                        }
+
+                    />
+
+                )
+            }
+
+
+
+            sx={{
+
+                width: "100%",
+
+
+                "& .MuiOutlinedInput-root": {
+
+                    height: 48,
+
+                    borderRadius: 999,
+
+                }
+
+            }}
+
+        />
+
+    );
+
+
+
+
+
+
+    return (
+
+        <>
+
+            <AppBar
+
+                position="fixed"
+
+                elevation={0}
+
+                sx={{
+
+                    zIndex: 2000,
+
+                    bgcolor:
+
+                        scrolled
+
+                            ? "rgba(5,5,5,.85)"
+
+                            : "transparent",
+
+
+                    backdropFilter:
+                        "blur(25px)",
+
+
+                    borderBottom:
+
+                        scrolled
+
+                            ? "1px solid rgba(255,255,255,.08)"
+
+                            : "none",
+
+
+                    transition:
+                        ".3s",
+
+                }}
+
+            >
+
+
+                <Toolbar
+
+                    sx={{
+
+                        minHeight: 82,
+
+                        px: {
+                            xs: 2,
+                            md: 6
+                        }
+
+                    }}
+
+                >
+
+
+                    <Box
+
+                        component={Link}
+
+                        href="/"
+
+                        sx={{
+                            display: "flex"
+                        }}
+
+                    >
+
+                        <Image
+
+                            src="/v11-logo.png"
+
+                            alt="Voxel Eleven"
+
+                            width={140}
+
+                            height={45}
+
+                            style={{
+
+                                objectFit: "contain"
+
+                            }}
+
+                        />
+
+                    </Box>
+
+
+
+
+                    <Stack
+
+                        direction="row"
+
+                        spacing={1}
+
+                        sx={{
+
+                            ml: 5,
 
                             display: {
                                 xs: "none",
-                                lg: "block",
-                            },
+                                md: "flex"
+                            }
+
+                        }}
+
+                    >
+
+                        {
+                            navItems.map(item => (
+
+                                <Box
+
+                                    key={item.label}
+
+                                    component={Link}
+
+                                    href={item.href}
+
+                                    sx={{
+
+                                        px: 2,
+
+                                        py: 1,
+
+                                        color: "text.primary",
+
+                                        borderRadius: 2,
+
+                                        fontWeight: 700,
+
+                                        textDecoration: "none",
+
+                                        "&:hover": {
+
+                                            color:
+                                                "primary.main",
+
+                                            bgcolor:
+                                                "rgba(255,255,255,.05)"
+
+                                        }
+
+                                    }}
+
+                                >
+
+                                    {item.label}
+
+                                </Box>
+
+                            ))
+                        }
+
+
+                    </Stack>
+
+
+
+
+
+                    <Box
+
+                        sx={{
+                            flex: 1,
+                            maxWidth: 520,
+                            mx: 5,
+                            display: {
+                                xs: "none",
+                                lg: "block"
+                            }
                         }}
                     >
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: 1,
-                            }}
-                        >
+                        <SearchBox />
 
-                            <Autocomplete
-                                freeSolo
-                                options={searchOptions}
-                                filterOptions={(x) => x}
-                                inputValue={search}
-                                onInputChange={(_, value) => setSearch(value)}
-                                getOptionLabel={(option) =>
-                                    typeof option === "string"
-                                        ? option
-                                        : option.name
-                                }
-                                onChange={(_, value) => {
-                                    if (!value || typeof value === "string") return;
-
-                                    setSearch("");
-
-                                    router.push(`/produto/${value.slug}`);
-                                }}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        placeholder="Buscar time, jogador ou seleção..."
-                                        onKeyDown={(e) => {
-                                            if (e.key === "Enter") {
-                                                handleSearch();
-                                            }
-                                        }}
-                                    />
-                                )}
-                                renderOption={(props, option) => (
-                                    <Box
-                                        component="li"
-                                        {...props}
-                                        sx={{
-                                            py: 1.5,
-                                            gap: 2,
-                                            borderRadius: 2,
-
-                                            "&:hover": {
-                                                background: "rgba(0,255,64,.08)",
-                                            },
-                                        }}
-                                    >
-                                        <Avatar
-                                            src={option.image}
-                                            variant="rounded"
-                                            sx={{
-                                                width: 50,
-                                                height: 50,
-                                            }}
-                                        />
-
-                                        <Box sx={{ flex: 1 }}>
-                                            <Typography sx={{ fontWeight: 700, }}>
-                                                {option.name}
-                                            </Typography>
-
-                                            <Typography
-                                                variant="body2"
-                                                color="text.secondary"
-                                            >
-                                                {option.team}
-                                            </Typography>
-                                        </Box>
-
-                                        <Typography
-                                            color="primary.main"
-                                            sx={{
-                                                fontWeight: 700,
-                                            }}
-                                        >
-                                            R$ {Number(option.price).toFixed(2)}
-                                        </Typography>
-                                    </Box>
-                                )}
-                                noOptionsText="Nenhum produto encontrado"
-                                sx={{
-                                    width: "100%",
-                                    "& .MuiOutlinedInput-root": {
-                                        height: 46,
-                                        borderRadius: 999,
-                                        background: "rgba(255,255,255,.04)",
-                                        "&:hover": {
-                                            background: "rgba(255,255,255,.06)",
-                                        },
-                                        "&.Mui-focused": {
-                                            boxShadow: "0 0 0 2px rgba(0,255,64,.15)",
-                                        },
-                                    },
-                                }}
-                            />
-                        </Box>
                     </Box>
 
-                    {/* ACTIONS */}
-                    <Stack direction="row" spacing={1}>
-                        <IconButton
-                            onClick={() => setSearchOpen(true)}
-                            sx={{ display: { xs: "flex", md: "none" } }}
-                        >
-                            <SearchIcon />
-                        </IconButton>
+                    <Stack
+                        direction="row"
+                        spacing={1}
+                        sx={{
+                            ml: "auto",
+                        }}
+                    >
+                        <Tooltip title="Buscar">
 
-                        <Badge badgeContent={totalItems} color="primary">
-                            <IconButton onClick={() => setCartOpen(true)}>
-                                <ShoppingBagOutlinedIcon />
+                            <IconButton
+
+                                onClick={
+                                    () => setSearchOpen(true)
+                                }
+
+                                sx={{
+                                    display: {
+                                        xs: "flex",
+                                        lg: "none"
+                                    }
+                                }}
+
+                            >
+                                <SearchIcon />
                             </IconButton>
-                        </Badge>
+                        </Tooltip>
+
+                        <Tooltip title="Carrinho">
+                            <IconButton
+                                onClick={
+                                    () => setCartOpen(true)
+                                }
+                            >
+                                <Badge
+                                    badgeContent={totalItems}
+                                    color="primary"
+                                >
+                                    <ShoppingBagOutlinedIcon />
+                                </Badge>
+                            </IconButton>
+                        </Tooltip>
 
                         <IconButton
-                            onClick={() => setMobileMenuOpen(true)}
-                            sx={{ display: { xs: "flex", md: "none" } }}
+                            onClick={
+                                () => setMenuOpen(true)
+                            }
+                            sx={{
+                                display: {
+                                    xs: "flex",
+                                    md: "none"
+                                }
+                            }}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -311,165 +636,157 @@ export default function Navbar() {
                 </Toolbar>
             </AppBar>
 
-            {/* MOBILE */}
             <Drawer
                 anchor="right"
-                open={mobileMenuOpen}
-                onClose={() => setMobileMenuOpen(false)}
-                slotProps={{
-                    paper: {
-                        sx: {
-                            width: 320,
-                            background: "#050505",
-                        },
-                    },
-                }}
+                open={menuOpen}
+                onClose={
+                    () => setMenuOpen(false)
+                }
             >
                 <Box
                     sx={{
-                        p: 3,
+                        width: 320,
+                        p: 3
                     }}
                 >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                        }}
+                    <Stack sx={{ direction: "row", justifyContent: "space-between", alignItems: "center" }}
                     >
-                        <Typography
-                            sx={{
-                                fontWeight: 800,
-                                color: "primary.main",
-                            }}
+                        <Typography sx={{ color: "primary.main", fontWeight: 900 }}
                         >
                             MENU
                         </Typography>
 
-                        <IconButton onClick={() => setMobileMenuOpen(false)}>
-                            <CloseIcon />
-                        </IconButton>
-                    </Box>
 
-                    <Stack
-                        sx={{
-                            mt: 4,
-                        }}
-                        spacing={2}
-                    >
-                        {navItems.map((item) => (
-                            <Button
-                                key={item.label}
-                                component={Link}
-                                href={item.href}
-                                onClick={() => setMobileMenuOpen(false)}
-                                sx={{
-                                    justifyContent: "flex-start",
-                                    color: "text.primary",
-                                    fontWeight: 700,
-                                    transition: "0.25s",
-                                    "&:hover": {
-                                        transform: "translateX(5px)",
-                                        color: "primary.main",
-                                    },
-                                }}
-                            >
-                                {item.label}
-                            </Button>
-                        ))}
+                        <IconButton
+
+                            onClick={
+                                () => setMenuOpen(false)
+                            }
+
+                        >
+
+                            <CloseIcon />
+
+                        </IconButton>
+
+
                     </Stack>
+
+
+
+                    <List sx={{ mt: 3 }}>
+
+                        {
+                            navItems.map(item => (
+
+                                <ListItemButton
+
+                                    key={item.label}
+
+                                    component={Link}
+
+                                    href={item.href}
+
+                                    onClick={
+                                        () => setMenuOpen(false)
+                                    }
+
+                                >
+
+                                    <ListItemText
+
+                                        primary={item.label}
+
+                                    />
+
+                                </ListItemButton>
+
+                            ))
+                        }
+
+                    </List>
+
+
                 </Box>
+
+
             </Drawer>
 
-            <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+
+
+
 
             <Dialog
-                open={searchOpen}
+
                 fullScreen
-                onClose={() => setSearchOpen(false)}
-                slotProps={{
-                    paper: {
-                        sx: {
-                            bgcolor: "#050505",
-                        },
-                    },
-                }}
+
+                open={searchOpen}
+
+                onClose={
+                    () => setSearchOpen(false)
+                }
+
             >
+
                 <Box
+
                     sx={{
-                        minHeight: "100%",
-                        p: 2,
+
+                        p: 2
+
                     }}
+
                 >
+
                     <Stack
+
                         direction="row"
+
                         spacing={2}
-                        sx={{
-                            alignItems: "center",
-                        }}
+
                     >
-                        <IconButton onClick={() => setSearchOpen(false)}>
+
+                        <IconButton
+
+                            onClick={
+                                () => setSearchOpen(false)
+                            }
+
+                        >
+
                             <CloseIcon />
+
                         </IconButton>
 
-                        <Autocomplete
-                            freeSolo
-                            disablePortal
-                            fullWidth
-                            options={searchOptions}
-                            filterOptions={(x) => x}
-                            inputValue={search}
-                            onInputChange={(_, value) => setSearch(value)}
-                            getOptionLabel={(option) =>
-                                typeof option === "string"
-                                    ? option
-                                    : option.name
-                            }
-                            onChange={(_, value) => {
-                                if (!value || typeof value === "string") return;
 
-                                setSearch("");
-                                setSearchOpen(false);
+                        <SearchBox />
 
-                                router.push(`/produto/${value.slug}`);
-                            }}
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    autoFocus
-                                    placeholder="Buscar camisa..."
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter") {
-                                            handleSearch();
-                                            setSearchOpen(false);
-                                        }
-                                    }}
-                                />
-                            )}
-                            sx={{
-                                flex: 1,
-                                "& .MuiOutlinedInput-root": {
-                                    height: 48,
-                                    borderRadius: 999,
-                                    background: "rgba(255,255,255,.04)",
 
-                                    "& fieldset": {
-                                        borderColor: "rgba(255,255,255,.15)",
-                                    },
-
-                                    "&:hover fieldset": {
-                                        borderColor: "#00ff40",
-                                    },
-
-                                    "&.Mui-focused fieldset": {
-                                        borderColor: "#00ff40",
-                                    },
-                                },
-                            }}
-                        />
                     </Stack>
+
+
                 </Box>
+
+
             </Dialog>
+
+
+
+
+
+            <CartDrawer
+
+                open={cartOpen}
+
+                onClose={
+                    () => setCartOpen(false)
+                }
+
+            />
+
+
         </>
+
     );
+
 }
