@@ -21,6 +21,7 @@ import {
     Autocomplete,
     Avatar,
     TextField,
+    Dialog,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -61,6 +62,7 @@ export default function Navbar() {
     const router = useRouter();
 
     const [search, setSearch] = useState("");
+    const [searchOpen, setSearchOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -172,12 +174,13 @@ export default function Navbar() {
 
                     <Box
                         sx={{
-                            flex: 1,
-                            maxWidth: 520,
-                            mx: 4,
+                            flexGrow: 1,
+                            maxWidth: 550,
+                            mx: 5,
+
                             display: {
                                 xs: "none",
-                                md: "block",
+                                lg: "block",
                             },
                         }}
                     >
@@ -188,12 +191,6 @@ export default function Navbar() {
                                 gap: 1,
                             }}
                         >
-                            <IconButton
-                                onClick={handleSearch}
-                                size="small"
-                            >
-                                <SearchIcon color="action" />
-                            </IconButton>
 
                             <Autocomplete
                                 freeSolo
@@ -272,18 +269,16 @@ export default function Navbar() {
                                 )}
                                 noOptionsText="Nenhum produto encontrado"
                                 sx={{
+                                    width: "100%",
                                     "& .MuiOutlinedInput-root": {
                                         height: 46,
                                         borderRadius: 999,
                                         background: "rgba(255,255,255,.04)",
-
                                         "&:hover": {
                                             background: "rgba(255,255,255,.06)",
                                         },
-
                                         "&.Mui-focused": {
-                                            boxShadow:
-                                                "0 0 0 2px rgba(0,255,64,.15)",
+                                            boxShadow: "0 0 0 2px rgba(0,255,64,.15)",
                                         },
                                     },
                                 }}
@@ -293,18 +288,15 @@ export default function Navbar() {
 
                     {/* ACTIONS */}
                     <Stack direction="row" spacing={1}>
+                        <IconButton
+                            onClick={() => setSearchOpen(true)}
+                            sx={{ display: { xs: "flex", md: "none" } }}
+                        >
+                            <SearchIcon />
+                        </IconButton>
+
                         <Badge badgeContent={totalItems} color="primary">
-                            <IconButton
-                                onClick={() => setCartOpen(true)}
-                                sx={{
-                                    border: "1px solid rgba(255,255,255,0.1)",
-                                    backgroundColor: "rgba(255,255,255,0.03)",
-                                    "&:hover": {
-                                        backgroundColor: "primary.main",
-                                        color: "#000",
-                                    },
-                                }}
-                            >
+                            <IconButton onClick={() => setCartOpen(true)}>
                                 <ShoppingBagOutlinedIcon />
                             </IconButton>
                         </Badge>
@@ -390,6 +382,68 @@ export default function Navbar() {
             </Drawer>
 
             <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+
+            <Dialog
+                open={searchOpen}
+                fullScreen
+                onClose={() => setSearchOpen(false)}
+            >
+                <Box
+                    sx={{
+                        bgcolor: "#050505",
+                        minHeight: "100%",
+                        p: 2,
+                    }}
+                >
+                    <Stack
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: 2,
+                            alignItems: "center",
+                        }}
+                    >
+                        <IconButton onClick={() => setSearchOpen(false)}>
+                            <CloseIcon />
+                        </IconButton>
+
+                        <Autocomplete
+                            freeSolo
+                            autoFocus
+                            fullWidth
+                            options={searchOptions}
+                            filterOptions={(x) => x}
+                            inputValue={search}
+                            onInputChange={(_, value) => setSearch(value)}
+                            getOptionLabel={(option) =>
+                                typeof option === "string"
+                                    ? option
+                                    : option.name
+                            }
+                            onChange={(_, value) => {
+                                if (!value || typeof value === "string") return;
+
+                                setSearch("");
+                                setSearchOpen(false);
+
+                                router.push(`/produto/${value.slug}`);
+                            }}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    placeholder="Buscar camisa..."
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                            handleSearch();
+                                            setSearchOpen(false);
+                                        }
+                                    }}
+                                />
+                            )}
+                        />
+                    </Stack>
+                </Box>
+            </Dialog>
         </>
     );
 }
