@@ -160,93 +160,6 @@ export default function Navbar() {
         );
     };
 
-    const searchOptions = useMemo(() => {
-        const value =
-            search
-                .trim()
-                .toLowerCase();
-
-        if (!value)
-            return [];
-
-        return products
-            .filter(product => {
-
-                const content = [
-
-                    product.name,
-                    product.team,
-                    product.category,
-                    product.description,
-                    product.season,
-                    product.badge,
-
-                ]
-                    .filter(Boolean)
-                    .join(" ")
-                    .toLowerCase();
-
-
-
-                return content.includes(value);
-
-
-            })
-            .slice(0, 8);
-
-
-    }, [search]);
-
-
-
-
-    const executeSearch = useCallback(() => {
-
-
-        const value =
-            search.trim();
-
-
-        if (!value)
-            return;
-
-
-        setSearch("");
-
-
-        router.push(
-            `/catalogo?q=${encodeURIComponent(value)}`
-        );
-
-
-    }, [
-        search,
-        router
-    ]);
-
-
-
-
-
-    const selectProduct = useCallback(
-        (product: any) => {
-
-
-            setSearch("");
-
-            setSearchOpen(false);
-
-
-            router.push(
-                `/produto/${product.slug}`
-            );
-
-        },
-        [
-            router
-        ]
-    );
-
     return (
         <>
             <AppBar
@@ -334,13 +247,7 @@ export default function Navbar() {
 
 
                     </Stack>
-
-
-
-
-
                     <Box
-
                         sx={{
                             flex: 1,
                             maxWidth: 520,
@@ -352,17 +259,11 @@ export default function Navbar() {
                         }}
                     >
                         <SearchBox
-
                             search={search}
-
                             setSearch={setSearch}
-
                             onSelect={handleSelectProduct}
-
                             onEnter={handleSearch}
-
                         />
-
                     </Box>
 
                     <Stack
@@ -542,26 +443,15 @@ export default function Navbar() {
                             flex: 1,
                         }}
                     >
-
                         <SearchBox
-
                             search={search}
-
                             setSearch={setSearch}
-
                             onSelect={handleSelectProduct}
-
                             onEnter={handleSearch}
-
                         />
-
                     </Box>
-
-
                 </Stack>
-
             </Drawer>
-
             <CartDrawer
                 open={cartOpen}
                 onClose={
