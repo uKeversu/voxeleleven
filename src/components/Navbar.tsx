@@ -387,19 +387,24 @@ export default function Navbar() {
                 open={searchOpen}
                 fullScreen
                 onClose={() => setSearchOpen(false)}
+                slotProps={{
+                    paper: {
+                        sx: {
+                            bgcolor: "#050505",
+                        },
+                    },
+                }}
             >
                 <Box
                     sx={{
-                        bgcolor: "#050505",
                         minHeight: "100%",
                         p: 2,
                     }}
                 >
                     <Stack
+                        direction="row"
+                        spacing={2}
                         sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            gap: 2,
                             alignItems: "center",
                         }}
                     >
@@ -409,7 +414,7 @@ export default function Navbar() {
 
                         <Autocomplete
                             freeSolo
-                            autoFocus
+                            disablePortal
                             fullWidth
                             options={searchOptions}
                             filterOptions={(x) => x}
@@ -431,6 +436,7 @@ export default function Navbar() {
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
+                                    autoFocus
                                     placeholder="Buscar camisa..."
                                     onKeyDown={(e) => {
                                         if (e.key === "Enter") {
@@ -440,6 +446,26 @@ export default function Navbar() {
                                     }}
                                 />
                             )}
+                            sx={{
+                                flex: 1,
+                                "& .MuiOutlinedInput-root": {
+                                    height: 48,
+                                    borderRadius: 999,
+                                    background: "rgba(255,255,255,.04)",
+
+                                    "& fieldset": {
+                                        borderColor: "rgba(255,255,255,.15)",
+                                    },
+
+                                    "&:hover fieldset": {
+                                        borderColor: "#00ff40",
+                                    },
+
+                                    "&.Mui-focused fieldset": {
+                                        borderColor: "#00ff40",
+                                    },
+                                },
+                            }}
                         />
                     </Stack>
                 </Box>
