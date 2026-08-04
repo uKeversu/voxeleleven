@@ -197,25 +197,23 @@ export default function Navbar() {
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
-                                    placeholder="Buscar time, jogador ou seleção..."
+                                    placeholder="Buscar time, seleção ou modelo..."
                                     onKeyDown={(e) => {
                                         if (e.key === "Enter") {
                                             handleSearch();
                                         }
                                     }}
-                                    slotProps={{
-                                        input: {
-                                            ...params.InputProps,
-                                            startAdornment: (
-                                                <>
-                                                    <InputAdornment position="start">
-                                                        <SearchIcon />
-                                                    </InputAdornment>
+                                    InputProps={{
+                                        ...params.InputProps,
+                                        startAdornment: (
+                                            <>
+                                                <InputAdornment position="start">
+                                                    <SearchIcon />
+                                                </InputAdornment>
 
-                                                    {params.InputProps.startAdornment}
-                                                </>
-                                            ),
-                                        },
+                                                {params.InputProps.startAdornment}
+                                            </>
+                                        ),
                                     }}
                                 />
                             )}
