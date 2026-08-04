@@ -254,8 +254,10 @@ export default function CatalogoClient() {
                         }}
                     >
                         <FiltersSidebar
+                            /*
                             search={search}
-                            setSearch={setSearch}
+                             setSearch={setSearch}
+                            */
                             selectedCategory={
                                 selectedCategory
                             }
@@ -399,8 +401,10 @@ export default function CatalogoClient() {
                 </Box>
 
                 <FiltersSidebar
+                    /*
                     search={search}
                     setSearch={setSearch}
+                    */
                     selectedCategory={
                         selectedCategory
                     }

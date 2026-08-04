@@ -188,11 +188,12 @@ export default function Navbar() {
                                 gap: 1,
                             }}
                         >
-                            <SearchIcon
-                                sx={{
-                                    color: "text.secondary",
-                                }}
-                            />
+                            <IconButton
+                                onClick={handleSearch}
+                                size="small"
+                            >
+                                <SearchIcon color="action" />
+                            </IconButton>
 
                             <Autocomplete
                                 freeSolo
@@ -246,8 +247,8 @@ export default function Navbar() {
                                             }}
                                         />
 
-                                        <Box flex={1}>
-                                            <Typography fontWeight={700}>
+                                        <Box sx={{ flex: 1 }}>
+                                            <Typography sx={{ fontWeight: 700, }}>
                                                 {option.name}
                                             </Typography>
 
@@ -261,7 +262,9 @@ export default function Navbar() {
 
                                         <Typography
                                             color="primary.main"
-                                            fontWeight={700}
+                                            sx={{
+                                                fontWeight: 700,
+                                            }}
                                         >
                                             R$ {Number(option.price).toFixed(2)}
                                         </Typography>

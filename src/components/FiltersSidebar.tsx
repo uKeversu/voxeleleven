@@ -45,11 +45,13 @@ const teams = [
 ];
 
 type Props = {
+    /*
     search: string;
 
     setSearch: (
         value: string
     ) => void;
+    */
 
     selectedCategory: string;
 
@@ -83,8 +85,10 @@ type Props = {
 };
 
 export default function FiltersSidebar({
+    /*
     search,
     setSearch,
+    */
 
     selectedCategory,
     setSelectedCategory,
@@ -138,7 +142,7 @@ export default function FiltersSidebar({
             />
 
             {/* SEARCH */}
-            <TextField
+            {/*<TextField
                 fullWidth
                 placeholder="Buscar..."
                 value={search}
@@ -167,7 +171,7 @@ export default function FiltersSidebar({
                             "rgba(255,255,255,0.02)",
                     },
                 }}
-            />
+            />*/}
 
             {/* CATEGORY */}
             <Typography
