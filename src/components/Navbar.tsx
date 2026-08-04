@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import CartDrawer from "@/components/CartDrawer";
+
+import { products } from "@/data/products";
 
 import {
     AppBar,
@@ -15,11 +18,17 @@ import {
     Stack,
     Typography,
     Badge,
+    Autocomplete,
+    Avatar,
+    InputAdornment,
+    TextField,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import SearchIcon from "@mui/icons-material/Search";
+
 
 const navItems = [
     {
@@ -50,11 +59,46 @@ export default function Navbar() {
     const [cartOpen, setCartOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
+    const router = useRouter();
+
+    const [search, setSearch] = useState("");
+
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    const searchOptions = useMemo(() => {
+        if (!search.trim()) return [];
+
+        const q = search.toLowerCase();
+
+        return products
+            .filter((product) => {
+                const text = [
+                    product.name,
+                    product.team,
+                    product.category,
+                    product.description,
+                    product.price,
+                    product.season,
+                    product.badge,
+                ]
+                    .filter(Boolean)
+                    .join(" ")
+                    .toLowerCase();
+
+                return text.includes(q);
+            })
+            .slice(0, 6);
+    }, [search]);
+
+    const handleSearch = () => {
+        router.push(
+            `/catalogo?q=${encodeURIComponent(search)}`
+        );
+    };
 
     return (
         <>
@@ -122,6 +166,122 @@ export default function Navbar() {
                             </Button>
                         ))}
                     </Stack>
+
+                    <Box
+                        sx={{
+                            flex: 1,
+                            maxWidth: 520,
+                            mx: 4,
+                            display: {
+                                xs: "none",
+                                lg: "block",
+                            },
+                        }}
+                    >
+                        <Autocomplete
+                            freeSolo
+                            options={searchOptions}
+                            filterOptions={(x) => x}
+                            inputValue={search}
+                            onInputChange={(_, value) => setSearch(value)}
+                            getOptionLabel={(option) =>
+                                typeof option === "string"
+                                    ? option
+                                    : option.name
+                            }
+                            onChange={(_, value) => {
+                                if (!value || typeof value === "string") return;
+
+                                router.push(`/produto/${value.slug}`);
+                            }}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    placeholder="Buscar time, jogador ou seleção..."
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                            handleSearch();
+                                        }
+                                    }}
+                                    slotProps={{
+                                        input: {
+                                            ...params.InputProps,
+                                            startAdornment: (
+                                                <>
+                                                    <InputAdornment position="start">
+                                                        <SearchIcon />
+                                                    </InputAdornment>
+
+                                                    {params.InputProps.startAdornment}
+                                                </>
+                                            ),
+                                        },
+                                    }}
+                                />
+                            )}
+                            renderOption={(props, option) => (
+                                <Box
+                                    component="li"
+                                    {...props}
+                                    sx={{
+                                        py: 1.5,
+                                        gap: 2,
+                                        borderRadius: 2,
+
+                                        "&:hover": {
+                                            background: "rgba(0,255,64,.08)",
+                                        },
+                                    }}
+                                >
+                                    <Avatar
+                                        src={option.image}
+                                        variant="rounded"
+                                        sx={{
+                                            width: 50,
+                                            height: 50,
+                                        }}
+                                    />
+
+                                    <Box flex={1}>
+                                        <Typography fontWeight={700}>
+                                            {option.name}
+                                        </Typography>
+
+                                        <Typography
+                                            variant="body2"
+                                            color="text.secondary"
+                                        >
+                                            {option.team}
+                                        </Typography>
+                                    </Box>
+
+                                    <Typography
+                                        color="primary.main"
+                                        fontWeight={700}
+                                    >
+                                        R$ {Number(option.price).toFixed(2)}
+                                    </Typography>
+                                </Box>
+                            )}
+                            noOptionsText="Nenhum produto encontrado"
+                            sx={{
+                                "& .MuiOutlinedInput-root": {
+                                    height: 46,
+                                    borderRadius: 999,
+                                    background: "rgba(255,255,255,.04)",
+
+                                    "&:hover": {
+                                        background: "rgba(255,255,255,.06)",
+                                    },
+
+                                    "&.Mui-focused": {
+                                        boxShadow:
+                                            "0 0 0 2px rgba(0,255,64,.15)",
+                                    },
+                                },
+                            }}
+                        />
+                    </Box>
 
                     {/* ACTIONS */}
                     <Stack direction="row" spacing={1}>
