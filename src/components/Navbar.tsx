@@ -20,7 +20,6 @@ import {
     Badge,
     Autocomplete,
     Avatar,
-    InputAdornment,
     TextField,
 } from "@mui/material";
 
@@ -95,9 +94,13 @@ export default function Navbar() {
     }, [search]);
 
     const handleSearch = () => {
-        router.push(
-            `/catalogo?q=${encodeURIComponent(search)}`
-        );
+        const value = search.trim();
+
+        if (!value) return;
+
+        setSearch("");
+
+        router.push(`/catalogo?q=${encodeURIComponent(value)}`);
     };
 
     return (
@@ -174,111 +177,115 @@ export default function Navbar() {
                             mx: 4,
                             display: {
                                 xs: "none",
-                                lg: "block",
+                                md: "block",
                             },
                         }}
                     >
-                        <Autocomplete
-                            freeSolo
-                            options={searchOptions}
-                            filterOptions={(x) => x}
-                            inputValue={search}
-                            onInputChange={(_, value) => setSearch(value)}
-                            getOptionLabel={(option) =>
-                                typeof option === "string"
-                                    ? option
-                                    : option.name
-                            }
-                            onChange={(_, value) => {
-                                if (!value || typeof value === "string") return;
-
-                                router.push(`/produto/${value.slug}`);
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 1,
                             }}
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    placeholder="Buscar time, seleção ou modelo..."
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter") {
-                                            handleSearch();
-                                        }
-                                    }}
-                                    InputProps={{
-                                        ...params.InputProps,
-                                        startAdornment: (
-                                            <>
-                                                <InputAdornment position="start">
-                                                    <SearchIcon />
-                                                </InputAdornment>
+                        >
+                            <SearchIcon
+                                sx={{
+                                    color: "text.secondary",
+                                }}
+                            />
 
-                                                {params.InputProps.startAdornment}
-                                            </>
-                                        ),
-                                    }}
-                                />
-                            )}
-                            renderOption={(props, option) => (
-                                <Box
-                                    component="li"
-                                    {...props}
-                                    sx={{
-                                        py: 1.5,
-                                        gap: 2,
-                                        borderRadius: 2,
+                            <Autocomplete
+                                freeSolo
+                                options={searchOptions}
+                                filterOptions={(x) => x}
+                                inputValue={search}
+                                onInputChange={(_, value) => setSearch(value)}
+                                getOptionLabel={(option) =>
+                                    typeof option === "string"
+                                        ? option
+                                        : option.name
+                                }
+                                onChange={(_, value) => {
+                                    if (!value || typeof value === "string") return;
 
-                                        "&:hover": {
-                                            background: "rgba(0,255,64,.08)",
-                                        },
-                                    }}
-                                >
-                                    <Avatar
-                                        src={option.image}
-                                        variant="rounded"
-                                        sx={{
-                                            width: 50,
-                                            height: 50,
+                                    setSearch("");
+
+                                    router.push(`/produto/${value.slug}`);
+                                }}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        placeholder="Buscar time, jogador ou seleção..."
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter") {
+                                                handleSearch();
+                                            }
                                         }}
                                     />
+                                )}
+                                renderOption={(props, option) => (
+                                    <Box
+                                        component="li"
+                                        {...props}
+                                        sx={{
+                                            py: 1.5,
+                                            gap: 2,
+                                            borderRadius: 2,
 
-                                    <Box flex={1}>
-                                        <Typography fontWeight={700}>
-                                            {option.name}
-                                        </Typography>
+                                            "&:hover": {
+                                                background: "rgba(0,255,64,.08)",
+                                            },
+                                        }}
+                                    >
+                                        <Avatar
+                                            src={option.image}
+                                            variant="rounded"
+                                            sx={{
+                                                width: 50,
+                                                height: 50,
+                                            }}
+                                        />
+
+                                        <Box flex={1}>
+                                            <Typography fontWeight={700}>
+                                                {option.name}
+                                            </Typography>
+
+                                            <Typography
+                                                variant="body2"
+                                                color="text.secondary"
+                                            >
+                                                {option.team}
+                                            </Typography>
+                                        </Box>
 
                                         <Typography
-                                            variant="body2"
-                                            color="text.secondary"
+                                            color="primary.main"
+                                            fontWeight={700}
                                         >
-                                            {option.team}
+                                            R$ {Number(option.price).toFixed(2)}
                                         </Typography>
                                     </Box>
+                                )}
+                                noOptionsText="Nenhum produto encontrado"
+                                sx={{
+                                    "& .MuiOutlinedInput-root": {
+                                        height: 46,
+                                        borderRadius: 999,
+                                        background: "rgba(255,255,255,.04)",
 
-                                    <Typography
-                                        color="primary.main"
-                                        fontWeight={700}
-                                    >
-                                        R$ {Number(option.price).toFixed(2)}
-                                    </Typography>
-                                </Box>
-                            )}
-                            noOptionsText="Nenhum produto encontrado"
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    height: 46,
-                                    borderRadius: 999,
-                                    background: "rgba(255,255,255,.04)",
+                                        "&:hover": {
+                                            background: "rgba(255,255,255,.06)",
+                                        },
 
-                                    "&:hover": {
-                                        background: "rgba(255,255,255,.06)",
+                                        "&.Mui-focused": {
+                                            boxShadow:
+                                                "0 0 0 2px rgba(0,255,64,.15)",
+                                        },
                                     },
-
-                                    "&.Mui-focused": {
-                                        boxShadow:
-                                            "0 0 0 2px rgba(0,255,64,.15)",
-                                    },
-                                },
-                            }}
-                        />
+                                }}
+                            />
+                        </Box>
                     </Box>
 
                     {/* ACTIONS */}

@@ -25,8 +25,7 @@ export default function CatalogoClient() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
-    const [search, setSearch] =
-        useState("");
+    const search = searchParams.get("q") || "";
 
     const selectedCategory =
         searchParams.get("categoria") || "Todos";
@@ -53,19 +52,22 @@ export default function CatalogoClient() {
         time: string,
         featured: boolean
     ) => {
-        const params = new URLSearchParams();
+        const params = new URLSearchParams(searchParams.toString());
 
-        if (categoria !== "Todos") {
+        if (categoria !== "Todos")
             params.set("categoria", categoria);
-        }
+        else
+            params.delete("categoria");
 
-        if (time !== "Todos") {
+        if (time !== "Todos")
             params.set("time", time);
-        }
+        else
+            params.delete("time");
 
-        if (featured) {
+        if (featured)
             params.set("featured", "true");
-        }
+        else
+            params.delete("featured");
 
         router.replace(`/catalogo?${params.toString()}`);
     };
