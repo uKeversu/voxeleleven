@@ -40,6 +40,7 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { products } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import CartDrawer from "@/components/CartDrawer";
+import SearchBox from "@/components/SearchBox";
 
 
 
@@ -135,25 +136,41 @@ export default function Navbar() {
 
     }, []);
 
+    const handleSelectProduct = (product: any) => {
+        setSearch("");
 
+        setSearchOpen(false);
 
+        router.push(
+            `/produto/${product.slug}`
+        );
+    };
+
+    const handleSearch = () => {
+        const value =
+            search.trim();
+
+        if (!value)
+            return;
+
+        setSearch("");
+
+        router.push(
+            `/catalogo?q=${encodeURIComponent(value)}`
+        );
+    };
 
     const searchOptions = useMemo(() => {
-
-
         const value =
             search
                 .trim()
                 .toLowerCase();
 
-
         if (!value)
             return [];
 
-
         return products
             .filter(product => {
-
 
                 const content = [
 
@@ -230,327 +247,88 @@ export default function Navbar() {
         ]
     );
 
-
-
-
-
-    const SearchBox = () => (
-
-        <Autocomplete
-
-            freeSolo
-
-            options={searchOptions}
-
-            filterOptions={(x) => x}
-
-            inputValue={search}
-
-            onInputChange={
-                (_, value) =>
-                    setSearch(value)
-            }
-
-
-            getOptionLabel={
-                option =>
-                    typeof option === "string"
-                        ? option
-                        : option.name
-            }
-
-
-            onChange={
-                (_, value) => {
-
-                    if (
-                        value &&
-                        typeof value !== "string"
-                    ) {
-
-                        selectProduct(value);
-
-                    }
-
-                }
-            }
-
-
-
-            renderOption={
-                (props, option) => (
-
-                    <Box
-
-                        component="li"
-
-                        {...props}
-
-                        sx={{
-                            display: "flex",
-                            gap: 2,
-                            py: 1.5,
-                            borderRadius: 2,
-                        }}
-
-                    >
-
-                        <Avatar
-
-                            src={option.image}
-
-                            variant="rounded"
-
-                            sx={{
-                                width: 52,
-                                height: 52,
-                            }}
-
-                        />
-
-
-                        <Box sx={{ flex: 1 }}>
-
-                            <Typography
-                                sx={{ fontWeight: 700 }}
-                            >
-                                {option.name}
-                            </Typography>
-
-
-                            <Typography
-                                variant="body2"
-                                color="text.secondary"
-                            >
-                                {option.team}
-                            </Typography>
-
-
-                        </Box>
-
-
-                        <Typography
-                            sx={{ color: "primary.main", fontWeight: 800 }}
-                        >
-
-                            R$ {option.price.toFixed(2)}
-
-                        </Typography>
-
-
-                    </Box>
-
-                )
-            }
-
-
-
-            renderInput={
-                params => (
-
-                    <TextField
-
-                        {...params}
-
-                        placeholder="Buscar camisa, time ou jogador..."
-
-                        onKeyDown={
-                            e => {
-
-                                if (e.key === "Enter")
-                                    executeSearch();
-
-                            }
-                        }
-
-                    />
-
-                )
-            }
-
-
-
-            sx={{
-
-                width: "100%",
-
-
-                "& .MuiOutlinedInput-root": {
-
-                    height: 48,
-
-                    borderRadius: 999,
-
-                }
-
-            }}
-
-        />
-
-    );
-
-
-
-
-
-
     return (
-
         <>
-
             <AppBar
-
                 position="fixed"
-
                 elevation={0}
-
                 sx={{
-
                     zIndex: 2000,
-
                     bgcolor:
-
                         scrolled
-
                             ? "rgba(5,5,5,.85)"
-
                             : "transparent",
-
-
                     backdropFilter:
                         "blur(25px)",
-
-
                     borderBottom:
-
                         scrolled
-
                             ? "1px solid rgba(255,255,255,.08)"
-
                             : "none",
-
-
                     transition:
                         ".3s",
-
                 }}
-
             >
-
-
                 <Toolbar
-
                     sx={{
-
                         minHeight: 82,
-
                         px: {
                             xs: 2,
                             md: 6
                         }
-
                     }}
-
                 >
-
-
                     <Box
-
                         component={Link}
-
                         href="/"
-
                         sx={{
                             display: "flex"
                         }}
-
                     >
-
                         <Image
-
                             src="/v11-logo.png"
-
                             alt="Voxel Eleven"
-
                             width={140}
-
                             height={45}
-
                             style={{
-
                                 objectFit: "contain"
-
                             }}
-
                         />
-
                     </Box>
 
-
-
-
                     <Stack
-
                         direction="row"
-
                         spacing={1}
-
                         sx={{
-
                             ml: 5,
-
                             display: {
                                 xs: "none",
                                 md: "flex"
                             }
-
                         }}
-
                     >
-
                         {
                             navItems.map(item => (
-
                                 <Box
-
                                     key={item.label}
-
                                     component={Link}
-
                                     href={item.href}
-
                                     sx={{
-
                                         px: 2,
-
                                         py: 1,
-
                                         color: "text.primary",
-
                                         borderRadius: 2,
-
                                         fontWeight: 700,
-
                                         textDecoration: "none",
-
                                         "&:hover": {
-
                                             color:
                                                 "primary.main",
-
                                             bgcolor:
                                                 "rgba(255,255,255,.05)"
-
                                         }
-
                                     }}
-
                                 >
-
                                     {item.label}
-
                                 </Box>
-
                             ))
                         }
 
@@ -573,7 +351,17 @@ export default function Navbar() {
                             }
                         }}
                     >
-                        <SearchBox />
+                        <SearchBox
+
+                            search={search}
+
+                            setSearch={setSearch}
+
+                            onSelect={handleSelectProduct}
+
+                            onEnter={handleSearch}
+
+                        />
 
                     </Box>
 
@@ -588,9 +376,10 @@ export default function Navbar() {
 
                             <IconButton
 
-                                onClick={
-                                    () => setSearchOpen(true)
-                                }
+                                onClick={() => {
+                                    setSearch("");
+                                    setSearchOpen(true);
+                                }}
 
                                 sx={{
                                     display: {
@@ -649,7 +438,12 @@ export default function Navbar() {
                         p: 3
                     }}
                 >
-                    <Stack sx={{ direction: "row", justifyContent: "space-between", alignItems: "center" }}
+                    <Stack
+                        direction="row"
+                        sx={{
+                            justifyContent: "space-between",
+                            alignItems: "center"
+                        }}
                     >
                         <Typography sx={{ color: "primary.main", fontWeight: 900 }}
                         >
@@ -712,81 +506,68 @@ export default function Navbar() {
 
             </Drawer>
 
-
-
-
-
-            <Dialog
-
-                fullScreen
-
+            <Drawer
+                anchor="top"
                 open={searchOpen}
-
-                onClose={
-                    () => setSearchOpen(false)
-                }
-
+                onClose={() => setSearchOpen(false)}
+                slotProps={{
+                    paper: {
+                        sx: {
+                            background: "#050505",
+                            backgroundImage: "none",
+                            p: 2,
+                            pt: 3,
+                        }
+                    }
+                }}
             >
 
-                <Box
-
+                <Stack
+                    direction="row"
+                    spacing={2}
                     sx={{
-
-                        p: 2
-
+                        alignItems: "center",
                     }}
-
                 >
 
-                    <Stack
+                    <IconButton
+                        onClick={() => setSearchOpen(false)}
+                    >
+                        <CloseIcon />
+                    </IconButton>
 
-                        direction="row"
 
-                        spacing={2}
-
+                    <Box
+                        sx={{
+                            flex: 1,
+                        }}
                     >
 
-                        <IconButton
+                        <SearchBox
 
-                            onClick={
-                                () => setSearchOpen(false)
-                            }
+                            search={search}
 
-                        >
+                            setSearch={setSearch}
 
-                            <CloseIcon />
+                            onSelect={handleSelectProduct}
 
-                        </IconButton>
+                            onEnter={handleSearch}
 
+                        />
 
-                        <SearchBox />
-
-
-                    </Stack>
+                    </Box>
 
 
-                </Box>
+                </Stack>
 
-
-            </Dialog>
-
-
-
-
+            </Drawer>
 
             <CartDrawer
-
                 open={cartOpen}
-
                 onClose={
                     () => setCartOpen(false)
                 }
-
             />
-
-
         </>
-
     );
-
 }
