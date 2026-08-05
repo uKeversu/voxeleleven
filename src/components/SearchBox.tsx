@@ -179,13 +179,21 @@ export default function SearchBox({
             sx={{
                 width: "100%",
                 "& .MuiOutlinedInput-root": {
-                    height: 48,
+                    height: 54,
                     borderRadius: 999,
-                    background:
-                        "rgba(255,255,255,.04)",
+                    background: "rgba(255,255,255,.03)",
+                    transition: ".25s",
+                    "& fieldset": {
+                        borderColor: "rgba(255,255,255,.06)"
+                    },
+                    "&:hover fieldset": {
+                        borderColor: "rgba(0,255,64,.35)"
+                    },
                     "&.Mui-focused": {
-                        boxShadow:
-                            "0 0 0 2px rgba(0,255,64,.25)"
+                        boxShadow: "0 0 20px rgba(0,255,64,.18)",
+                        "& fieldset": {
+                            borderColor: "#00ff40"
+                        }
                     }
                 }
             }}

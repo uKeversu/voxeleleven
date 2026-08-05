@@ -18,16 +18,13 @@ import {
     Stack,
     IconButton,
     Badge,
-    Autocomplete,
-    TextField,
-    Avatar,
     Typography,
     Drawer,
     List,
     ListItemButton,
     ListItemText,
-    Dialog,
     Tooltip,
+    Collapse,
 } from "@mui/material";
 
 
@@ -147,17 +144,16 @@ export default function Navbar() {
     };
 
     const handleSearch = () => {
-        const value =
-            search.trim();
 
-        if (!value)
-            return;
+        const value = search.trim();
+
+        if (!value) return;
 
         setSearch("");
 
-        router.push(
-            `/catalogo?q=${encodeURIComponent(value)}`
-        );
+        setSearchOpen(false);
+
+        router.push(`/catalogo?q=${encodeURIComponent(value)}`);
     };
 
     return (
@@ -166,6 +162,8 @@ export default function Navbar() {
                 position="fixed"
                 elevation={0}
                 sx={{
+                    opacity: searchOpen ? 0 : 1,
+                    pointerEvents: searchOpen ? "none" : "auto",
                     top: {
                         xs: 0,
                         md: 34,
@@ -187,28 +185,36 @@ export default function Navbar() {
             >
                 <Toolbar
                     sx={{
-                        minHeight: {
-                            xs: 72,
-                            md: 72,
-                        },
+                        minHeight: 72,
                         px: {
                             xs: 2,
-                            md: 6
-                        }
+                            md: 6,
+                        },
+                        gap: 4,
                     }}
                 >
                     <Box
                         component={Link}
                         href="/"
                         sx={{
-                            display: "flex"
+                            display: "flex",
+                            alignItems: "center",
+                            transition: ".3s",
+
+                            "& img": {
+                                transition: ".3s",
+                            },
+
+                            "&:hover img": {
+                                filter: "drop-shadow(0 0 12px rgba(0,255,64,.35))",
+                            },
                         }}
                     >
                         <Image
                             src="/v11-logo.png"
                             alt="Voxel Eleven"
-                            width={140}
-                            height={45}
+                            width={165}
+                            height={50}
                             style={{
                                 objectFit: "contain"
                             }}
@@ -233,18 +239,33 @@ export default function Navbar() {
                                     component={Link}
                                     href={item.href}
                                     sx={{
-                                        px: 2,
+                                        px: 1.8,
                                         py: 1,
+                                        position: "relative",
                                         color: "text.primary",
-                                        borderRadius: 2,
-                                        fontWeight: 700,
                                         textDecoration: "none",
+                                        fontSize: 13,
+                                        fontWeight: 700,
+                                        letterSpacing: ".8px",
+                                        transition: ".25s",
+                                        "&::after": {
+                                            content: '""',
+                                            position: "absolute",
+                                            left: "50%",
+                                            bottom: -4,
+                                            transform: "translateX(-50%)",
+                                            width: 0,
+                                            height: 2,
+                                            borderRadius: 999,
+                                            background: "primary.main",
+                                            transition: ".25s",
+                                        },
                                         "&:hover": {
-                                            color:
-                                                "primary.main",
-                                            bgcolor:
-                                                "rgba(255,255,255,.05)"
-                                        }
+                                            color: "primary.main",
+                                        },
+                                        "&:hover::after": {
+                                            width: "70%",
+                                        },
                                     }}
                                 >
                                     {item.label}
@@ -257,8 +278,8 @@ export default function Navbar() {
                     <Box
                         sx={{
                             flex: 1,
-                            maxWidth: 520,
-                            mx: 5,
+                            maxWidth: 620,
+                            mx: 6,
                             display: {
                                 xs: "none",
                                 lg: "block"
@@ -286,14 +307,21 @@ export default function Navbar() {
 
                                 onClick={() => {
                                     setSearch("");
-                                    setSearchOpen(true);
+                                    setSearchOpen((prev) => !prev);
                                 }}
 
                                 sx={{
                                     display: {
                                         xs: "flex",
                                         lg: "none"
-                                    }
+                                    },
+                                    width: 42,
+                                    height: 42,
+                                    borderRadius: "50%",
+                                    transition: ".25s",
+                                    "&:hover": {
+                                        bgcolor: "rgba(255,255,255,.05)",
+                                    },
                                 }}
 
                             >
@@ -306,10 +334,30 @@ export default function Navbar() {
                                 onClick={
                                     () => setCartOpen(true)
                                 }
+                                sx={{
+                                    width: 42,
+                                    height: 42,
+                                    borderRadius: "50%",
+                                    transition: ".25s",
+                                    "&:hover": {
+                                        bgcolor: "rgba(255,255,255,.05)",
+                                    },
+                                }}
                             >
                                 <Badge
                                     badgeContent={totalItems}
                                     color="primary"
+                                    sx={{
+                                        "& .MuiBadge-badge": {
+                                            minWidth: 18,
+                                            height: 18,
+                                            borderRadius: 999,
+                                            fontWeight: 800,
+                                            color: "#000",
+                                            background: "#00ff40",
+                                            boxShadow: "0 0 10px rgba(0,255,64,.35)",
+                                        },
+                                    }}
                                 >
                                     <ShoppingBagOutlinedIcon />
                                 </Badge>
@@ -324,7 +372,14 @@ export default function Navbar() {
                                 display: {
                                     xs: "flex",
                                     md: "none"
-                                }
+                                },
+                                width: 42,
+                                height: 42,
+                                borderRadius: "50%",
+                                transition: ".25s",
+                                "&:hover": {
+                                    bgcolor: "rgba(255,255,255,.05)",
+                                },
                             }}
                         >
                             <MenuIcon />
@@ -333,12 +388,91 @@ export default function Navbar() {
                 </Toolbar>
             </AppBar>
 
+            <Collapse
+                in={searchOpen}
+                timeout={350}
+                unmountOnExit
+                sx={{
+                    position: "fixed",
+                    top: {
+                        xs: 72,
+                        md: 106, // Navbar (72) + TopBar (34)
+                    },
+                    left: 0,
+                    right: 0,
+                    zIndex: 1999,
+                }}
+            >
+                <Box
+                    sx={{
+                        px: {
+                            xs: 2,
+                            md: 6,
+                        },
+                        py: 2,
+                        bgcolor: "rgba(8,8,8,.96)",
+                        backdropFilter: "blur(20px)",
+                        borderBottom: "1px solid rgba(255,255,255,.06)",
+                        boxShadow: "0 12px 40px rgba(0,0,0,.45)",
+                    }}
+                >
+                    <Stack
+                        direction="row"
+                        spacing={2}
+                        sx={{
+                            alignItems: "center",
+                            maxWidth: 1400,
+                            mx: "auto",
+                        }}
+                    >
+                        <Box sx={{ flex: 1 }}>
+                            <SearchBox
+                                search={search}
+                                setSearch={setSearch}
+                                onSelect={handleSelectProduct}
+                                onEnter={() => {
+                                    handleSearch();
+                                    setSearchOpen(false);
+                                }}
+                            />
+                        </Box>
+
+                        <IconButton
+                            onClick={() => setSearchOpen(false)}
+                            sx={{
+                                width: 46,
+                                height: 46,
+                                borderRadius: "50%",
+                                bgcolor: "rgba(255,255,255,.04)",
+
+                                "&:hover": {
+                                    bgcolor: "rgba(255,255,255,.08)",
+                                },
+                            }}
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                    </Stack>
+                </Box>
+            </Collapse>
+
             <Drawer
                 anchor="right"
                 open={menuOpen}
                 onClose={
                     () => setMenuOpen(false)
                 }
+                slotProps={{
+                    paper: {
+                        sx: {
+                            width: 320,
+                            background: "#080808",
+                            backgroundImage: "none",
+                            borderLeft:
+                                "1px solid rgba(255,255,255,.06)",
+                        },
+                    },
+                }}
             >
                 <Box
                     sx={{
@@ -360,11 +494,18 @@ export default function Navbar() {
 
 
                         <IconButton
-
                             onClick={
                                 () => setMenuOpen(false)
                             }
-
+                            sx={{
+                                width: 42,
+                                height: 42,
+                                borderRadius: "50%",
+                                transition: ".25s",
+                                "&:hover": {
+                                    bgcolor: "rgba(255,255,255,.05)",
+                                },
+                            }}
                         >
 
                             <CloseIcon />
@@ -382,30 +523,26 @@ export default function Navbar() {
                             navItems.map(item => (
 
                                 <ListItemButton
-
                                     key={item.label}
-
                                     component={Link}
-
                                     href={item.href}
-
                                     onClick={
                                         () => setMenuOpen(false)
                                     }
-
+                                    sx={{
+                                        borderRadius: 3,
+                                        mb: 1,
+                                        "&:hover": {
+                                            bgcolor: "rgba(255,255,255,.04)"
+                                        }
+                                    }}
                                 >
-
                                     <ListItemText
-
                                         primary={item.label}
-
                                     />
-
                                 </ListItemButton>
-
                             ))
                         }
-
                     </List>
 
 
@@ -414,51 +551,7 @@ export default function Navbar() {
 
             </Drawer>
 
-            <Drawer
-                anchor="top"
-                open={searchOpen}
-                onClose={() => setSearchOpen(false)}
-                slotProps={{
-                    paper: {
-                        sx: {
-                            background: "#050505",
-                            backgroundImage: "none",
-                            p: 2,
-                            pt: 3,
-                        }
-                    }
-                }}
-            >
 
-                <Stack
-                    direction="row"
-                    spacing={2}
-                    sx={{
-                        alignItems: "center",
-                    }}
-                >
-
-                    <IconButton
-                        onClick={() => setSearchOpen(false)}
-                    >
-                        <CloseIcon />
-                    </IconButton>
-
-
-                    <Box
-                        sx={{
-                            flex: 1,
-                        }}
-                    >
-                        <SearchBox
-                            search={search}
-                            setSearch={setSearch}
-                            onSelect={handleSelectProduct}
-                            onEnter={handleSearch}
-                        />
-                    </Box>
-                </Stack>
-            </Drawer>
             <CartDrawer
                 open={cartOpen}
                 onClose={
