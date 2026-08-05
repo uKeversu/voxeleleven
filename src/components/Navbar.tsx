@@ -46,19 +46,19 @@ import SearchBox from "@/components/SearchBox";
 
 const navItems = [
     {
-        label: "Catálogo",
+        label: "CATÁLOGO",
         href: "/catalogo",
     },
     {
-        label: "Brasileiros",
+        label: "BRASILEIROS",
         href: "/catalogo?categoria=Brasileiros",
     },
     {
-        label: "Europeus",
+        label: "EUROPEUS",
         href: "/catalogo?categoria=Europeus",
     },
     {
-        label: "Seleções",
+        label: "SELEÇÕES",
         href: "/catalogo?categoria=Seleções",
     },
 ];
@@ -166,6 +166,10 @@ export default function Navbar() {
                 position="fixed"
                 elevation={0}
                 sx={{
+                    top: {
+                        xs: 0,
+                        md: 34,
+                    },
                     zIndex: 2000,
                     bgcolor:
                         scrolled
@@ -183,7 +187,10 @@ export default function Navbar() {
             >
                 <Toolbar
                     sx={{
-                        minHeight: 82,
+                        minHeight: {
+                            xs: 72,
+                            md: 72,
+                        },
                         px: {
                             xs: 2,
                             md: 6

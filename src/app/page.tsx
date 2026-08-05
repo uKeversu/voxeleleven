@@ -1,3 +1,4 @@
+import TopBar from "@/components/TopBar";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
@@ -8,11 +9,12 @@ import PromoCarrousel from "@/components/PromoCarrousel";
 export default function Home() {
   return (
     <>
+      <TopBar />
       <Navbar />
       <Hero />
-      <PromoCarrousel/>
+      <PromoCarrousel />
       <Categories />
-      <BrandSection/>
+      <BrandSection />
       <FeaturedProducts />
     </>
   );

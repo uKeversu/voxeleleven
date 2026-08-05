@@ -2,6 +2,7 @@
 
 import type { Metadata } from "next";
 
+import TopBar from "@/components/TopBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
@@ -30,6 +31,7 @@ export default function RootLayout({
         <ThemeRegistry>
           <CartProvider>
             <SnackbarProvider>
+              <TopBar />
               <Navbar />
 
               {children}
