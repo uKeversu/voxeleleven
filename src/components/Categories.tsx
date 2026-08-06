@@ -12,9 +12,10 @@ import PublicIcon from "@mui/icons-material/Public";
 import FlagIcon from "@mui/icons-material/Flag";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import { PiBaseballCapFill } from "react-icons/pi";
 import SportsBasketballIcon from "@mui/icons-material/SportsBasketball";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
 
 import { useRouter } from "next/navigation";
 
@@ -22,41 +23,49 @@ const categories = [
     {
         name: "Brasileiros",
         icon: <SportsSoccerIcon fontSize="large" />,
+        image: "/vasco-home-26-27.jpg"
     },
 
     {
         name: "Europeus",
         icon: <PublicIcon fontSize="large" />,
+        image: "/real-madrid-away-25-26.jpeg"
     },
 
     {
         name: "Seleções",
         icon: <FlagIcon fontSize="large" />,
+        image: "/brasil-home-26-27.jpg"
     },
 
     {
         name: "Retrô",
         icon: <HistoryEduIcon fontSize="large" />,
+        image: "/milan-retro.jpeg"
     },
 
     {
-        name: "Conjuntos",
-        icon: <CheckroomIcon fontSize="large" />,
+        name: "Colecionáveis V11",
+        icon: <WorkspacePremiumIcon fontSize="large" />,
+        image: "/colecionaveis/porta-copo-corinthians.png"
     },
 
     {
         name: "Agasalhos",
         icon: <AcUnitIcon fontSize="large" />,
+        image: "/agasalhos/jaqueta-psg.png"
     },
 
     {
         name: "Bonés",
         icon: <PiBaseballCapFill size={32} />,
+        image: "/bones/bone-brasil-preto.png"
     },
 
     {
         name: "Basquete",
         icon: <SportsBasketballIcon fontSize="large" />,
+        image: "/basquete/celtics-preta-11.png"
     },
 ];
 
@@ -120,78 +129,104 @@ export default function Categories() {
                         key={item.name}
                     >
                         <Paper
-                            onClick={() =>
-                                handleCategory(item.name)
-                            }
+                            onClick={() => handleCategory(item.name)}
                             sx={{
-                                p: 3,
-
-                                minHeight: 140,
-
-                                borderRadius: 5,
-
-                                background:
-                                    "linear-gradient(135deg, rgba(0,255,64,0.06), #111)",
-
-                                border:
-                                    "1px solid rgba(255,255,255,0.05)",
-
-                                cursor: "pointer",
-
                                 position: "relative",
-
+                                height: 220,
+                                borderRadius: 5,
                                 overflow: "hidden",
-
-                                transition: "all 0.35s ease",
-
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "space-between",
+                                cursor: "pointer",
+                                background: "#101010",
+                                transition: ".35s",
 
                                 "&:hover": {
-                                    transform:
-                                        "translateY(-6px)",
+                                    transform: "translateY(-8px)",
+                                    boxShadow: "0 25px 45px rgba(0,0,0,.45)",
 
-                                    boxShadow:
-                                        "0 0 25px rgba(0,255,64,0.18)",
+                                    "& img": {
+                                        transform: "scale(1.08)",
+                                    },
 
-                                    border:
-                                        "1px solid rgba(0,255,64,0.25)",
-                                },
+                                    "& .overlay": {
+                                        background:
+                                            "linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.25))",
+                                    },
 
-                                "&::before": {
-                                    content: '""',
-
-                                    position: "absolute",
-
-                                    width: 120,
-                                    height: 120,
-
-                                    background:
-                                        "rgba(0,255,64,0.08)",
-
-                                    filter: "blur(50px)",
-
-                                    top: -30,
-                                    right: -30,
+                                    "& .title": {
+                                        color: "primary.main",
+                                    },
                                 },
                             }}
                         >
+                            {/* Imagem */}
+                            <Box
+                                component="img"
+                                src={item.image}
+                                alt={item.name}
+                                sx={{
+                                    position: "absolute",
+                                    inset: 0,
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    transition: ".6s ease",
+                                }}
+                            />
+
+                            {/* Escurecimento */}
+                            <Box
+                                className="overlay"
+                                sx={{
+                                    position: "absolute",
+                                    inset: 0,
+                                    background:
+                                        "linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.45))",
+                                    transition: ".35s",
+                                }}
+                            />
+
+                            {/* Ícone */}
                             <Box
                                 sx={{
+                                    position: "absolute",
+                                    top: 18,
+                                    left: 18,
+
+                                    width: 48,
+                                    height: 48,
+
+                                    borderRadius: "50%",
+
+                                    bgcolor: "rgba(0,0,0,.45)",
+                                    backdropFilter: "blur(12px)",
+
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+
                                     color: "primary.main",
-                                    mb: 2,
                                     zIndex: 2,
                                 }}
                             >
                                 {item.icon}
                             </Box>
 
-                            <Box sx={{ zIndex: 2 }}>
+                            {/* Texto */}
+                            <Box
+                                sx={{
+                                    position: "absolute",
+                                    left: 22,
+                                    right: 22,
+                                    bottom: 20,
+                                    zIndex: 2,
+                                }}
+                            >
                                 <Typography
+                                    className="title"
                                     sx={{
-                                        fontWeight: 700,
-                                        fontSize: "1.1rem",
+                                        fontWeight: 900,
+                                        fontSize: "1.35rem",
+                                        transition: ".3s",
                                     }}
                                 >
                                     {item.name}
@@ -199,9 +234,9 @@ export default function Categories() {
 
                                 <Typography
                                     sx={{
-                                        fontSize: 13,
-                                        color: "#999",
-                                        mt: 0.5,
+                                        color: "#d0d0d0",
+                                        fontSize: 14,
+                                        mt: .5,
                                     }}
                                 >
                                     Explorar coleção →

@@ -44,7 +44,7 @@ export const products: Product[] = [
         image: "/brasil-dourada.jpeg",
         description:
             "Edição especial dourada da seleção brasileira 2022",
-        featured: true,
+        featured: false,
         stock: estoque(0, 0, 0, 0)
     },
 
@@ -124,7 +124,7 @@ export const products: Product[] = [
         image: "/manchestercity-preto.jpeg",
         description:
             "Modelo premium alternativo do Manchester City 2025",
-        featured: true,
+        featured: false,
         stock: estoque(0, 0, 0, 0)
     },
 
@@ -188,7 +188,7 @@ export const products: Product[] = [
         image: "/roma-bege.jpeg",
         description:
             "Modelo premium da Roma 2020",
-        featured: true,
+        featured: false,
         stock: estoque(0, 0, 0, 0)
     },
 
@@ -220,7 +220,7 @@ export const products: Product[] = [
         image: "/vasco-home-26-27.jpg",
         description:
             "Modelo premium Vasco da Gama 2026",
-        featured: true,
+        featured: false,
         stock: estoque(0, 0, 0, 0)
     },
 
@@ -236,7 +236,7 @@ export const products: Product[] = [
         image: "/manchester-united-away-24-25.png",
         description:
             "Modelo premium alternativo do Manchester United 2024",
-        featured: true,
+        featured: false,
         stock: estoque(0, 0, 0, 0)
     },
 
@@ -300,7 +300,7 @@ export const products: Product[] = [
         image: "/flamengo-away-25-26.jpg",
         description:
             "Modelo premium alternativo do Flamengo 2025",
-        featured: true,
+        featured: false,
         stock: estoque(0, 0, 0, 0)
     },
 
@@ -940,7 +940,7 @@ export const products: Product[] = [
         image: "/manchestercity-away-24-25.png",
         description:
             "Modelo premium alternativo do Manchester City 2024",
-        featured: true,
+        featured: false,
         stock: estoque(0, 0, 0, 0)
     },
 
@@ -956,7 +956,7 @@ export const products: Product[] = [
         image: "/barcelona-away-23-24.png",
         description:
             "Modelo premium alternativo do Barcelona 2023",
-        featured: true,
+        featured: false,
         stock: estoque(0, 1, 0, 0)
     },
 
@@ -972,7 +972,7 @@ export const products: Product[] = [
         image: "/real-madrid-home-26-27.png",
         description:
             "Modelo premium do Real Madrid 2026",
-        featured: true,
+        featured: false,
         stock: estoque(0, 0, 1, 0)
     },
 
@@ -988,7 +988,7 @@ export const products: Product[] = [
         image: "/brasil-feminina-home-26-27.png",
         description:
             "Modelo feminino premium da seleção brasileira 2026",
-        featured: true,
+        featured: false,
         stock: estoque(3, 3, 2, 0)
     },
 
@@ -1004,7 +1004,7 @@ export const products: Product[] = [
         image: "/tailandesa-brasil-home-26-27.png",
         description:
             "Modelo tailandês da seleção brasileira 2026",
-        featured: true,
+        featured: false,
         stock: estoque(0, 1, 1, 0)
     },
 
@@ -1052,7 +1052,7 @@ export const products: Product[] = [
         image: "/tailandesa-arsenal-home-25-26.png",
         description:
             "Modelo tailandês do clube inglês Arsenal 2025",
-        featured: true,
+        featured: false,
         stock: estoque(0, 0, 0, 0)
     },
 
@@ -1068,7 +1068,7 @@ export const products: Product[] = [
         image: "/tailandesa-barcelona-home-25-26.png",
         description:
             "Modelo tailandês do clube espanhol Barcelona 2025",
-        featured: true,
+        featured: false,
         stock: estoque(0, 0, 0, 0)
     },
 
@@ -1084,8 +1084,24 @@ export const products: Product[] = [
         image: "/brasil-cristo-24-25.png",
         description:
             "Modelo premium alternativo da seleção brasileira",
-        featured: true,
+        featured: false,
         stock: estoque(0, 1, 1, 0)
+    },
+
+    {
+        id: 68,
+        name: "Tailandesa 1.1 - Espanha - Home 26/27",
+        slug: "tailandesa-espanha-home-26-27",
+        team: "Espanha",
+        category: "Seleções",
+        season: "25/26",
+        price: 149.90,
+        badge: "NEW",
+        image: "/selecoes/tailandesa-espanha-home-26-27.png",
+        description:
+            "Modelo tailandês da campeã mundial Espanha modelo 2026",
+        featured: true,
+        stock: estoque(0, 1, 0, 0)
     },
 
 ];
