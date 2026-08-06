@@ -4,6 +4,8 @@
 
 import Link from "next/link";
 
+import { useRouter, usePathname } from "next/navigation";
+
 import {
     Box,
     Container,
@@ -16,6 +18,9 @@ import {
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+
+const router = useRouter();
+const pathname = usePathname();
 
 const links = [
     {
@@ -106,16 +111,24 @@ export default function Footer() {
                                 component="img"
                                 src="/voxel-eleven-logo.png"
                                 alt="Voxel Eleven"
+                                onClick={() => {
+                                    if (pathname === "/") {
+                                        window.scrollTo({
+                                            top: 0,
+                                            behavior: "smooth",
+                                        });
+                                    } else {
+                                        router.push("/");
+                                    }
+                                }}
                                 sx={{
+                                    cursor: "pointer",
                                     height: {
                                         xs: 280,
                                         md: 350,
                                     },
-
                                     width: "auto",
-
                                     objectFit: "contain",
-
                                     flexShrink: 0,
                                 }}
                             />
