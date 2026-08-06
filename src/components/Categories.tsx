@@ -1,3 +1,5 @@
+// src/components/Categories.tsx
+
 "use client";
 
 import {
