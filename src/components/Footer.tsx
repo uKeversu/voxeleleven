@@ -19,8 +19,6 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 
-const router = useRouter();
-const pathname = usePathname();
 
 const links = [
     {
@@ -42,6 +40,10 @@ const links = [
 ];
 
 export default function Footer() {
+
+    const router = useRouter();
+    const pathname = usePathname();
+
     return (
         <Box
             component="footer"
