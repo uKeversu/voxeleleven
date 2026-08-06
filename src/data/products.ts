@@ -797,7 +797,7 @@ export const products: Product[] = [
         description:
             "Camisa Polo do Grêmio 25/26 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        stock: estoque(0, 0, 1, 1)
+        stock: estoque(0, 0, 1, 0)
     },
 
     {
