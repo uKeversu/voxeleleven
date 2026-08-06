@@ -28,6 +28,7 @@ const items = [
     {
         icon: <WhatsAppIcon fontSize="inherit" />,
         text: "ATENDIMENTO VIA WHATSAPP",
+        href: "https://wa.me/554788453656?text=Olá!%20Gostaria%20de%20mais%20informações.",
     },
 ];
 
@@ -61,46 +62,56 @@ export default function TopBar() {
                     }}
                 >
                     {items.map((item) => (
-                        <Stack
+                        <Box
                             key={item.text}
-                            direction="row"
-                            spacing={0.8}
+                            component={item.href ? "a" : "div"}
+                            href={item.href}
+                            target={item.href ? "_blank" : undefined}
+                            rel={item.href ? "noopener noreferrer" : undefined}
                             sx={{
-                                alignItems: "center",
-                                color: "#bdbdbd",
-                                fontSize: 11,
-                                fontWeight: 700,
-                                letterSpacing: ".5px",
-                                transition: ".25s",
-                                cursor: "default",
-
-                                "& svg": {
-                                    color: "primary.main",
-                                    fontSize: 15,
-                                    transition: ".25s",
-                                },
-
-                                "&:hover": {
-                                    color: "#fff",
-
-                                    "& svg": {
-                                        transform: "scale(1.1)",
-                                    },
-                                },
+                                textDecoration: "none",
                             }}
                         >
-                            {item.icon}
-
-                            <Typography
+                            <Stack
+                                direction="row"
+                                spacing={0.8}
                                 sx={{
+                                    alignItems: "center",
+                                    color: "#bdbdbd",
                                     fontSize: 11,
                                     fontWeight: 700,
                                     letterSpacing: ".5px",
+                                    transition: ".25s",
+                                    cursor: item.href ? "pointer" : "default",
+
+                                    "& svg": {
+                                        color: "primary.main",
+                                        fontSize: 15,
+                                        transition: ".25s",
+                                    },
+
+                                    "&:hover": {
+                                        color: "#fff",
+
+                                        "& svg": {
+                                            transform: "scale(1.1)",
+                                        },
+                                    },
                                 }}
                             >
-                                {item.text}
-                            </Typography>
-                        </Stack>
+                                {item.icon}
+
+                                <Typography
+                                    sx={{
+                                        fontSize: 11,
+                                        fontWeight: 700,
+                                        letterSpacing: ".5px",
+                                    }}
+                                >
+                                    {item.text}
+                                </Typography>
+                            </Stack>
+                        </Box>
                     ))}
                 </Stack>
             </Container>

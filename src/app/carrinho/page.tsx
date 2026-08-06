@@ -37,7 +37,7 @@ export default function CarrinhoPage() {
     } = useCart();
 
     const handleWhatsAppCheckout = () => {
-        const numero = "5547984738397";
+        const numero = "554788453656";
 
         const mensagem =
             generateWhatsAppMessage({

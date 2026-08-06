@@ -241,7 +241,7 @@ export default function Footer() {
                             direction="row"
                             spacing={1.5}
                         >
-                            <IconButton href="https://www.instagram.com/voxelkore/"
+                            <IconButton href="https://www.instagram.com/voxeleleven/"
                                 sx={{
                                     border:
                                         "1px solid",
@@ -273,7 +273,7 @@ export default function Footer() {
                                 <InstagramIcon />
                             </IconButton>
 
-                            <IconButton
+                            <IconButton href="https://wa.me/554788453656?text=Olá!%20Gostaria%20de%20mais%20informações."
                                 sx={{
                                     border:
                                         "1px solid",
@@ -305,7 +305,7 @@ export default function Footer() {
                                 <WhatsAppIcon />
                             </IconButton>
 
-                            <IconButton
+                            <IconButton href="https://voxeleleven.vercel.app"
                                 sx={{
                                     border:
                                         "1px solid",
