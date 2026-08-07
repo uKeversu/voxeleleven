@@ -1,0 +1,2603 @@
+
+-- ============================================
+-- VOXEL ELEVEN
+-- Migração do catálogo estático
+-- ============================================
+
+BEGIN;
+
+-- ============================================
+-- PRODUTOS
+-- ============================================
+
+INSERT INTO products (
+    id,
+    name,
+    slug,
+    team,
+    category,
+    season,
+    price,
+    badge,
+    image,
+    description,
+    featured,
+    active
+)
+VALUES
+(
+        1,
+        'Brasil - Home 26/27',
+        'brasil-amarela-26',
+        'Brasil',
+        'Seleções',
+        '26',
+        119.9,
+        'NEW',
+        '/brasil-home-26-27.jpg',
+        'Modelo premium da seleção brasileira 2026',
+        true,
+        true
+    ),
+(
+        2,
+        'Brasil - Away 22/23',
+        'brasil-dourada',
+        'Brasil',
+        'Seleções',
+        '22',
+        99.9,
+        'LIMITED',
+        '/brasil-dourada.jpeg',
+        'Edição especial dourada da seleção brasileira 2022',
+        false,
+        true
+    ),
+(
+        3,
+        'Argentina - Home 26/27',
+        'argentina-azul-branco',
+        'Argentina',
+        'Seleções',
+        '26',
+        99.9,
+        'NEW',
+        '/argentina-azul-branco.png',
+        'Modelo premium da seleção argentina 2026',
+        false,
+        true
+    ),
+(
+        4,
+        'Atlético Mineiro - Home 26/27',
+        'atletico-mineiro-preto-branco',
+        'Atlético Mineiro',
+        'Brasileiros',
+        '26',
+        89.9,
+        'NEW',
+        '/atleticomineiro-preto-branco.jpeg',
+        'Modelo premium do Atlético Mineiro 2026',
+        false,
+        true
+    ),
+(
+        5,
+        'Corinthians - Retrô 98',
+        'corinthians-retro',
+        'Corinthians',
+        'Retrô',
+        'Retrô',
+        99.9,
+        'RETRO',
+        '/corinthians-retro.PNG',
+        'Modelo premium retrô do Corinthians 1998',
+        false,
+        true
+    ),
+(
+        6,
+        'Flamengo - Away 25/26',
+        'flamengo-preto',
+        'Flamengo',
+        'Brasileiros',
+        '25',
+        89.9,
+        'LIMITED',
+        '/flamengo-preto.png',
+        'Modelo premium do Flamengo 2025',
+        false,
+        true
+    ),
+(
+        7,
+        'Tailandesa 1.1 - Manchester City - Away 25/26',
+        'manchester-city-preto',
+        'Manchester City',
+        'Europeus',
+        '26',
+        149.9,
+        'LIMITED',
+        '/manchestercity-preto.jpeg',
+        'Modelo premium alternativo do Manchester City 2025',
+        false,
+        true
+    ),
+(
+        8,
+        'AC Milan - Retrô 2002',
+        'milan-retro',
+        'Milan',
+        'Retrô',
+        '2002',
+        99.9,
+        'RETRO',
+        '/milan-retro.jpeg',
+        'Modelo premium retrô do Milan 2002 Kaká',
+        true,
+        true
+    ),
+(
+        9,
+        'Palmeiras - Home 26/27',
+        'palmeiras-verde',
+        'Palmeiras',
+        'Brasileiros',
+        '26',
+        89.9,
+        'NEW',
+        '/palmeiras-verde.jpeg',
+        'Modelo premium do Palmeiras 2026',
+        false,
+        true
+    ),
+(
+        10,
+        'PSG - Away 25/26',
+        'psg-preto',
+        'PSG',
+        'Europeus',
+        '26',
+        89.9,
+        'LIMITED',
+        '/psg-preto.jpeg',
+        'Modelo premium alternativa do PSG 2025',
+        false,
+        true
+    ),
+(
+        11,
+        'Roma - Away 20/21',
+        'roma-bege',
+        'Roma',
+        'Europeus',
+        '26',
+        99.9,
+        'LIMITED',
+        '/roma-bege.jpeg',
+        'Modelo premium da Roma 2020',
+        false,
+        true
+    ),
+(
+        12,
+        'São Paulo - Home 26/27',
+        'sao-paulo-branco',
+        'São Paulo',
+        'Brasileiros',
+        '26',
+        89.9,
+        'NEW',
+        '/saopaulo-branco.jpeg',
+        'Modelo premium do São Paulo 2026',
+        false,
+        true
+    ),
+(
+        13,
+        'Vasco Da Gama - Home 26/27',
+        'vasco-home-26-27',
+        'Vasco da Gama',
+        'Brasileiros',
+        '26',
+        89.9,
+        'NEW',
+        '/vasco-home-26-27.jpg',
+        'Modelo premium Vasco da Gama 2026',
+        false,
+        true
+    ),
+(
+        14,
+        'Manchester United - Away 24/25',
+        'manchester-united-away-24-25',
+        'Manchester United',
+        'Europeus',
+        '24',
+        119.9,
+        'LIMITED',
+        '/manchester-united-away-24-25.png',
+        'Modelo premium alternativo do Manchester United 2024',
+        false,
+        true
+    ),
+(
+        15,
+        'Vasco Da Gama - Away 26/27',
+        'vasco-away-26-27',
+        'Vasco da Gama',
+        'Brasileiros',
+        '26',
+        89.9,
+        'NEW',
+        '/vasco-away-26-27.jpg',
+        'Modelo premium alternativo do Vasco da Gama 2026',
+        false,
+        true
+    ),
+(
+        16,
+        'Santos - Away 25/26',
+        'santos-away-25-26',
+        'Santos',
+        'Brasileiros',
+        '25',
+        89.9,
+        'NEW',
+        '/santos-away-25-26.jpg',
+        'Modelo premium alternativo do Santos 2025',
+        false,
+        true
+    ),
+(
+        17,
+        'Fluminense - Away 26/27',
+        'fluminense-away-26-27',
+        'Fluminense',
+        'Brasileiros',
+        '26',
+        89.9,
+        'NEW',
+        '/fluminense-away-26-27.png',
+        'Modelo premium visitante do Fluminense 2026',
+        false,
+        true
+    ),
+(
+        18,
+        'Flamengo - Away 25/26',
+        'flamengo-away-25-26',
+        'Flamengo',
+        'Brasileiros',
+        '25',
+        89.9,
+        'BEST SELLER',
+        '/flamengo-away-25-26.jpg',
+        'Modelo premium alternativo do Flamengo 2025',
+        false,
+        true
+    ),
+(
+        19,
+        'Corinthians - Away 25/26',
+        'corinthians-away-25-26',
+        'Corinthians',
+        'Brasileiros',
+        '25',
+        89.9,
+        'NEW',
+        '/corinthians-away-25-26.jpg',
+        'Modelo premium alternativo do Corinthians 2025',
+        false,
+        true
+    ),
+(
+        20,
+        'Portugal - Home 26/27',
+        'portugal-home-26-27',
+        'Portugal',
+        'Seleções',
+        '26',
+        99.9,
+        'NEW',
+        '/portugal-home-26-27.jpg',
+        'Modelo premium da seleção portuguesa 2026',
+        false,
+        true
+    ),
+(
+        21,
+        'Brasil - Retrô 98',
+        'brasil-retro-98',
+        'Brasil',
+        'Retrô',
+        '1998',
+        99.9,
+        'RETRO',
+        '/brasil-retro-98.jpg',
+        'Modelo premium retrô da seleção brasileira 1998',
+        false,
+        true
+    ),
+(
+        22,
+        'Roma - Home 25/26',
+        'roma-home-25-26',
+        'Roma',
+        'Europeus',
+        '25',
+        89.9,
+        'LIMITED',
+        '/roma-home-25-26.jpg',
+        'Modelo premium titular da Roma 2025',
+        false,
+        true
+    ),
+(
+        23,
+        'Brasil - Polo Preta 26/27',
+        'brasil-polo-preta-26-27',
+        'Brasil',
+        'Seleções',
+        '26',
+        99.9,
+        'PREMIUM',
+        '/brasil-polo-preta-26-27.jpeg',
+        'Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado',
+        false,
+        true
+    ),
+(
+        24,
+        'Liverpool - Goleiro 25/26',
+        'liverpool-goleiro-25-26',
+        'Liverpool',
+        'Europeus',
+        '25',
+        89.9,
+        'NEW',
+        '/liverpool-goleiro-25-26.jpg',
+        'Modelo de goleiro do Liverpool 2025/26 com design marcante e tecido dry fit premium',
+        false,
+        true
+    ),
+(
+        25,
+        'Brasil - Azul 26/27',
+        'brasil-azul-26-27',
+        'Brasil',
+        'Seleções',
+        '26',
+        99.9,
+        'NEW',
+        '/brasil-azul-26-27.jpeg',
+        'Camisa reserva da Seleção Brasileira 2026 com visual clássico em azul vibrante',
+        false,
+        true
+    ),
+(
+        26,
+        'Real Madrid - Away 25/26',
+        'real-madrid-away-25-26',
+        'Real Madrid',
+        'Europeus',
+        '25',
+        89.9,
+        'LIMITED',
+        '/real-madrid-away-25-26.jpeg',
+        'Modelo away do Real Madrid 2025/26 com detalhes premium e caimento confortável',
+        true,
+        true
+    ),
+(
+        27,
+        'Brasil - Away 26/27',
+        'brasil-away-26-27',
+        'Brasil',
+        'Seleções',
+        '26',
+        119.9,
+        'NEW',
+        '/brasil-away-26-27.jpeg',
+        'Versão visitante da Seleção Brasileira 2026 com tecido leve e acabamento premium',
+        false,
+        true
+    ),
+(
+        28,
+        'Cruzeiro - Away 25/26',
+        'cruzeiro-away-25-26',
+        'Cruzeiro',
+        'Brasileiros',
+        '25',
+        89.9,
+        'LIMITED',
+        '/cruzeiro-away-25-26.jpeg',
+        'Camisa visitante do Cruzeiro 2025/26 inspirada na tradição celeste do clube',
+        false,
+        true
+    ),
+(
+        29,
+        'Flamengo - Home 26/27',
+        'flamengo-home-26-27',
+        'Flamengo',
+        'Brasileiros',
+        '26',
+        99.9,
+        'BESTSELLER',
+        '/flamengo-home-26-27.jpeg',
+        'Modelo titular do Flamengo 2026/27 com listras clássicas e acabamento premium',
+        false,
+        true
+    ),
+(
+        30,
+        'Liverpool - Home 25/26',
+        'liverpool-home-25-26',
+        'Liverpool',
+        'Europeus',
+        '25',
+        89.9,
+        'LIMITED',
+        '/liverpool-home-25-26.jpeg',
+        'Camisa titular do Liverpool 2025/26 com design clássico e detalhes sofisticados',
+        false,
+        true
+    ),
+(
+        31,
+        'Brasil - Home 26/27 - DTF',
+        'brasil-home-26-27-dtf',
+        'Brasil',
+        'Seleções',
+        '26',
+        99.9,
+        'NEW',
+        '/brasil-amarela-dtf-26-27.jpeg',
+        'Versão com símobolo em DTF da camisa da seleção brasileira 2026',
+        false,
+        true
+    ),
+(
+        32,
+        'Brasil - Dryfit Preta',
+        'brasil-dryfit-preta',
+        'Brasil',
+        'Seleções',
+        '26',
+        59.9,
+        'DRY-FIT',
+        '/brasil-dryfit-preta.jpeg',
+        'Camisa dryfit preta inspirada na Seleção Brasileira com visual urbano e moderno',
+        false,
+        true
+    ),
+(
+        33,
+        'Brasil - Dryfit Verde',
+        'brasil-dryfit-verde',
+        'Brasil',
+        'Seleções',
+        '26',
+        59.9,
+        'DRY-FIT',
+        '/brasil-dryfit-verde.jpg',
+        'Camisa dryfit verde da Seleção Brasileira com tecido leve e visual esportivo premium',
+        false,
+        true
+    ),
+(
+        34,
+        'Brasil - Dryfit Azul',
+        'brasil-dryfit-azul',
+        'Brasil',
+        'Seleções',
+        '26',
+        59.9,
+        'DRY-FIT',
+        '/brasil-dryfit-azul.jpg',
+        'Modelo dryfit azul inspirado na tradição da Seleção Brasileira com conforto e respirabilidade',
+        false,
+        true
+    ),
+(
+        35,
+        'Brasil - Dryfit Branca',
+        'brasil-dryfit-branca',
+        'Brasil',
+        'Seleções',
+        '26',
+        59.9,
+        'DRY-FIT',
+        '/brasil-dryfit-branca.jpg',
+        'Camisa dryfit branca com design clean e acabamento moderno inspirado na Seleção Brasileira',
+        false,
+        true
+    ),
+(
+        36,
+        'Brasil - Dryfit Amarela',
+        'brasil-dryfit-amarela',
+        'Brasil',
+        'Seleções',
+        '26',
+        59.9,
+        'DRY-FIT',
+        '/brasil-dryfit-amarela.jpg',
+        'Versão dryfit amarela da Seleção Brasileira com tecido premium e estilo esportivo marcante',
+        false,
+        true
+    ),
+(
+        37,
+        'Brasil - Polo amarela 26/27',
+        'brasil-polo-amarela-26-27',
+        'Brasil',
+        'Seleções',
+        '26',
+        99.9,
+        'PREMIUM',
+        '/brasil-polo-amarela-26-27.jpg',
+        'Camisa polo premium da Seleção Brasileira com visual moderno e acabamento sofisticado',
+        false,
+        true
+    ),
+(
+        38,
+        'Arsenal - Away 25/26',
+        'arsenal-away-25-26',
+        'Arsenal',
+        'Europeus',
+        '26',
+        89.9,
+        'LIMITED',
+        '/arsenal-away-25-26.jpg',
+        'Camisa alternativa do Arsenal 25/26 com visual ousado, tecido leve e acabamento premium.',
+        false,
+        true
+    ),
+(
+        39,
+        'Grêmio - Home 26/27',
+        'gremio-home-26-27',
+        'Grêmio',
+        'Brasileiros',
+        '26/27',
+        89.9,
+        'NEW',
+        '/gremio-home-26-27.png',
+        'Camisa home do Grêmio 26/27 com listras tradicionais, tecido leve e acabamento premium.',
+        false,
+        true
+    ),
+(
+        40,
+        'Borussia - Away 25/26',
+        'borussia-home-24-25',
+        'Borussia Dortmund',
+        'Europeus',
+        '24/25',
+        89.9,
+        'LIMITED',
+        '/borussia-home-24-25.jpg',
+        'Camisa do Borussia 24/25 com design moderno, caimento confortável e detalhes premium.',
+        false,
+        true
+    ),
+(
+        41,
+        'Vasco - Retro 2000',
+        'vasco-retro-2000',
+        'Vasco da Gama',
+        'Retrô',
+        '2000',
+        199.9,
+        'CLASSIC',
+        '/vasco-retro-2000.jpg',
+        'Camisa retrô do Vasco inspirada na temporada 2000, com visual clássico e acabamento premium.',
+        false,
+        true
+    ),
+(
+        42,
+        'Fluminense - Home 25/26',
+        'fluminense-home-26-27',
+        'Fluminense',
+        'Brasileiros',
+        '26/27',
+        89.9,
+        'NEW',
+        '/fluminense-home-26-27.jpg',
+        'Camisa home do Fluminense 26/27 com visual tradicional, tecido leve e ótimo conforto.',
+        false,
+        true
+    ),
+(
+        43,
+        'Ajax- Away 26/27',
+        'ajax-away-26-27',
+        'Ajax',
+        'Europeus',
+        '26/27',
+        89.9,
+        'LIMITED',
+        '/ajax-away-26-27.png',
+        'Camisa do Ajax 26/27 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        44,
+        'Botafogo- Away 25/26',
+        'botafogo-away-25-26',
+        'Botafogo',
+        'Brasileiros',
+        '25/26',
+        89.9,
+        'LIMITED',
+        '/botafogo-away-25-26.png',
+        'Camisa do Botafogo 25/26 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        45,
+        'Vasco- Away 24/25',
+        'vasco-away-24-25',
+        'Vasco da Gama',
+        'Brasileiros',
+        '24/25',
+        89.9,
+        'LIMITED',
+        '/vasco-away-24-25.png',
+        'Camisa do Vasco da Gama 24/25 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        46,
+        'Internacional- Home 26/27',
+        'internacional-home-26-27',
+        'Internacional',
+        'Brasileiros',
+        '26/27',
+        89.9,
+        'NEW',
+        '/internacional-home-26-27.png',
+        'Camisa do Internacional 26/27 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        47,
+        'Santos - Home 26/27',
+        'santos-home-26-27',
+        'Santos',
+        'Brasileiros',
+        '26/27',
+        89.9,
+        'NEW',
+        '/santos-home-26-27.png',
+        'Camisa do Santos 26/27 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        48,
+        'São Paulo - Away 26/27',
+        'sao-paulo-away-26-27',
+        'São Paulo',
+        'Brasileiros',
+        '26/27',
+        89.9,
+        'NEW',
+        '/sao-paulo-away-26-27.png',
+        'Camisa do São Paulo 26/27 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        49,
+        'Grêmio - Away 25/26',
+        'gremio-away-25-26',
+        'Grêmio',
+        'Brasileiros',
+        '25/26',
+        89.9,
+        'LIMITED',
+        '/gremio-away-25-26.png',
+        'Camisa Polo do Grêmio 25/26 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        50,
+        'Flamengo - Away 26/27',
+        'flamengo-away-26-27',
+        'Flamengo',
+        'Brasileiros',
+        '26/27',
+        89.9,
+        'NEW',
+        '/flamengo-away-26-27.png',
+        'Camisa Flamengo 26/27 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        51,
+        'Flamengo - Balmain 24/25',
+        'flamengo-balmain-24-25',
+        'Flamengo',
+        'Brasileiros',
+        '24/25',
+        89.9,
+        'LIMITED',
+        '/flamengo-balmain-24-25.png',
+        'Camisa Flamengo Balmain 24/25 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        52,
+        'Corinthians - Home 20/21',
+        'corinthians-home-20-21',
+        'Corinthians',
+        'Brasileiros',
+        '20/21',
+        99.9,
+        'LIMITED',
+        '/corinthians-polo-20-21.png',
+        'Camisa Polo do Corinthians 20/21 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        53,
+        'Corinthians - Away 26/27',
+        'corinthians-away-26-27',
+        'Corinthians',
+        'Brasileiros',
+        '26/27',
+        89.9,
+        'NEW',
+        '/corinthians-polo-26-27.png',
+        'Camisa Polo do Corinthians 26/27 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        54,
+        'Corinthians - Away 24/25',
+        'corinthians-away-24-25',
+        'Corinthians',
+        'Brasileiros',
+        '24/25',
+        89.9,
+        'LIMITED',
+        '/corinthians-away-24-25.png',
+        'Camisa All Black do Corinthians 24/25 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        55,
+        'Corinthians - Home 24/25',
+        'corinthians-home-24-25',
+        'Corinthians',
+        'Brasileiros',
+        '24/25',
+        89.9,
+        'LIMITED',
+        '/corinthians-home-24-25.png',
+        'Camisa do Corinthians 24/25 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        56,
+        'França - Home 26/27',
+        'franca-home-26-27',
+        'França',
+        'Seleções',
+        '26/27',
+        89.9,
+        'NEW',
+        '/franca-home-26-27.png',
+        'Camisa da seleção francesa 26/27 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        57,
+        'Japão - Away 23/24',
+        'japao-away-23-24',
+        'Japão',
+        'Seleções',
+        '23/24',
+        89.9,
+        'LIMITED',
+        '/japao-away-23-24.png',
+        'Camisa da seleção japonesa 23/24 com design moderno, tecido respirável e acabamento premium.',
+        false,
+        true
+    ),
+(
+        58,
+        'Manchester City - Away 24/25',
+        'manchester-city-away-24-25',
+        'Manchester City',
+        'Europeus',
+        '24',
+        89.9,
+        'LIMITED',
+        '/manchestercity-away-24-25.png',
+        'Modelo premium alternativo do Manchester City 2024',
+        false,
+        true
+    ),
+(
+        59,
+        'Barcelona - Away 23/24',
+        'barcelona-away-23-24',
+        'Barcelona',
+        'Europeus',
+        '23',
+        89.9,
+        'LIMITED',
+        '/barcelona-away-23-24.png',
+        'Modelo premium alternativo do Barcelona 2023',
+        false,
+        true
+    ),
+(
+        60,
+        'Real Madrid - Home 26/27',
+        'real-madrid-home-26-27',
+        'Real Madrid',
+        'Europeus',
+        '26/27',
+        89.9,
+        'NEW',
+        '/real-madrid-home-26-27.png',
+        'Modelo premium do Real Madrid 2026',
+        false,
+        true
+    ),
+(
+        61,
+        'Brasil Feminina - Home 26/27',
+        'brasil-feminina-home-26-27',
+        'Brasil',
+        'Seleções',
+        '26/27',
+        119.9,
+        'NEW',
+        '/brasil-feminina-home-26-27.png',
+        'Modelo feminino premium da seleção brasileira 2026',
+        false,
+        true
+    ),
+(
+        62,
+        'Tailandesa 1.1 - Brasil - Home 26/27',
+        'tailandesa-brasil-home-26-27',
+        'Brasil',
+        'Seleções',
+        '26/27',
+        149.9,
+        'NEW',
+        '/tailandesa-brasil-home-26-27.png',
+        'Modelo tailandês da seleção brasileira 2026',
+        false,
+        true
+    ),
+(
+        63,
+        'Tailandesa 1.1 - Oplympique de Marseille- Home 25/26',
+        'tailandesa-marseille-home-25-26',
+        'Olympique de Marseille',
+        'Europeus',
+        '25/26',
+        149.9,
+        'LIMITED',
+        '/tailandesa-marseille-home-25-26.png',
+        'Modelo tailandês do clube frances Olympique de Marseille 2025',
+        true,
+        true
+    ),
+(
+        64,
+        'Tailandesa 1.1 - Bayern Munich- Away 25/26',
+        'tailandesa-bayern-munich-away-25-26',
+        'Bayern Munich',
+        'Europeus',
+        '25/26',
+        149.9,
+        'LIMITED',
+        '/tailandesa-bayern-munich-home-25-26.png',
+        'Modelo tailandês do clube alemão Bayern Munich 2025',
+        true,
+        true
+    ),
+(
+        65,
+        'Tailandesa 1.1 - Arsenal - Home 25/26',
+        'tailandesa-arsenal-home-25-26',
+        'Arsenal',
+        'Europeus',
+        '25/26',
+        149.9,
+        'LIMITED',
+        '/tailandesa-arsenal-home-25-26.png',
+        'Modelo tailandês do clube inglês Arsenal 2025',
+        false,
+        true
+    ),
+(
+        66,
+        'Tailandesa 1.1 - Barcelona - Home 25/26',
+        'tailandesa-barcelona-home-25-26',
+        'Barcelona',
+        'Europeus',
+        '25/26',
+        149.9,
+        'LIMITED',
+        '/tailandesa-barcelona-home-25-26.png',
+        'Modelo tailandês do clube espanhol Barcelona 2025',
+        false,
+        true
+    ),
+(
+        67,
+        'Brasil - Cristo Redentor 24/25',
+        'brasil-cristo-24-25',
+        'Brasil',
+        'Seleções',
+        '24/25',
+        79.9,
+        'LIMITED',
+        '/brasil-cristo-24-25.png',
+        'Modelo premium alternativo da seleção brasileira',
+        false,
+        true
+    ),
+(
+        68,
+        'Tailandesa 1.1 - Espanha - Home 26/27',
+        'tailandesa-espanha-home-26-27',
+        'Espanha',
+        'Seleções',
+        '25/26',
+        149.9,
+        'NEW',
+        '/selecoes/tailandesa-espanha-home-26-27.png',
+        'Modelo tailandês da campeã mundial Espanha modelo 2026',
+        true,
+        true
+    ),
+(
+        69,
+        'Napoli - Away 25/26',
+        'napoli-away-25-26',
+        'Napoli',
+        'Europeus',
+        '25/26',
+        89.9,
+        'LIMITED',
+        '/napoli-away-25-26.png',
+        'Modelo premium de visitante do Napoli 2025',
+        false,
+        true
+    ),
+(
+        70,
+        'Corinthians - Retro 1990',
+        'corinthians-retro-1990',
+        'Corinthians',
+        'Retrô',
+        '1990',
+        99.9,
+        'RETRO',
+        '/corinthians-retro-1990.png',
+        'Modelo premium retrô do Corinthians 1990',
+        false,
+        true
+    ),
+(
+        71,
+        'Flamengo - Retro 95/96',
+        'flamengo-retro-95-96',
+        'Flamengo',
+        'Retrô',
+        '95/96',
+        99.9,
+        'RETRO',
+        '/flamengo-retro-95-96.png',
+        'Modelo premium retrô do Flamengo da temporada 95/96',
+        false,
+        true
+    ),
+(
+        72,
+        'Tailandesa 1.1 - Real Madrid - Away 25/26',
+        'tailandesa-real-madrid-away-25-26',
+        'Real Madrid',
+        'Europeus',
+        '25/26',
+        149.9,
+        'LIMITED',
+        '/tailandesa-real-madrid-away-25-26.png',
+        'Modelo tailandês do clube espanhol Real Madrid 2025',
+        false,
+        true
+    ),
+(
+        73,
+        'Tailandesa 1.1 - Arsenal - Away 25/26',
+        'tailandesa-arsenal-away-25-26',
+        'Arsenal',
+        'Europeus',
+        '25/26',
+        149.9,
+        'LIMITED',
+        '/tailandesa-arsenal-away-25-26.png',
+        'Modelo tailandês do clube inglês Arsenal 2025',
+        false,
+        true
+    ),
+(
+        74,
+        'Tailandesa 1.1 - Ajax - Away 25/26',
+        'tailandesa-ajax-away-25-26',
+        'Ajax',
+        'Europeus',
+        '25/26',
+        149.9,
+        'LIMITED',
+        '/tailandesa-ajax-away-25-26.png',
+        'Modelo tailandês alternativo do clube holandês Ajax 2025',
+        false,
+        true
+    ),
+(
+        75,
+        'Tailandesa 1.1 - Corinthians - Home 25/26',
+        'tailandesa-corinthians-home-25-26',
+        'Corinthians',
+        'Brasileiros',
+        '25/26',
+        149.9,
+        'LIMITED',
+        '/tailandesa-corinthians-home-25-26.png',
+        'Modelo tailandês do clube brasileiro Corinthians 2025',
+        false,
+        true
+    )
+ON CONFLICT (id) DO NOTHING;
+
+
+-- ============================================
+-- VARIANTES / ESTOQUE
+-- ============================================
+
+INSERT INTO product_variants (
+    product_id,
+    size,
+    stock
+)
+VALUES
+(
+                1,
+                'P',
+                0
+            ),
+(
+                1,
+                'M',
+                5
+            ),
+(
+                1,
+                'G',
+                2
+            ),
+(
+                1,
+                'GG',
+                1
+            ),
+(
+                2,
+                'P',
+                0
+            ),
+(
+                2,
+                'M',
+                0
+            ),
+(
+                2,
+                'G',
+                0
+            ),
+(
+                2,
+                'GG',
+                0
+            ),
+(
+                3,
+                'P',
+                0
+            ),
+(
+                3,
+                'M',
+                0
+            ),
+(
+                3,
+                'G',
+                2
+            ),
+(
+                3,
+                'GG',
+                0
+            ),
+(
+                4,
+                'P',
+                0
+            ),
+(
+                4,
+                'M',
+                0
+            ),
+(
+                4,
+                'G',
+                0
+            ),
+(
+                4,
+                'GG',
+                0
+            ),
+(
+                5,
+                'P',
+                0
+            ),
+(
+                5,
+                'M',
+                0
+            ),
+(
+                5,
+                'G',
+                0
+            ),
+(
+                5,
+                'GG',
+                0
+            ),
+(
+                6,
+                'P',
+                0
+            ),
+(
+                6,
+                'M',
+                0
+            ),
+(
+                6,
+                'G',
+                0
+            ),
+(
+                6,
+                'GG',
+                0
+            ),
+(
+                7,
+                'P',
+                0
+            ),
+(
+                7,
+                'M',
+                1
+            ),
+(
+                7,
+                'G',
+                0
+            ),
+(
+                7,
+                'GG',
+                0
+            ),
+(
+                8,
+                'P',
+                0
+            ),
+(
+                8,
+                'M',
+                0
+            ),
+(
+                8,
+                'G',
+                1
+            ),
+(
+                8,
+                'GG',
+                2
+            ),
+(
+                9,
+                'P',
+                0
+            ),
+(
+                9,
+                'M',
+                0
+            ),
+(
+                9,
+                'G',
+                1
+            ),
+(
+                9,
+                'GG',
+                0
+            ),
+(
+                10,
+                'P',
+                0
+            ),
+(
+                10,
+                'M',
+                0
+            ),
+(
+                10,
+                'G',
+                0
+            ),
+(
+                10,
+                'GG',
+                0
+            ),
+(
+                11,
+                'P',
+                0
+            ),
+(
+                11,
+                'M',
+                0
+            ),
+(
+                11,
+                'G',
+                0
+            ),
+(
+                11,
+                'GG',
+                0
+            ),
+(
+                12,
+                'P',
+                0
+            ),
+(
+                12,
+                'M',
+                0
+            ),
+(
+                12,
+                'G',
+                1
+            ),
+(
+                12,
+                'GG',
+                0
+            ),
+(
+                13,
+                'P',
+                0
+            ),
+(
+                13,
+                'M',
+                0
+            ),
+(
+                13,
+                'G',
+                1
+            ),
+(
+                13,
+                'GG',
+                0
+            ),
+(
+                14,
+                'P',
+                0
+            ),
+(
+                14,
+                'M',
+                0
+            ),
+(
+                14,
+                'G',
+                0
+            ),
+(
+                14,
+                'GG',
+                0
+            ),
+(
+                15,
+                'P',
+                0
+            ),
+(
+                15,
+                'M',
+                1
+            ),
+(
+                15,
+                'G',
+                1
+            ),
+(
+                15,
+                'GG',
+                0
+            ),
+(
+                16,
+                'P',
+                0
+            ),
+(
+                16,
+                'M',
+                0
+            ),
+(
+                16,
+                'G',
+                0
+            ),
+(
+                16,
+                'GG',
+                0
+            ),
+(
+                17,
+                'P',
+                0
+            ),
+(
+                17,
+                'M',
+                1
+            ),
+(
+                17,
+                'G',
+                0
+            ),
+(
+                17,
+                'GG',
+                1
+            ),
+(
+                18,
+                'P',
+                0
+            ),
+(
+                18,
+                'M',
+                0
+            ),
+(
+                18,
+                'G',
+                0
+            ),
+(
+                18,
+                'GG',
+                0
+            ),
+(
+                19,
+                'P',
+                0
+            ),
+(
+                19,
+                'M',
+                0
+            ),
+(
+                19,
+                'G',
+                0
+            ),
+(
+                19,
+                'GG',
+                0
+            ),
+(
+                20,
+                'P',
+                0
+            ),
+(
+                20,
+                'M',
+                0
+            ),
+(
+                20,
+                'G',
+                1
+            ),
+(
+                20,
+                'GG',
+                0
+            ),
+(
+                21,
+                'P',
+                0
+            ),
+(
+                21,
+                'M',
+                0
+            ),
+(
+                21,
+                'G',
+                0
+            ),
+(
+                21,
+                'GG',
+                0
+            ),
+(
+                22,
+                'P',
+                0
+            ),
+(
+                22,
+                'M',
+                0
+            ),
+(
+                22,
+                'G',
+                0
+            ),
+(
+                22,
+                'GG',
+                0
+            ),
+(
+                23,
+                'P',
+                0
+            ),
+(
+                23,
+                'M',
+                1
+            ),
+(
+                23,
+                'G',
+                0
+            ),
+(
+                23,
+                'GG',
+                0
+            ),
+(
+                24,
+                'P',
+                0
+            ),
+(
+                24,
+                'M',
+                0
+            ),
+(
+                24,
+                'G',
+                0
+            ),
+(
+                24,
+                'GG',
+                0
+            ),
+(
+                25,
+                'P',
+                0
+            ),
+(
+                25,
+                'M',
+                0
+            ),
+(
+                25,
+                'G',
+                0
+            ),
+(
+                25,
+                'GG',
+                0
+            ),
+(
+                26,
+                'P',
+                0
+            ),
+(
+                26,
+                'M',
+                1
+            ),
+(
+                26,
+                'G',
+                1
+            ),
+(
+                26,
+                'GG',
+                0
+            ),
+(
+                27,
+                'P',
+                1
+            ),
+(
+                27,
+                'M',
+                2
+            ),
+(
+                27,
+                'G',
+                4
+            ),
+(
+                27,
+                'GG',
+                3
+            ),
+(
+                28,
+                'P',
+                0
+            ),
+(
+                28,
+                'M',
+                0
+            ),
+(
+                28,
+                'G',
+                0
+            ),
+(
+                28,
+                'GG',
+                0
+            ),
+(
+                29,
+                'P',
+                0
+            ),
+(
+                29,
+                'M',
+                0
+            ),
+(
+                29,
+                'G',
+                0
+            ),
+(
+                29,
+                'GG',
+                0
+            ),
+(
+                30,
+                'P',
+                0
+            ),
+(
+                30,
+                'M',
+                0
+            ),
+(
+                30,
+                'G',
+                0
+            ),
+(
+                30,
+                'GG',
+                0
+            ),
+(
+                31,
+                'P',
+                0
+            ),
+(
+                31,
+                'M',
+                0
+            ),
+(
+                31,
+                'G',
+                0
+            ),
+(
+                31,
+                'GG',
+                0
+            ),
+(
+                32,
+                'P',
+                0
+            ),
+(
+                32,
+                'M',
+                0
+            ),
+(
+                32,
+                'G',
+                0
+            ),
+(
+                32,
+                'GG',
+                0
+            ),
+(
+                33,
+                'P',
+                0
+            ),
+(
+                33,
+                'M',
+                0
+            ),
+(
+                33,
+                'G',
+                1
+            ),
+(
+                33,
+                'GG',
+                0
+            ),
+(
+                34,
+                'P',
+                0
+            ),
+(
+                34,
+                'M',
+                0
+            ),
+(
+                34,
+                'G',
+                0
+            ),
+(
+                34,
+                'GG',
+                0
+            ),
+(
+                35,
+                'P',
+                0
+            ),
+(
+                35,
+                'M',
+                0
+            ),
+(
+                35,
+                'G',
+                0
+            ),
+(
+                35,
+                'GG',
+                0
+            ),
+(
+                36,
+                'P',
+                0
+            ),
+(
+                36,
+                'M',
+                0
+            ),
+(
+                36,
+                'G',
+                0
+            ),
+(
+                36,
+                'GG',
+                0
+            ),
+(
+                37,
+                'P',
+                0
+            ),
+(
+                37,
+                'M',
+                0
+            ),
+(
+                37,
+                'G',
+                0
+            ),
+(
+                37,
+                'GG',
+                0
+            ),
+(
+                38,
+                'P',
+                0
+            ),
+(
+                38,
+                'M',
+                0
+            ),
+(
+                38,
+                'G',
+                0
+            ),
+(
+                38,
+                'GG',
+                0
+            ),
+(
+                39,
+                'P',
+                0
+            ),
+(
+                39,
+                'M',
+                0
+            ),
+(
+                39,
+                'G',
+                1
+            ),
+(
+                39,
+                'GG',
+                1
+            ),
+(
+                40,
+                'P',
+                0
+            ),
+(
+                40,
+                'M',
+                0
+            ),
+(
+                40,
+                'G',
+                0
+            ),
+(
+                40,
+                'GG',
+                0
+            ),
+(
+                41,
+                'P',
+                0
+            ),
+(
+                41,
+                'M',
+                0
+            ),
+(
+                41,
+                'G',
+                0
+            ),
+(
+                41,
+                'GG',
+                0
+            ),
+(
+                42,
+                'P',
+                0
+            ),
+(
+                42,
+                'M',
+                0
+            ),
+(
+                42,
+                'G',
+                0
+            ),
+(
+                42,
+                'GG',
+                0
+            ),
+(
+                43,
+                'P',
+                0
+            ),
+(
+                43,
+                'M',
+                0
+            ),
+(
+                43,
+                'G',
+                0
+            ),
+(
+                43,
+                'GG',
+                0
+            ),
+(
+                44,
+                'P',
+                0
+            ),
+(
+                44,
+                'M',
+                0
+            ),
+(
+                44,
+                'G',
+                1
+            ),
+(
+                44,
+                'GG',
+                0
+            ),
+(
+                45,
+                'P',
+                0
+            ),
+(
+                45,
+                'M',
+                0
+            ),
+(
+                45,
+                'G',
+                1
+            ),
+(
+                45,
+                'GG',
+                0
+            ),
+(
+                46,
+                'P',
+                0
+            ),
+(
+                46,
+                'M',
+                0
+            ),
+(
+                46,
+                'G',
+                1
+            ),
+(
+                46,
+                'GG',
+                1
+            ),
+(
+                47,
+                'P',
+                0
+            ),
+(
+                47,
+                'M',
+                1
+            ),
+(
+                47,
+                'G',
+                1
+            ),
+(
+                47,
+                'GG',
+                0
+            ),
+(
+                48,
+                'P',
+                0
+            ),
+(
+                48,
+                'M',
+                0
+            ),
+(
+                48,
+                'G',
+                1
+            ),
+(
+                48,
+                'GG',
+                0
+            ),
+(
+                49,
+                'P',
+                0
+            ),
+(
+                49,
+                'M',
+                0
+            ),
+(
+                49,
+                'G',
+                1
+            ),
+(
+                49,
+                'GG',
+                0
+            ),
+(
+                50,
+                'P',
+                0
+            ),
+(
+                50,
+                'M',
+                0
+            ),
+(
+                50,
+                'G',
+                0
+            ),
+(
+                50,
+                'GG',
+                0
+            ),
+(
+                51,
+                'P',
+                0
+            ),
+(
+                51,
+                'M',
+                0
+            ),
+(
+                51,
+                'G',
+                1
+            ),
+(
+                51,
+                'GG',
+                0
+            ),
+(
+                52,
+                'P',
+                0
+            ),
+(
+                52,
+                'M',
+                0
+            ),
+(
+                52,
+                'G',
+                1
+            ),
+(
+                52,
+                'GG',
+                1
+            ),
+(
+                53,
+                'P',
+                0
+            ),
+(
+                53,
+                'M',
+                0
+            ),
+(
+                53,
+                'G',
+                0
+            ),
+(
+                53,
+                'GG',
+                0
+            ),
+(
+                54,
+                'P',
+                0
+            ),
+(
+                54,
+                'M',
+                0
+            ),
+(
+                54,
+                'G',
+                0
+            ),
+(
+                54,
+                'GG',
+                0
+            ),
+(
+                55,
+                'P',
+                0
+            ),
+(
+                55,
+                'M',
+                0
+            ),
+(
+                55,
+                'G',
+                0
+            ),
+(
+                55,
+                'GG',
+                0
+            ),
+(
+                56,
+                'P',
+                0
+            ),
+(
+                56,
+                'M',
+                1
+            ),
+(
+                56,
+                'G',
+                1
+            ),
+(
+                56,
+                'GG',
+                0
+            ),
+(
+                57,
+                'P',
+                0
+            ),
+(
+                57,
+                'M',
+                0
+            ),
+(
+                57,
+                'G',
+                1
+            ),
+(
+                57,
+                'GG',
+                0
+            ),
+(
+                58,
+                'P',
+                0
+            ),
+(
+                58,
+                'M',
+                0
+            ),
+(
+                58,
+                'G',
+                0
+            ),
+(
+                58,
+                'GG',
+                0
+            ),
+(
+                59,
+                'P',
+                0
+            ),
+(
+                59,
+                'M',
+                1
+            ),
+(
+                59,
+                'G',
+                0
+            ),
+(
+                59,
+                'GG',
+                0
+            ),
+(
+                60,
+                'P',
+                0
+            ),
+(
+                60,
+                'M',
+                0
+            ),
+(
+                60,
+                'G',
+                1
+            ),
+(
+                60,
+                'GG',
+                0
+            ),
+(
+                61,
+                'P',
+                3
+            ),
+(
+                61,
+                'M',
+                3
+            ),
+(
+                61,
+                'G',
+                2
+            ),
+(
+                61,
+                'GG',
+                0
+            ),
+(
+                62,
+                'P',
+                0
+            ),
+(
+                62,
+                'M',
+                1
+            ),
+(
+                62,
+                'G',
+                1
+            ),
+(
+                62,
+                'GG',
+                0
+            ),
+(
+                63,
+                'P',
+                0
+            ),
+(
+                63,
+                'M',
+                0
+            ),
+(
+                63,
+                'G',
+                1
+            ),
+(
+                63,
+                'GG',
+                0
+            ),
+(
+                64,
+                'P',
+                0
+            ),
+(
+                64,
+                'M',
+                0
+            ),
+(
+                64,
+                'G',
+                1
+            ),
+(
+                64,
+                'GG',
+                0
+            ),
+(
+                65,
+                'P',
+                0
+            ),
+(
+                65,
+                'M',
+                1
+            ),
+(
+                65,
+                'G',
+                1
+            ),
+(
+                65,
+                'GG',
+                0
+            ),
+(
+                66,
+                'P',
+                0
+            ),
+(
+                66,
+                'M',
+                0
+            ),
+(
+                66,
+                'G',
+                0
+            ),
+(
+                66,
+                'GG',
+                0
+            ),
+(
+                67,
+                'P',
+                0
+            ),
+(
+                67,
+                'M',
+                1
+            ),
+(
+                67,
+                'G',
+                1
+            ),
+(
+                67,
+                'GG',
+                0
+            ),
+(
+                68,
+                'P',
+                0
+            ),
+(
+                68,
+                'M',
+                1
+            ),
+(
+                68,
+                'G',
+                0
+            ),
+(
+                68,
+                'GG',
+                0
+            ),
+(
+                69,
+                'P',
+                0
+            ),
+(
+                69,
+                'M',
+                0
+            ),
+(
+                69,
+                'G',
+                1
+            ),
+(
+                69,
+                'GG',
+                0
+            ),
+(
+                70,
+                'P',
+                0
+            ),
+(
+                70,
+                'M',
+                0
+            ),
+(
+                70,
+                'G',
+                1
+            ),
+(
+                70,
+                'GG',
+                1
+            ),
+(
+                71,
+                'P',
+                0
+            ),
+(
+                71,
+                'M',
+                0
+            ),
+(
+                71,
+                'G',
+                1
+            ),
+(
+                71,
+                'GG',
+                0
+            ),
+(
+                72,
+                'P',
+                0
+            ),
+(
+                72,
+                'M',
+                1
+            ),
+(
+                72,
+                'G',
+                0
+            ),
+(
+                72,
+                'GG',
+                0
+            ),
+(
+                73,
+                'P',
+                0
+            ),
+(
+                73,
+                'M',
+                1
+            ),
+(
+                73,
+                'G',
+                1
+            ),
+(
+                73,
+                'GG',
+                0
+            ),
+(
+                74,
+                'P',
+                0
+            ),
+(
+                74,
+                'M',
+                0
+            ),
+(
+                74,
+                'G',
+                2
+            ),
+(
+                74,
+                'GG',
+                0
+            ),
+(
+                75,
+                'P',
+                0
+            ),
+(
+                75,
+                'M',
+                1
+            ),
+(
+                75,
+                'G',
+                1
+            ),
+(
+                75,
+                'GG',
+                0
+            )
+ON CONFLICT (product_id, size) DO NOTHING;
+
+
+-- ============================================
+-- CORRIGE SEQUÊNCIA DO ID
+-- ============================================
+
+SELECT setval(
+    pg_get_serial_sequence('products', 'id'),
+    COALESCE((SELECT MAX(id) FROM products), 1)
+);
+
+COMMIT;

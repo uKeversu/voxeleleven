@@ -1,10 +1,16 @@
+// src/app/catalogo/page.tsx
+
 import { Suspense } from "react";
 import CatalogoClient from "./CatalogoClient";
 
-export default function CatalogoPage() {
+import { getProducts } from "@/lib/products";
+
+export default async function CatalogoPage() {
+    const products = await getProducts();
+
     return (
         <Suspense fallback={<div>Carregando...</div>}>
-            <CatalogoClient />
+            <CatalogoClient products={products} />
         </Suspense>
     );
 }

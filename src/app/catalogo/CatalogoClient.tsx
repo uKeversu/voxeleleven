@@ -1,3 +1,5 @@
+// src/app/catalogo/CatalogoClient.tsx
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -18,10 +20,15 @@ import CloseIcon from "@mui/icons-material/Close";
 import ProductCard from "@/components/ProductCard";
 import FiltersSidebar from "@/components/FiltersSidebar";
 
-import { products } from "@/data/products";
+import { Product } from "@/types/product";
 
-export default function CatalogoClient() {
+interface CatalogoClientProps {
+    products: Product[];
+}
 
+export default function CatalogoClient({
+    products,
+}: CatalogoClientProps) {
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -52,81 +59,119 @@ export default function CatalogoClient() {
         time: string,
         featured: boolean
     ) => {
-        const params = new URLSearchParams(searchParams.toString());
+        const params = new URLSearchParams(
+            searchParams.toString()
+        );
 
-        if (categoria !== "Todos")
+        if (categoria !== "Todos") {
             params.set("categoria", categoria);
-        else
+        } else {
             params.delete("categoria");
+        }
 
-        if (time !== "Todos")
+        if (time !== "Todos") {
             params.set("time", time);
-        else
+        } else {
             params.delete("time");
+        }
 
-        if (featured)
+        if (featured) {
             params.set("featured", "true");
-        else
+        } else {
             params.delete("featured");
+        }
 
-        router.replace(`/catalogo?${params.toString()}`);
+        router.replace(
+            `/catalogo?${params.toString()}`
+        );
     };
 
     const filteredProducts = useMemo(() => {
         let filtered = [...products];
 
+        /*
+         * BUSCA
+         */
         filtered = filtered.filter(
             (product) =>
                 product.name
                     .toLowerCase()
-                    .includes(search.toLowerCase()) ||
+                    .includes(
+                        search.toLowerCase()
+                    ) ||
                 product.team
                     .toLowerCase()
-                    .includes(search.toLowerCase())
+                    .includes(
+                        search.toLowerCase()
+                    )
         );
 
+        /*
+         * CATEGORIA
+         */
         if (selectedCategory !== "Todos") {
             filtered = filtered.filter(
                 (product) =>
-                    product.category === selectedCategory
+                    product.category ===
+                    selectedCategory
             );
         }
 
+        /*
+         * TIME
+         */
         if (selectedTeam !== "Todos") {
             filtered = filtered.filter(
                 (product) =>
-                    product.team === selectedTeam
+                    product.team ===
+                    selectedTeam
             );
         }
 
+        /*
+         * PREÇO
+         */
         filtered = filtered.filter(
             (product) =>
-                product.price >= priceRange[0] &&
-                product.price <= priceRange[1]
+                product.price >=
+                priceRange[0] &&
+                product.price <=
+                priceRange[1]
         );
 
+        /*
+         * DESTAQUES
+         */
         if (onlyFeatured) {
             filtered = filtered.filter(
-                (product) => product.featured
+                (product) =>
+                    product.featured
             );
         }
 
+        /*
+         * ORDENAÇÃO
+         */
         switch (sortBy) {
             case "menor-preco":
                 filtered.sort(
-                    (a, b) => a.price - b.price
+                    (a, b) =>
+                        a.price - b.price
                 );
                 break;
 
             case "maior-preco":
                 filtered.sort(
-                    (a, b) => b.price - a.price
+                    (a, b) =>
+                        b.price - a.price
                 );
                 break;
 
             case "az":
                 filtered.sort((a, b) =>
-                    a.name.localeCompare(b.name)
+                    a.name.localeCompare(
+                        b.name
+                    )
                 );
                 break;
 
@@ -134,26 +179,40 @@ export default function CatalogoClient() {
                 break;
         }
 
-
-        // Sempre estoque zero no final
+        /*
+         * PRODUTOS SEM ESTOQUE SEMPRE NO FINAL
+         */
         filtered.sort((a, b) => {
+            const estoqueA =
+                Object.values(a.stock).some(
+                    (qtd) => qtd > 0
+                );
 
-            const estoqueA = Object.values(a.stock)
-                .some((qtd) => qtd > 0);
+            const estoqueB =
+                Object.values(b.stock).some(
+                    (qtd) => qtd > 0
+                );
 
-            const estoqueB = Object.values(b.stock)
-                .some((qtd) => qtd > 0);
+            if (
+                estoqueA &&
+                !estoqueB
+            ) {
+                return -1;
+            }
 
-            if (estoqueA && !estoqueB) return -1;
-
-            if (!estoqueA && estoqueB) return 1;
+            if (
+                !estoqueA &&
+                estoqueB
+            ) {
+                return 1;
+            }
 
             return 0;
         });
 
-
         return filtered;
     }, [
+        products,
         search,
         selectedCategory,
         selectedTeam,
@@ -166,7 +225,8 @@ export default function CatalogoClient() {
         <Box
             sx={{
                 minHeight: "100vh",
-                backgroundColor: "background.default",
+                backgroundColor:
+                    "background.default",
                 px: {
                     xs: 2,
                     md: 6,
@@ -192,7 +252,8 @@ export default function CatalogoClient() {
 
                 <Typography
                     sx={{
-                        color: "text.secondary",
+                        color:
+                            "text.secondary",
                         maxWidth: 700,
                         fontSize: {
                             xs: "1rem",
@@ -200,8 +261,8 @@ export default function CatalogoClient() {
                         },
                     }}
                 >
-                    Explore toda a coleção premium da
-                    Voxel Eleven.
+                    Explore toda a coleção
+                    premium da Voxel Eleven.
                 </Typography>
             </Box>
 
@@ -209,7 +270,9 @@ export default function CatalogoClient() {
                 startIcon={<TuneIcon />}
                 variant="outlined"
                 onClick={() =>
-                    setMobileFiltersOpen(true)
+                    setMobileFiltersOpen(
+                        true
+                    )
                 }
                 sx={{
                     display: {
@@ -229,7 +292,8 @@ export default function CatalogoClient() {
                 container
                 spacing={4}
                 sx={{
-                    alignItems: "flex-start",
+                    alignItems:
+                        "flex-start",
                 }}
             >
                 <Grid
@@ -246,22 +310,22 @@ export default function CatalogoClient() {
                 >
                     <Box
                         sx={{
-                            position: "sticky",
+                            position:
+                                "sticky",
                             top: 100,
                             display: "flex",
-                            flexDirection: "column",
+                            flexDirection:
+                                "column",
                             gap: 3,
                         }}
                     >
                         <FiltersSidebar
-                            /*
-                            search={search}
-                             setSearch={setSearch}
-                            */
                             selectedCategory={
                                 selectedCategory
                             }
-                            setSelectedCategory={(value) =>
+                            setSelectedCategory={(
+                                value
+                            ) =>
                                 updateFiltersInUrl(
                                     value,
                                     selectedTeam,
@@ -271,7 +335,9 @@ export default function CatalogoClient() {
                             selectedTeam={
                                 selectedTeam
                             }
-                            setSelectedTeam={(value) =>
+                            setSelectedTeam={(
+                                value
+                            ) =>
                                 updateFiltersInUrl(
                                     selectedCategory,
                                     value,
@@ -279,15 +345,21 @@ export default function CatalogoClient() {
                                 )
                             }
                             sortBy={sortBy}
-                            setSortBy={setSortBy}
-                            priceRange={priceRange}
+                            setSortBy={
+                                setSortBy
+                            }
+                            priceRange={
+                                priceRange
+                            }
                             setPriceRange={
                                 setPriceRange
                             }
                             onlyFeatured={
                                 onlyFeatured
                             }
-                            setOnlyFeatured={(value) =>
+                            setOnlyFeatured={(
+                                value
+                            ) =>
                                 updateFiltersInUrl(
                                     selectedCategory,
                                     selectedTeam,
@@ -310,8 +382,10 @@ export default function CatalogoClient() {
                             display: "flex",
                             justifyContent:
                                 "space-between",
-                            alignItems: "center",
-                            flexWrap: "wrap",
+                            alignItems:
+                                "center",
+                            flexWrap:
+                                "wrap",
                             gap: 2,
                         }}
                     >
@@ -336,7 +410,9 @@ export default function CatalogoClient() {
                         {filteredProducts.map(
                             (product) => (
                                 <Grid
-                                    key={product.id}
+                                    key={
+                                        product.id
+                                    }
                                     size={{
                                         xs: 12,
                                         sm: 6,
@@ -357,16 +433,21 @@ export default function CatalogoClient() {
 
             <Drawer
                 anchor="left"
-                open={mobileFiltersOpen}
+                open={
+                    mobileFiltersOpen
+                }
                 onClose={() =>
-                    setMobileFiltersOpen(false)
+                    setMobileFiltersOpen(
+                        false
+                    )
                 }
                 slotProps={{
                     paper: {
                         sx: {
                             width: 320,
                             p: 3,
-                            background: "#050505",
+                            background:
+                                "#050505",
                         },
                     },
                 }}
@@ -374,7 +455,8 @@ export default function CatalogoClient() {
                 <Box
                     sx={{
                         display: "flex",
-                        alignItems: "center",
+                        alignItems:
+                            "center",
                         justifyContent:
                             "space-between",
                         mb: 4,
@@ -401,22 +483,24 @@ export default function CatalogoClient() {
                 </Box>
 
                 <FiltersSidebar
-                    /*
-                    search={search}
-                    setSearch={setSearch}
-                    */
                     selectedCategory={
                         selectedCategory
                     }
-                    setSelectedCategory={(value) =>
+                    setSelectedCategory={(
+                        value
+                    ) =>
                         updateFiltersInUrl(
                             value,
                             selectedTeam,
                             onlyFeatured
                         )
                     }
-                    selectedTeam={selectedTeam}
-                    setSelectedTeam={(value) =>
+                    selectedTeam={
+                        selectedTeam
+                    }
+                    setSelectedTeam={(
+                        value
+                    ) =>
                         updateFiltersInUrl(
                             selectedCategory,
                             value,
@@ -425,10 +509,18 @@ export default function CatalogoClient() {
                     }
                     sortBy={sortBy}
                     setSortBy={setSortBy}
-                    priceRange={priceRange}
-                    setPriceRange={setPriceRange}
-                    onlyFeatured={onlyFeatured}
-                    setOnlyFeatured={(value) =>
+                    priceRange={
+                        priceRange
+                    }
+                    setPriceRange={
+                        setPriceRange
+                    }
+                    onlyFeatured={
+                        onlyFeatured
+                    }
+                    setOnlyFeatured={(
+                        value
+                    ) =>
                         updateFiltersInUrl(
                             selectedCategory,
                             selectedTeam,

@@ -1,21 +1,32 @@
-import TopBar from "@/components/TopBar";
-import Navbar from "@/components/Navbar";
+// src/app/page.tsx
+
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import BrandSection from "@/components/BrandSection";
 import PromoCarrousel from "@/components/PromoCarrousel";
 
-export default function Home() {
+import { getProducts } from "@/lib/products";
+
+export default async function Home() {
+
+  const products = await getProducts();
+
   return (
     <>
-      <TopBar />
-      <Navbar />
       <Hero />
-      <PromoCarrousel />
+
+      <PromoCarrousel
+        products={products}
+      />
+
       <Categories />
+
       <BrandSection />
-      <FeaturedProducts />
+
+      <FeaturedProducts
+        products={products}
+      />
     </>
   );
 }

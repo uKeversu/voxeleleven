@@ -5,10 +5,13 @@ import type { Metadata } from "next";
 import TopBar from "@/components/TopBar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
 import { CartProvider } from "@/context/CartContext";
 import { SnackbarProvider } from "@/context/SnackbarContext";
 
 import ThemeRegistry from "@/providers/ThemeRegistry";
+
+import { getProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Voxel Eleven",
@@ -20,26 +23,38 @@ type Props = {
   children: React.ReactNode;
 };
 
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Props) {
+
+  const products = await getProducts();
+
   return (
     <html lang="pt-BR">
       <body>
+
         <ThemeRegistry>
-          <CartProvider>
-            <SnackbarProvider>
+
+          <SnackbarProvider>
+
+            <CartProvider>
+
               <TopBar />
-              <Navbar />
+
+              <Navbar
+                products={products}
+              />
 
               {children}
 
               <Footer />
-            </SnackbarProvider>
-          </CartProvider>
+
+            </CartProvider>
+
+          </SnackbarProvider>
+
         </ThemeRegistry>
+
       </body>
     </html>
   );

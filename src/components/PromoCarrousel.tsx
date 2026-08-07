@@ -16,7 +16,7 @@ import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { useRouter } from "next/navigation";
 
 import { useCart } from "@/context/CartContext";
-import { products } from "@/data/products";
+import { Product } from "@/types/product";
 
 const slides = [
     {
@@ -56,7 +56,14 @@ const slides = [
     },
 ];
 
-export default function PromoCarousel() {
+interface PromoCarouselProps {
+    products: Product[];
+}
+
+export default function PromoCarousel({
+    products,
+}: PromoCarouselProps) {
+
     const router = useRouter();
     const { addToCart } = useCart();
 
@@ -86,9 +93,13 @@ export default function PromoCarousel() {
 
             if (!tamanhoDisponivel) return;
 
-            addToCart(brasilHome, tamanhoDisponivel);
+            addToCart(
+                brasilHome,
+                tamanhoDisponivel
+            );
 
             router.push("/carrinho");
+
             return;
         }
 

@@ -1,3 +1,5 @@
+// src/components/SearchBox.tsx
+
 "use client";
 
 import {
@@ -8,46 +10,44 @@ import {
     Typography,
 } from "@mui/material";
 
-import { products } from "@/data/products";
 import { useMemo } from "react";
 
+import { Product } from "@/types/product";
 
 interface SearchBoxProps {
-
     search: string;
 
     setSearch: (
         value: string
     ) => void;
 
+    products: Product[];
+
     onSelect: (
-        product: any
+        product: Product
     ) => void;
 
     onEnter: () => void;
-
 }
 
 export default function SearchBox({
     search,
     setSearch,
+    products,
     onSelect,
     onEnter,
 }: SearchBoxProps) {
-
 
     const options = useMemo(() => {
 
         const value =
             search.trim().toLowerCase();
 
-
         if (!value)
             return [];
 
-
         return products
-            .filter(product => {
+            .filter((product) => {
 
                 const text = [
                     product.name,
@@ -55,50 +55,38 @@ export default function SearchBox({
                     product.category,
                     product.description,
                     product.season,
-                    product.badge
+                    product.badge,
                 ]
                     .filter(Boolean)
                     .join(" ")
                     .toLowerCase();
-
 
                 return text.includes(value);
 
             })
             .slice(0, 8);
 
-
-    }, [search]);
-
-
+    }, [search, products]);
 
     return (
-
         <Autocomplete
-
             freeSolo
-
             options={options}
-
             filterOptions={(x) => x}
-
             inputValue={search}
 
             onInputChange={(_, value) => {
                 setSearch(value);
             }}
 
-
             getOptionLabel={(option) => {
 
-                if (typeof option === "string")
+                if (typeof option === "string") {
                     return option;
+                }
 
                 return option.name;
-
             }}
-
-
 
             onChange={(_, value) => {
 
@@ -108,9 +96,7 @@ export default function SearchBox({
                 ) {
                     onSelect(value);
                 }
-
             }}
-
 
             renderOption={(props, option) => (
 
@@ -120,7 +106,7 @@ export default function SearchBox({
                     sx={{
                         display: "flex",
                         gap: 2,
-                        py: 1.5
+                        py: 1.5,
                     }}
                 >
 
@@ -129,17 +115,19 @@ export default function SearchBox({
                         variant="rounded"
                         sx={{
                             width: 50,
-                            height: 50
+                            height: 50,
                         }}
                     />
 
-
                     <Box sx={{ flex: 1 }}>
 
-                        <Typography sx={{ fontWeight: 700 }}>
+                        <Typography
+                            sx={{
+                                fontWeight: 700,
+                            }}
+                        >
                             {option.name}
                         </Typography>
-
 
                         <Typography
                             variant="body2"
@@ -148,54 +136,66 @@ export default function SearchBox({
                             {option.team}
                         </Typography>
 
-
                     </Box>
 
-                    <Typography sx={{ color: "primary.main", fontWeight: 800 }}
+                    <Typography
+                        sx={{
+                            color: "primary.main",
+                            fontWeight: 800,
+                        }}
                     >
                         R$ {option.price.toFixed(2)}
                     </Typography>
 
-
                 </Box>
-
             )}
 
-
-
             renderInput={(params) => (
+
                 <TextField
                     {...params}
                     autoFocus
                     placeholder="Buscar camisa, time ou jogador..."
+
                     onKeyDown={(e) => {
 
-                        if (e.key === "Enter")
+                        if (e.key === "Enter") {
                             onEnter();
+                        }
                     }}
                 />
             )}
 
             sx={{
                 width: "100%",
+
                 "& .MuiOutlinedInput-root": {
                     height: 54,
                     borderRadius: 999,
-                    background: "rgba(255,255,255,.03)",
+                    background:
+                        "rgba(255,255,255,.03)",
                     transition: ".25s",
+
                     "& fieldset": {
-                        borderColor: "rgba(255,255,255,.06)"
+                        borderColor:
+                            "rgba(255,255,255,.06)",
                     },
+
                     "&:hover fieldset": {
-                        borderColor: "rgba(0,255,64,.35)"
+                        borderColor:
+                            "rgba(0,255,64,.35)",
                     },
+
                     "&.Mui-focused": {
-                        boxShadow: "0 0 20px rgba(0,255,64,.18)",
+                        boxShadow:
+                            "0 0 20px rgba(0,255,64,.18)",
+
                         "& fieldset": {
-                            borderColor: "#00ff40"
-                        }
-                    }
-                }
+                            borderColor:
+                                "#00ff40",
+                        },
+                    },
+                },
             }}
         />
     );

@@ -1,10 +1,18 @@
+// src/components/FeaturedProducts.tsx
+
 "use client";
 
 import { Box, Typography, Grid } from "@mui/material";
 import ProductCard from "./ProductCard";
-import { products } from "@/data/products";
+import { Product } from "@/types/product";
 
-export default function FeaturedProducts() {
+interface FeaturedProductsProps {
+    products: Product[];
+}
+
+export default function FeaturedProducts({
+    products,
+}: FeaturedProductsProps) {
     return (
         <Box sx={{ py: 10, px: { xs: 3, md: 10 } }}>
             <Typography
@@ -21,7 +29,10 @@ export default function FeaturedProducts() {
                 {products
                     .filter((p) => p.featured)
                     .map((product) => (
-                        <Grid key={product.id} size={{ xs: 12, sm: 6, md: 4 }}>
+                        <Grid
+                            key={product.id}
+                            size={{ xs: 12, sm: 6, md: 4 }}
+                        >
                             <ProductCard product={product} />
                         </Grid>
                     ))}

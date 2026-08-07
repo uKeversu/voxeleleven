@@ -1,3 +1,5 @@
+// src/components/NavBar.tsx
+
 "use client";
 
 import {
@@ -33,8 +35,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
-
-import { products } from "@/data/products";
+import { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
 import CartDrawer from "@/components/CartDrawer";
 import SearchBox from "@/components/SearchBox";
@@ -60,9 +61,12 @@ const navItems = [
     },
 ];
 
-
-
-export default function Navbar() {
+interface NavbarProps {
+    products: Product[];
+}
+export default function Navbar({
+    products,
+}: NavbarProps) {
 
     const router = useRouter();
 
@@ -133,7 +137,7 @@ export default function Navbar() {
 
     }, []);
 
-    const handleSelectProduct = (product: any) => {
+    const handleSelectProduct = (product: Product) => {
         setSearch("");
 
         setSearchOpen(false);
@@ -289,6 +293,7 @@ export default function Navbar() {
                         <SearchBox
                             search={search}
                             setSearch={setSearch}
+                            products={products}
                             onSelect={handleSelectProduct}
                             onEnter={handleSearch}
                         />
@@ -429,6 +434,7 @@ export default function Navbar() {
                             <SearchBox
                                 search={search}
                                 setSearch={setSearch}
+                                products={products}
                                 onSelect={handleSelectProduct}
                                 onEnter={() => {
                                     handleSearch();
