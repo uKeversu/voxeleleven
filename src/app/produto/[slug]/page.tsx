@@ -382,7 +382,7 @@ function ProductContent({
                                     mb: 0.5,
                                 }}
                             >
-                                R$ 149,90
+                                R$ 179,90
                             </Typography>
 
                             <Typography

@@ -221,7 +221,7 @@ export const products: Product[] = [
         description:
             "Modelo premium Vasco da Gama 2026",
         featured: false,
-        stock: estoque(0, 0, 0, 0)
+        stock: estoque(0, 0, 1, 0)
     },
 
     {
