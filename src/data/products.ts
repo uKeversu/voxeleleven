@@ -114,18 +114,18 @@ export const products: Product[] = [
 
     {
         id: 7,
-        name: "Manchester City - Away 25/26",
+        name: "Tailandesa 1.1 - Manchester City - Away 25/26",
         slug: "manchester-city-preto",
         team: "Manchester City",
         category: "Europeus",
         season: "26",
-        price: 89.90,
+        price: 149.90,
         badge: "LIMITED",
         image: "/manchestercity-preto.jpeg",
         description:
             "Modelo premium alternativo do Manchester City 2025",
         featured: false,
-        stock: estoque(0, 0, 0, 0)
+        stock: estoque(0, 1, 0, 0)
     },
 
     {
@@ -253,7 +253,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Vasco da Gama 2026",
         featured: false,
-        stock: estoque(0, 0, 0, 0)
+        stock: estoque(0, 1, 1, 0)
     },
 
     {
@@ -274,18 +274,18 @@ export const products: Product[] = [
 
     {
         id: 17,
-        name: "Fluminense - Away 25/26",
-        slug: "fluminense-away-25-26",
+        name: "Fluminense - Away 26/27",
+        slug: "fluminense-away-26-27",
         team: "Fluminense",
         category: "Brasileiros",
-        season: "25",
+        season: "26",
         price: 89.90,
-        badge: "LIMITED",
-        image: "/fluminense-away-25-26.jpg",
+        badge: "NEW",
+        image: "/fluminense-away-26-27.png",
         description:
-            "Modelo premium alternativo do Fluminense 2025",
+            "Modelo premium visitante do Fluminense 2026",
         featured: false,
-        stock: estoque(0, 0, 0, 0)
+        stock: estoque(0, 1, 0, 1)
     },
 
     {
@@ -701,7 +701,7 @@ export const products: Product[] = [
         description:
             "Camisa do Ajax 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        stock: estoque(0, 1, 0, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
@@ -765,7 +765,7 @@ export const products: Product[] = [
         description:
             "Camisa do Santos 26/27 com design moderno, tecido respirável e acabamento premium.",
         featured: false,
-        stock: estoque(0, 0, 1, 0)
+        stock: estoque(0, 1, 1, 0)
     },
 
     {
@@ -1053,7 +1053,7 @@ export const products: Product[] = [
         description:
             "Modelo tailandês do clube inglês Arsenal 2025",
         featured: false,
-        stock: estoque(0, 0, 0, 0)
+        stock: estoque(0, 1, 1, 0)
     },
 
     {
@@ -1102,6 +1102,118 @@ export const products: Product[] = [
             "Modelo tailandês da campeã mundial Espanha modelo 2026",
         featured: true,
         stock: estoque(0, 1, 0, 0)
+    },
+
+    {
+        id: 69,
+        name: "Napoli - Away 25/26",
+        slug: "napoli-away-25-26",
+        team: "Napoli",
+        category: "Europeus",
+        season: "25/26",
+        price: 89.90,
+        badge: "LIMITED",
+        image: "/napoli-away-25-26.png",
+        description:
+            "Modelo premium de visitante do Napoli 2025",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 70,
+        name: "Corinthians - Retro 1990",
+        slug: "corinthians-retro-1990",
+        team: "Corinthians",
+        category: "Retrô",
+        season: "1990",
+        price: 99.90,
+        badge: "RETRO",
+        image: "/corinthians-retro-1990.png",
+        description:
+            "Modelo premium retrô do Corinthians 1990",
+        featured: false,
+        stock: estoque(0, 0, 1, 1)
+    },
+
+    {
+        id: 71,
+        name: "Flamengo - Retro 95/96",
+        slug: "flamengo-retro-95-96",
+        team: "Flamengo",
+        category: "Retrô",
+        season: "95/96",
+        price: 99.90,
+        badge: "RETRO",
+        image: "/flamengo-retro-95-96.png",
+        description:
+            "Modelo premium retrô do Flamengo da temporada 95/96",
+        featured: false,
+        stock: estoque(0, 0, 1, 0)
+    },
+
+    {
+        id: 72,
+        name: "Tailandesa 1.1 - Real Madrid - Away 25/26",
+        slug: "tailandesa-real-madrid-away-25-26",
+        team: "Real Madrid",
+        category: "Europeus",
+        season: "25/26",
+        price: 149.90,
+        badge: "LIMITED",
+        image: "/tailandesa-real-madrid-away-25-26.png",
+        description:
+            "Modelo tailandês do clube espanhol Real Madrid 2025",
+        featured: false,
+        stock: estoque(0, 1, 0, 0)
+    },
+
+    {
+        id: 73,
+        name: "Tailandesa 1.1 - Arsenal - Away 25/26",
+        slug: "tailandesa-arsenal-away-25-26",
+        team: "Arsenal",
+        category: "Europeus",
+        season: "25/26",
+        price: 149.90,
+        badge: "LIMITED",
+        image: "/tailandesa-arsenal-away-25-26.png",
+        description:
+            "Modelo tailandês do clube inglês Arsenal 2025",
+        featured: false,
+        stock: estoque(0, 1, 1, 0)
+    },
+
+    {
+        id: 74,
+        name: "Tailandesa 1.1 - Ajax - Away 25/26",
+        slug: "tailandesa-ajax-away-25-26",
+        team: "Ajax",
+        category: "Europeus",
+        season: "25/26",
+        price: 149.90,
+        badge: "LIMITED",
+        image: "/tailandesa-ajax-away-25-26.png",
+        description:
+            "Modelo tailandês alternativo do clube holandês Ajax 2025",
+        featured: false,
+        stock: estoque(0, 0, 2, 0)
+    },
+
+    {
+        id: 75,
+        name: "Tailandesa 1.1 - Corinthians - Home 25/26",
+        slug: "tailandesa-corinthians-home-25-26",
+        team: "Corinthians",
+        category: "Brasileiros",
+        season: "25/26",
+        price: 149.90,
+        badge: "LIMITED",
+        image: "/tailandesa-corinthians-home-25-26.png",
+        description:
+            "Modelo tailandês do clube brasileiro Corinthians 2025",
+        featured: false,
+        stock: estoque(0, 1, 1, 0)
     },
 
 ];
