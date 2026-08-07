@@ -317,7 +317,7 @@ export const products: Product[] = [
         description:
             "Modelo premium alternativo do Corinthians 2025",
         featured: false,
-        stock: estoque(0, 0, 1, 0)
+        stock: estoque(0, 0, 0, 0)
     },
 
     {
