@@ -27,20 +27,25 @@ import {
     ListItemText,
     Tooltip,
     Collapse,
+    Button,
+    Menu,
+    MenuItem,
+    Divider,
 } from "@mui/material";
-
 
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 import { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
 import CartDrawer from "@/components/CartDrawer";
 import SearchBox from "@/components/SearchBox";
 
-
+import { useAuth } from "@/context/AuthContext";
 
 const navItems = [
     {
@@ -74,7 +79,17 @@ export default function Navbar({
         totalItems
     } = useCart();
 
+    const {
+        user,
+        profile,
+        loading,
+        signOut,
+    } = useAuth();
 
+    const [accountMenuAnchor, setAccountMenuAnchor] =
+        useState<null | HTMLElement>(null);
+
+    const accountMenuOpen = Boolean(accountMenuAnchor);
 
     const [
         scrolled,
@@ -333,6 +348,168 @@ export default function Navbar({
                                 <SearchIcon />
                             </IconButton>
                         </Tooltip>
+
+                        {!loading && (
+                            user ? (
+                                <>
+                                    <Tooltip title="Minha conta">
+                                        <IconButton
+                                            onClick={(event) => {
+                                                setAccountMenuAnchor(
+                                                    event.currentTarget
+                                                );
+                                            }}
+                                            sx={{
+                                                width: 42,
+                                                height: 42,
+                                                borderRadius: "50%",
+                                                transition: ".25s",
+
+                                                "&:hover": {
+                                                    bgcolor:
+                                                        "rgba(255,255,255,.05)",
+                                                },
+                                            }}
+                                        >
+                                            <PersonOutlineOutlinedIcon />
+                                        </IconButton>
+                                    </Tooltip>
+
+                                    <Menu
+                                        anchorEl={accountMenuAnchor}
+                                        open={accountMenuOpen}
+                                        onClose={() =>
+                                            setAccountMenuAnchor(null)
+                                        }
+                                        anchorOrigin={{
+                                            vertical: "bottom",
+                                            horizontal: "right",
+                                        }}
+                                        transformOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right",
+                                        }}
+                                        slotProps={{
+                                            paper: {
+                                                sx: {
+                                                    mt: 1.5,
+                                                    minWidth: 250,
+                                                    borderRadius: 3,
+                                                    bgcolor: "#0b0b0b",
+                                                    backgroundImage: "none",
+                                                    border:
+                                                        "1px solid rgba(255,255,255,.08)",
+                                                    boxShadow:
+                                                        "0 20px 60px rgba(0,0,0,.5)",
+                                                },
+                                            },
+                                        }}
+                                    >
+
+                                        <Box
+                                            sx={{
+                                                px: 2.5,
+                                                py: 2,
+                                            }}
+                                        >
+                                            <Typography
+                                                sx={{
+                                                    fontWeight: 800,
+                                                    fontSize: 15,
+                                                }}
+                                            >
+                                                {profile?.name || "Cliente"}
+                                            </Typography>
+
+                                            <Typography
+                                                sx={{
+                                                    mt: 0.3,
+                                                    color: "text.secondary",
+                                                    fontSize: 12,
+                                                    wordBreak: "break-word",
+                                                }}
+                                            >
+                                                {user.email}
+                                            </Typography>
+                                        </Box>
+
+                                        <Divider
+                                            sx={{
+                                                borderColor:
+                                                    "rgba(255,255,255,.07)",
+                                            }}
+                                        />
+
+                                        <MenuItem
+                                            onClick={() => {
+                                                setAccountMenuAnchor(null);
+                                                router.push("/conta");
+                                            }}
+                                            sx={{
+                                                mx: 1,
+                                                my: 0.5,
+                                                borderRadius: 2,
+                                            }}
+                                        >
+                                            <PersonOutlineOutlinedIcon
+                                                fontSize="small"
+                                                sx={{ mr: 1.5 }}
+                                            />
+
+                                            Minha conta
+                                        </MenuItem>
+
+                                        <Divider
+                                            sx={{
+                                                borderColor:
+                                                    "rgba(255,255,255,.07)",
+                                            }}
+                                        />
+
+                                        <MenuItem
+                                            onClick={async () => {
+                                                setAccountMenuAnchor(null);
+                                                await signOut();
+                                            }}
+                                            sx={{
+                                                mx: 1,
+                                                my: 0.5,
+                                                borderRadius: 2,
+                                            }}
+                                        >
+                                            <LogoutOutlinedIcon
+                                                fontSize="small"
+                                                sx={{ mr: 1.5 }}
+                                            />
+
+                                            Sair
+                                        </MenuItem>
+
+                                    </Menu>
+                                </>
+                            ) : (
+                                <Tooltip title="Entrar">
+                                    <IconButton
+                                        onClick={() => {
+                                            router.push("/login");
+                                        }}
+                                        sx={{
+                                            width: 42,
+                                            height: 42,
+                                            borderRadius: "50%",
+                                            transition: ".25s",
+
+                                            "&:hover": {
+                                                bgcolor:
+                                                    "rgba(255,255,255,.05)",
+                                            },
+                                        }}
+                                    >
+                                        <PersonOutlineOutlinedIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            )
+                        )}
 
                         <Tooltip title="Carrinho">
                             <IconButton

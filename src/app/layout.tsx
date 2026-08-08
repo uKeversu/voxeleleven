@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 
 import { CartProvider } from "@/context/CartContext";
 import { SnackbarProvider } from "@/context/SnackbarContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 import ThemeRegistry from "@/providers/ThemeRegistry";
 
@@ -26,35 +27,30 @@ type Props = {
 export default async function RootLayout({
   children,
 }: Props) {
-
   const products = await getProducts();
 
   return (
     <html lang="pt-BR">
       <body>
-
         <ThemeRegistry>
-
           <SnackbarProvider>
+            <AuthProvider>
+              <CartProvider>
 
-            <CartProvider>
+                <TopBar />
 
-              <TopBar />
+                <Navbar
+                  products={products}
+                />
 
-              <Navbar
-                products={products}
-              />
+                {children}
 
-              {children}
+                <Footer />
 
-              <Footer />
-
-            </CartProvider>
-
+              </CartProvider>
+            </AuthProvider>
           </SnackbarProvider>
-
         </ThemeRegistry>
-
       </body>
     </html>
   );
