@@ -12,7 +12,6 @@ export async function getProducts(): Promise<Product[]> {
     } = await supabase
         .from("products")
         .select("*")
-        .eq("active", true)
         .order("id", { ascending: true });
 
     if (productsError) {
@@ -53,20 +52,6 @@ export async function getProducts(): Promise<Product[]> {
         );
     }
 
-    /**
-     * Organiza as variantes por produto.
-     *
-     * Exemplo:
-     *
-     * {
-     *   1: {
-     *     P: 0,
-     *     M: 5,
-     *     G: 2,
-     *     GG: 1
-     *   }
-     * }
-     */
     const stockByProduct: Record<
         number,
         Record<string, number>
@@ -88,11 +73,12 @@ export async function getProducts(): Promise<Product[]> {
         team: product.team,
         category: product.category,
         season: product.season,
-        price: product.price,
+        price: Number(product.price),
         badge: product.badge ?? undefined,
         image: product.image,
         description: product.description,
         featured: product.featured ?? false,
+        active: product.active,
 
         stock: stockByProduct[product.id] ?? {},
     }));

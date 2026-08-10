@@ -27,18 +27,7 @@ import {
     Typography,
 } from "@mui/material";
 
-interface Product {
-    id: number;
-    name: string;
-    team: string;
-    category: string;
-    season: string;
-    price: number;
-    image: string;
-    featured: boolean;
-    active: boolean;
-    stock: Record<string, number>;
-}
+import type { Product } from "@/types/product";
 
 interface ProductListProps {
     products: Product[];
@@ -176,6 +165,30 @@ export default function ProductList({
 
     return (
         <Box>
+
+            <Stack
+                direction={{
+                    xs: "column",
+                    sm: "row",
+                }}
+                sx={{
+                    justifyContent: "flex-end",
+                    mb: 3,
+                }}
+            >
+                <Button
+                    component={Link}
+                    href="/admin/produtos/novo"
+                    variant="contained"
+                    sx={{
+                        borderRadius: 2,
+                        fontWeight: 900,
+                        px: 3,
+                    }}
+                >
+                    + Novo produto
+                </Button>
+            </Stack>
 
             {/* =================================================
                 RESUMO

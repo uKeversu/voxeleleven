@@ -12,6 +12,7 @@ export interface Product {
     image: string;
     description: string;
     featured?: boolean;
+    active?: boolean;
 
     stock: Record<string, number>;
 }

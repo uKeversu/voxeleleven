@@ -1,4 +1,4 @@
-// src/app/admin/produtos/page.tsx
+// src/app/admin/produtos/novo/page.tsx
 
 import {
     Box,
@@ -7,13 +7,9 @@ import {
     Typography,
 } from "@mui/material";
 
-import { getProducts } from "@/lib/products";
+import NewProductForm from "./NewProductForm";
 
-import ProductList from "./ProductList";
-
-export default async function AdminProdutosPage() {
-    const products = await getProducts();
-
+export default function NewProductPage() {
     return (
         <Box
             sx={{
@@ -25,7 +21,7 @@ export default async function AdminProdutosPage() {
                 pb: 10,
             }}
         >
-            <Container maxWidth="xl">
+            <Container maxWidth="md">
 
                 {/* CABEÇALHO */}
 
@@ -35,7 +31,6 @@ export default async function AdminProdutosPage() {
                         mb: 5,
                     }}
                 >
-
                     <Typography
                         variant="overline"
                         sx={{
@@ -54,7 +49,7 @@ export default async function AdminProdutosPage() {
                             letterSpacing: "-1px",
                         }}
                     >
-                        Gerenciamento de produtos
+                        Novo produto
                     </Typography>
 
                     <Typography
@@ -62,15 +57,12 @@ export default async function AdminProdutosPage() {
                             color: "text.secondary",
                         }}
                     >
-                        Visualize e gerencie o catálogo
+                        Cadastre um novo produto no catálogo
                         da Voxel Eleven.
                     </Typography>
-
                 </Stack>
 
-                <ProductList
-                    products={products}
-                />
+                <NewProductForm />
 
             </Container>
         </Box>
