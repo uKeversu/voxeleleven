@@ -89,7 +89,13 @@ export default function CadastroPage() {
     }
 
     return (
-        <Container maxWidth="sm" sx={{ py: 8 }}>
+        <Container maxWidth="sm" sx={{
+            py: 8,
+            pt: {
+                xs: 14,
+                md: 18,
+            },
+        }}>
             <Paper
                 elevation={0}
                 sx={{
@@ -104,7 +110,7 @@ export default function CadastroPage() {
                     <Box>
                         <Typography
                             variant="h4"
-                            sx={{fontWeight: 800}}
+                            sx={{ fontWeight: 800 }}
                             gutterBottom
                         >
                             Criar conta
@@ -198,7 +204,7 @@ export default function CadastroPage() {
 
                     <Typography
                         variant="body2"
-                        sx={{color: 'text.secondary', textAlign: 'center'}}
+                        sx={{ color: 'text.secondary', textAlign: 'center' }}
                     >
                         Já possui uma conta?{" "}
                         <Box

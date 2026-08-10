@@ -42,7 +42,10 @@ export default async function ContaPage() {
             <Box
                 sx={{
                     minHeight: "100vh",
-                    pt: 16,
+                    pt: {
+                        xs: 14,
+                        md: 18,
+                    },
                     pb: 10,
                 }}
             >
