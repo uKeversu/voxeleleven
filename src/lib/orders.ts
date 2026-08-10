@@ -33,20 +33,23 @@ export interface Order {
     shipping_state: string | null;
 
     status:
-        | "pending"
-        | "paid"
-        | "processing"
-        | "shipped"
-        | "delivered"
-        | "cancelled";
+    | "pending"
+    | "paid"
+    | "processing"
+    | "shipped"
+    | "delivered"
+    | "cancelled";
 
     payment_status:
-        | "pending"
-        | "approved"
-        | "failed"
-        | "refunded";
+    | "pending"
+    | "approved"
+    | "failed"
+    | "refunded";
 
     payment_method: string | null;
+
+    payment_due_date: string | null;
+    payment_notes: string | null;
 
     subtotal: number;
     shipping_cost: number;
@@ -61,39 +64,41 @@ export interface Order {
 export async function getOrders(): Promise<Order[]> {
     const supabase = await createClient();
 
-    const { data: orders, error: ordersError } =
-        await supabase
-            .from("orders")
-            .select(`
+    const { data, error } = await supabase
+        .from("orders")
+        .select(`
+            *,
+            order_items (
                 *,
-                order_items (
-                    *,
-                    products (
-                        name,
-                        image
-                    )
+                products (
+                    name,
+                    image
                 )
-            `)
-            .order("created_at", {
-                ascending: false,
-            });
+            )
+        `)
+        .order("created_at", {
+            ascending: false,
+        });
 
-    if (ordersError) {
-        console.error(
-            "Erro ao buscar pedidos:",
-            ordersError
-        );
+    console.log("=================================");
+    console.log("PEDIDOS RETORNADOS PELO SUPABASE:");
+    console.dir(data, { depth: null });
 
+    console.log("ERRO DO SUPABASE:");
+    console.log(error);
+    console.log("=================================");
+
+    if (error) {
         throw new Error(
             "Não foi possível carregar os pedidos."
         );
     }
 
-    if (!orders) {
+    if (!data) {
         return [];
     }
 
-    return orders.map((order) => ({
+    return data.map((order) => ({
         id: order.id,
 
         customer_name: order.customer_name,
@@ -128,13 +133,26 @@ export async function getOrders(): Promise<Order[]> {
         payment_method:
             order.payment_method,
 
-        subtotal: Number(order.subtotal),
+        subtotal:
+            Number(order.subtotal),
+
         shipping_cost:
             Number(order.shipping_cost),
-        total: Number(order.total),
 
-        created_at: order.created_at,
-        updated_at: order.updated_at,
+        total:
+            Number(order.total),
+
+        created_at:
+            order.created_at,
+
+        updated_at:
+            order.updated_at,
+
+        payment_due_date:
+            order.payment_due_date,
+
+        payment_notes:
+            order.payment_notes,
 
         items: (
             order.order_items ?? []
@@ -144,16 +162,17 @@ export async function getOrders(): Promise<Order[]> {
             product_id: item.product_id,
             size: item.size,
             quantity: item.quantity,
-            unit_price: Number(
-                item.unit_price
-            ),
-            total_price: Number(
-                item.total_price
-            ),
+
+            unit_price:
+                Number(item.unit_price),
+
+            total_price:
+                Number(item.total_price),
 
             product: item.products
                 ? {
-                    name: item.products.name,
+                    name:
+                        item.products.name,
                     image:
                         item.products.image,
                 }

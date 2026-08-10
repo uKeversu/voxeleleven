@@ -29,6 +29,8 @@ import {
     Typography,
 } from "@mui/material";
 
+import { markOrderAsPaid } from "./actions";
+
 import type { Order } from "@/lib/orders";
 
 interface OrderListProps {
@@ -722,20 +724,55 @@ export default function OrderList({
 
                                         <TableCell align="center">
 
-                                            <Button
-                                                component={
-                                                    Link
-                                                }
-                                                href={`/admin/pedidos/${order.id}`}
-                                                variant="outlined"
-                                                size="small"
-                                                sx={{
-                                                    borderRadius: 2,
-                                                    fontWeight: 800,
-                                                }}
+                                            <Stack
+                                                sx={{ flexDirection: 'row', justifyContent: 'center' }}
+                                                spacing={1}
                                             >
-                                                Ver
-                                            </Button>
+
+                                                <Button
+                                                    component={Link}
+                                                    href={`/admin/pedidos/${order.id}`}
+                                                    variant="outlined"
+                                                    size="small"
+                                                    sx={{
+                                                        borderRadius: 2,
+                                                        fontWeight: 800,
+                                                    }}
+                                                >
+                                                    Ver
+                                                </Button>
+
+                                                {order.payment_status === "pending" && (
+                                                    <Button
+                                                        variant="contained"
+                                                        color="success"
+                                                        size="small"
+                                                        onClick={async () => {
+                                                            const confirmed =
+                                                                window.confirm(
+                                                                    `Marcar o pedido #${order.id} como pago?`
+                                                                );
+
+                                                            if (!confirmed) {
+                                                                return;
+                                                            }
+
+                                                            await markOrderAsPaid(
+                                                                order.id
+                                                            );
+
+                                                            window.location.reload();
+                                                        }}
+                                                        sx={{
+                                                            borderRadius: 2,
+                                                            fontWeight: 800,
+                                                        }}
+                                                    >
+                                                        Pago
+                                                    </Button>
+                                                )}
+
+                                            </Stack>
 
                                         </TableCell>
 
