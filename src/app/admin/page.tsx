@@ -86,6 +86,10 @@ export default async function AdminPage() {
                     xs: 12,
                     md: 6,
                 },
+                pt: {
+                    xs: 14,
+                    md: 18,
+                },
             }}
         >
             <Container maxWidth="xl">
