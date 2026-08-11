@@ -20,17 +20,17 @@ type CreateManualOrderInput = {
     customer_email: string | null;
 
     payment_method:
-    | "pix"
-    | "card"
-    | "fiado";
+        | "pix"
+        | "card"
+        | "fiado";
 
     payment_due_date:
-    | string
-    | null;
+        | string
+        | null;
 
     payment_notes:
-    | string
-    | null;
+        | string
+        | null;
 
     subtotal: number;
     shipping_cost: number;
@@ -46,14 +46,13 @@ export async function createManualOrder(
     const supabase =
         await createClient();
 
+    /*
+     * AUTENTICAÇÃO
+     */
+
     const {
         data: { user },
-        error: userError,
     } = await supabase.auth.getUser();
-
-    /*
-     * VALIDAÇÕES
-     */
 
     if (!user) {
         return {
@@ -89,7 +88,7 @@ export async function createManualOrder(
 
     if (
         input.payment_method ===
-        "fiado" &&
+            "fiado" &&
         !input.payment_due_date
     ) {
         return {
@@ -100,147 +99,84 @@ export async function createManualOrder(
     }
 
     /*
-     * STATUS DO PEDIDO
+     * CRIA PEDIDO + ITENS + RESERVAS
+     *
+     * Tudo acontece dentro da RPC
+     * em uma única transação PostgreSQL.
      */
-
-    const isPaid =
-        input.payment_method ===
-        "pix" ||
-        input.payment_method ===
-        "card";
-
-    /*
-     * CRIA PEDIDO
-     */
-
-    const { data: order, error: orderError } =
-        await supabase
-            .from("orders")
-            .insert({
-                customer_name:
-                    input.customer_name,
-
-                customer_phone:
-                    input.customer_phone,
-
-                customer_email:
-                    input.customer_email,
-
-                status:
-                    isPaid
-                        ? "paid"
-                        : "pending",
-
-                payment_status:
-                    isPaid
-                        ? "approved"
-                        : "pending",
-
-                payment_method:
-                    input.payment_method,
-
-                subtotal:
-                    input.subtotal,
-
-                shipping_cost:
-                    input.shipping_cost,
-
-                discount: input.discount,
-
-                total:
-                    input.total,
-
-                payment_due_date:
-                    input.payment_method ===
-                        "fiado"
-                        ? input.payment_due_date
-                        : null,
-
-                payment_notes:
-                    input.payment_method ===
-                        "fiado"
-                        ? input.payment_notes
-                        : null,
-
-                updated_at:
-                    new Date().toISOString(),
-            })
-            .select("id")
-            .single();
-
-    if (orderError) {
-
-        console.error(
-            "Erro ao criar pedido:",
-            orderError
-        );
-
-        return {
-            success: false,
-            error:
-                "Não foi possível criar o pedido.",
-        };
-    }
-
-    /*
-     * CRIA ITENS
-     */
-
-    const orderItems =
-        input.items.map(
-            (item) => ({
-                order_id:
-                    order.id,
-
-                product_id:
-                    item.product_id,
-
-                size:
-                    item.size,
-
-                quantity:
-                    item.quantity,
-
-                unit_price:
-                    item.unit_price,
-
-                total_price:
-                    item.total_price,
-            })
-        );
 
     const {
-        data: insertedItems,
-        error: itemsError,
-    } = await supabase
-        .from("order_items")
-        .insert(orderItems)
-        .select();
+        data: orderId,
+        error,
+    } = await supabase.rpc(
+        "create_manual_order",
+        {
+            p_customer_name:
+                input.customer_name,
 
-    if (itemsError) {
+            p_customer_phone:
+                input.customer_phone,
 
+            p_customer_email:
+                input.customer_email,
+
+            p_payment_method:
+                input.payment_method,
+
+            p_payment_due_date:
+                input.payment_due_date,
+
+            p_payment_notes:
+                input.payment_notes,
+
+            p_subtotal:
+                input.subtotal,
+
+            p_shipping_cost:
+                input.shipping_cost,
+
+            p_discount:
+                input.discount,
+
+            p_total:
+                input.total,
+
+            p_items:
+                input.items.map(
+                    (item) => ({
+                        product_id:
+                            item.product_id,
+
+                        variant_id:
+                            item.variant_id,
+
+                        size:
+                            item.size,
+
+                        quantity:
+                            item.quantity,
+
+                        unit_price:
+                            item.unit_price,
+
+                        total_price:
+                            item.total_price,
+                    })
+                ),
+        }
+    );
+
+    if (error) {
         console.error(
-            "Erro ao criar itens do pedido:",
-            itemsError
+            "Erro ao criar pedido manual:",
+            error
         );
-
-        /*
-         * Remove o pedido caso
-         * os itens não sejam criados.
-         */
-
-        await supabase
-            .from("orders")
-            .delete()
-            .eq(
-                "id",
-                order.id
-            );
 
         return {
             success: false,
             error:
-                "Não foi possível adicionar os produtos ao pedido.",
+                error.message ||
+                "Não foi possível criar o pedido.",
         };
     }
 
@@ -250,6 +186,6 @@ export async function createManualOrder(
 
     return {
         success: true,
-        orderId: order.id,
+        orderId,
     };
 }

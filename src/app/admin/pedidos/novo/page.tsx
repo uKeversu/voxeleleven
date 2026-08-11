@@ -25,7 +25,8 @@ export default async function NovoPedidoPage() {
             product_variants (
                 id,
                 size,
-                stock
+                stock,
+                reserved_stock
             )
         `)
         .eq("active", true)

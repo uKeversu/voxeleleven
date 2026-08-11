@@ -873,6 +873,7 @@ export default function PaymentCalendar({
                                                     <Typography
                                                         sx={{
                                                             fontWeight: 900,
+                                                            pr: 1
                                                         }}
                                                     >
                                                         #

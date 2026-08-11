@@ -13,7 +13,6 @@ export async function markOrderAsPaid(
         .from("orders")
         .update({
             payment_status: "approved",
-            status: "paid",
             updated_at: new Date().toISOString(),
         })
         .eq("id", orderId);
@@ -26,6 +25,36 @@ export async function markOrderAsPaid(
 
         throw new Error(
             "Não foi possível marcar o pedido como pago."
+        );
+    }
+
+    return {
+        success: true,
+    };
+}
+
+
+export async function markOrderAsDelivered(
+    orderId: number
+) {
+    const supabase = await createClient();
+
+    const { error } = await supabase.rpc(
+        "mark_order_as_delivered",
+        {
+            p_order_id: orderId,
+        }
+    );
+
+    if (error) {
+        console.error(
+            "Erro ao marcar pedido como entregue:",
+            error
+        );
+
+        throw new Error(
+            error.message ||
+            "Não foi possível marcar o pedido como entregue."
         );
     }
 

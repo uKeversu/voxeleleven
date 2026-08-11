@@ -29,6 +29,7 @@ type Variant = {
     id: number;
     size: string;
     stock: number;
+    reserved_stock: number;
 };
 
 type Product = {
@@ -126,6 +127,15 @@ export default function NovoPedidoForm({
                 Number(selectedVariantId)
         ) ?? null;
     }, [availableVariants, selectedVariantId]);
+
+    const selectedVariantAvailableStock =
+        selectedVariant
+            ? Math.max(
+                0,
+                selectedVariant.stock -
+                selectedVariant.reserved_stock
+            )
+            : 0;
 
     /*
      * TOTAL
@@ -225,12 +235,19 @@ export default function NovoPedidoForm({
             return;
         }
 
+        const availableStock =
+            Math.max(
+                0,
+                selectedVariant.stock -
+                selectedVariant.reserved_stock
+            );
+
         if (
             parsedQuantity >
-            selectedVariant.stock
+            availableStock
         ) {
             setError(
-                `Estoque insuficiente. Disponível: ${selectedVariant.stock}.`
+                `Estoque insuficiente. Disponível: ${availableStock}.`
             );
             return;
         }
@@ -252,10 +269,10 @@ export default function NovoPedidoForm({
 
             if (
                 newQuantity >
-                selectedVariant.stock
+                availableStock
             ) {
                 setError(
-                    `A quantidade total não pode ultrapassar o estoque disponível (${selectedVariant.stock}).`
+                    `A quantidade total não pode ultrapassar o estoque disponível (${availableStock}).`
                 );
                 return;
             }
@@ -293,7 +310,7 @@ export default function NovoPedidoForm({
                             selectedProduct.price
                         ),
                     stock:
-                        selectedVariant.stock,
+                        availableStock,
                 },
             ]);
 
@@ -649,7 +666,10 @@ export default function NovoPedidoForm({
                             {products
                                 .filter((product) =>
                                     product.product_variants.some(
-                                        (variant) => variant.stock > 0
+                                        (variant) =>
+                                            variant.stock -
+                                            variant.reserved_stock >
+                                            0
                                     )
                                 )
                                 .map((product) => (
@@ -700,27 +720,33 @@ export default function NovoPedidoForm({
                                 Selecione
                             </MenuItem>
 
+
                             {availableVariants.map(
-                                (variant) => (
-                                    <MenuItem
-                                        key={
-                                            variant.id
-                                        }
-                                        value={
-                                            variant.id
-                                        }
-                                        disabled={
-                                            variant.stock <=
-                                            0
-                                        }
-                                    >
-                                        {variant.size}
-                                        {" • "}
-                                        {variant.stock > 0
-                                            ? `${variant.stock} disponíveis`
-                                            : "Sem estoque"}
-                                    </MenuItem>
-                                )
+                                (variant) => {
+
+                                    const availableStock =
+                                        Math.max(
+                                            0,
+                                            variant.stock -
+                                            variant.reserved_stock
+                                        );
+
+                                    return (
+                                        <MenuItem
+                                            key={variant.id}
+                                            value={variant.id}
+                                            disabled={
+                                                availableStock <= 0
+                                            }
+                                        >
+                                            {variant.size}
+                                            {" • "}
+                                            {availableStock > 0
+                                                ? `${availableStock} disponíveis`
+                                                : "Sem estoque"}
+                                        </MenuItem>
+                                    );
+                                }
                             )}
 
                         </TextField>

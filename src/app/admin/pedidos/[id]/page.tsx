@@ -23,6 +23,8 @@ import {
     type Order,
 } from "@/lib/orders";
 
+import PedidoAcoes from "./PedidoAcoes";
+
 interface PageProps {
     params: Promise<{
         id: string;
@@ -85,10 +87,8 @@ export default async function PedidoPage({
         status: Order["status"]
     ) {
         const labels = {
-            pending: "PENDENTE",
-            paid: "PAGO",
-            processing: "PROCESSANDO",
-            shipped: "ENVIADO",
+            reserved: "RESERVADO",
+            packing: "EMBALANDO",
             delivered: "ENTREGUE",
             cancelled: "CANCELADO",
         };
@@ -113,17 +113,16 @@ export default async function PedidoPage({
         status: Order["status"]
     ) {
         switch (status) {
-            case "paid":
             case "delivered":
-                return "success";
-
-            case "processing":
-            case "shipped":
                 return "primary";
+
+            case "packing":
+                return "warning";
 
             case "cancelled":
                 return "error";
 
+            case "reserved":
             default:
                 return "default";
         }
@@ -864,6 +863,11 @@ export default async function PedidoPage({
                             )}
 
                         {/* AÇÃO */}
+
+                        <PedidoAcoes
+                            orderId={order.id}
+                            status={order.status}
+                        />
 
                         <Button
                             href="/admin/pedidos"

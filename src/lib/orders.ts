@@ -6,6 +6,7 @@ export interface OrderItem {
     id: number;
     order_id: number;
     product_id: number;
+    variant_id: number | null;
     size: string;
     quantity: number;
     unit_price: number;
@@ -33,10 +34,8 @@ export interface Order {
     shipping_state: string | null;
 
     status:
-    | "pending"
-    | "paid"
-    | "processing"
-    | "shipped"
+    | "reserved"
+    | "packing"
     | "delivered"
     | "cancelled";
 
@@ -129,17 +128,15 @@ function mapOrder(order: any): Order {
         ).map((item: any) => ({
             id: item.id,
 
-            order_id:
-                item.order_id,
+            order_id: item.order_id,
 
-            product_id:
-                item.product_id,
+            product_id: item.product_id,
 
-            size:
-                item.size,
+            variant_id: item.variant_id,
 
-            quantity:
-                item.quantity,
+            size: item.size,
+
+            quantity: item.quantity,
 
             unit_price:
                 Number(item.unit_price),
@@ -149,11 +146,8 @@ function mapOrder(order: any): Order {
 
             product: item.products
                 ? {
-                    name:
-                        item.products.name,
-
-                    image:
-                        item.products.image,
+                    name: item.products.name,
+                    image: item.products.image,
                 }
                 : null,
         })),
@@ -309,14 +303,16 @@ export async function getOrderById(
         items: (
             data.order_items ?? []
         ).map((item: any) => ({
-            id:
-                item.id,
+            id: item.id,
 
             order_id:
                 item.order_id,
 
             product_id:
                 item.product_id,
+
+            variant_id:
+                item.variant_id,
 
             size:
                 item.size,

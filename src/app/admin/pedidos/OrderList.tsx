@@ -33,6 +33,8 @@ import { markOrderAsPaid } from "./actions";
 
 import type { Order } from "@/lib/orders";
 
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+
 interface OrderListProps {
     orders: Order[];
 }
@@ -147,7 +149,7 @@ export default function OrderList({
         orders.filter(
             (order) =>
                 order.status ===
-                "pending"
+                "reserved"
         ).length;
 
     const approvedPayments =
@@ -203,10 +205,8 @@ export default function OrderList({
         status: Order["status"]
     ) {
         const labels = {
-            pending: "PENDENTE",
-            paid: "PAGO",
-            processing: "PROCESSANDO",
-            shipped: "ENVIADO",
+            reserved: "RESERVADO",
+            packing: "EMBALANDO",
             delivered: "ENTREGUE",
             cancelled: "CANCELADO",
         };
@@ -231,17 +231,16 @@ export default function OrderList({
         status: Order["status"]
     ) {
         switch (status) {
-            case "paid":
             case "delivered":
-                return "success";
-
-            case "processing":
-            case "shipped":
                 return "primary";
+
+            case "packing":
+                return "warning";
 
             case "cancelled":
                 return "error";
 
+            case "reserved":
             default:
                 return "default";
         }
@@ -287,7 +286,7 @@ export default function OrderList({
                 />
 
                 <SummaryCard
-                    label="Pendentes"
+                    label="Reservados"
                     value={pendingOrders}
                 />
 
@@ -751,6 +750,9 @@ export default function OrderList({
                                                         variant="contained"
                                                         color="success"
                                                         size="small"
+                                                        startIcon={
+                                                        <CheckCircleRoundedIcon />
+                                                    }
                                                         onClick={async () => {
                                                             const confirmed = window.confirm(
                                                                 `Marcar o pedido #${order.id} como pago?`
@@ -764,12 +766,14 @@ export default function OrderList({
 
                                                             window.location.reload();
                                                         }}
+                                                        
                                                         sx={{
                                                             width: 90,
                                                             borderRadius: 2,
                                                             fontWeight: 800,
                                                         }}
                                                     >
+                                                        
                                                         Pago
                                                     </Button>
                                                 )}
