@@ -39,19 +39,9 @@ const menuItems = [
         icon: <Inventory2RoundedIcon />,
     },
     {
-        label: "Estoque",
-        href: "/admin/estoque",
-        icon: <WarehouseRoundedIcon />,
-    },
-    {
         label: "Pedidos",
         href: "/admin/pedidos",
         icon: <ShoppingBagRoundedIcon />,
-    },
-    {
-        label: "Usuários",
-        href: "/admin/usuarios",
-        icon: <PeopleRoundedIcon />,
     },
 ];
 

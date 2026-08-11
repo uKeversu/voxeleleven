@@ -636,7 +636,7 @@ export default function OrderList({
                                                 }
                                             </Typography>
 
-                                            {order.customer_email && (
+                                            {order.customer_phone && (
                                                 <Typography
                                                     variant="caption"
                                                     sx={{
@@ -645,7 +645,7 @@ export default function OrderList({
                                                     }}
                                                 >
                                                     {
-                                                        order.customer_email
+                                                        order.customer_phone
                                                     }
                                                 </Typography>
                                             )}
@@ -725,16 +725,20 @@ export default function OrderList({
                                         <TableCell align="center">
 
                                             <Stack
-                                                sx={{ flexDirection: 'row', justifyContent: 'center' }}
-                                                spacing={1}
+                                                sx={{
+                                                    flexDirection: "row",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    gap: 2
+                                                }}
                                             >
-
                                                 <Button
                                                     component={Link}
                                                     href={`/admin/pedidos/${order.id}`}
                                                     variant="outlined"
                                                     size="small"
                                                     sx={{
+                                                        width: 90,
                                                         borderRadius: 2,
                                                         fontWeight: 800,
                                                     }}
@@ -748,22 +752,20 @@ export default function OrderList({
                                                         color="success"
                                                         size="small"
                                                         onClick={async () => {
-                                                            const confirmed =
-                                                                window.confirm(
-                                                                    `Marcar o pedido #${order.id} como pago?`
-                                                                );
+                                                            const confirmed = window.confirm(
+                                                                `Marcar o pedido #${order.id} como pago?`
+                                                            );
 
                                                             if (!confirmed) {
                                                                 return;
                                                             }
 
-                                                            await markOrderAsPaid(
-                                                                order.id
-                                                            );
+                                                            await markOrderAsPaid(order.id);
 
                                                             window.location.reload();
                                                         }}
                                                         sx={{
+                                                            width: 90,
                                                             borderRadius: 2,
                                                             fontWeight: 800,
                                                         }}
@@ -771,7 +773,6 @@ export default function OrderList({
                                                         Pago
                                                     </Button>
                                                 )}
-
                                             </Stack>
 
                                         </TableCell>
