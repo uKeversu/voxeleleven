@@ -1,13 +1,17 @@
-import { createClient } from "@/lib/supabase/server";
+// src/lib/products.ts
+
+import { createClient } from
+    "@/lib/supabase/server";
 
 import {
     Product,
     ProductVariant,
 } from "@/types/product";
 
-export async function getProducts(): Promise<
-    Product[]
-> {
+
+export async function getProducts():
+    Promise<Product[]> {
+
     const supabase =
         await createClient();
 
@@ -22,12 +26,16 @@ export async function getProducts(): Promise<
     } = await supabase
         .from("products")
         .select("*")
-        .order("id", {
-            ascending: true,
-        });
+        .order(
+            "id",
+            {
+                ascending: true,
+            }
+        );
 
 
     if (productsError) {
+
         console.error(
             "Erro ao buscar produtos:",
             productsError
@@ -48,7 +56,7 @@ export async function getProducts(): Promise<
 
 
     /*
-     * IDS DOS PRODUTOS
+     * IDs DOS PRODUTOS
      */
 
     const productIds =
@@ -60,6 +68,11 @@ export async function getProducts(): Promise<
 
     /*
      * BUSCA VARIANTES
+     *
+     * Agora buscamos o ID,
+     * pois o checkout precisa
+     * saber exatamente qual
+     * variante está sendo comprada.
      */
 
     const {
@@ -77,6 +90,7 @@ export async function getProducts(): Promise<
 
 
     if (variantsError) {
+
         console.error(
             "Erro ao buscar estoque:",
             variantsError
@@ -89,44 +103,58 @@ export async function getProducts(): Promise<
 
 
     /*
-     * ESTOQUE POR PRODUTO
+     * ESTOQUE DISPONÍVEL
+     * POR PRODUTO
      */
 
-    const stockByProduct: Record<
-        number,
-        Record<string, number>
-    > = {};
+    const stockByProduct:
+        Record<
+            number,
+            Record<string, number>
+        > = {};
 
 
     /*
-     * VARIANTES POR PRODUTO
+     * VARIANTES
+     * POR PRODUTO
      */
 
-    const variantsByProduct: Record<
-        number,
-        ProductVariant[]
-    > = {};
+    const variantsByProduct:
+        Record<
+            number,
+            ProductVariant[]
+        > = {};
 
 
     variants?.forEach(
         (variant) => {
+
+            /*
+             * Inicializa estoque
+             */
 
             if (
                 !stockByProduct[
                 variant.product_id
                 ]
             ) {
+
                 stockByProduct[
                     variant.product_id
                 ] = {};
             }
 
 
+            /*
+             * Inicializa variantes
+             */
+
             if (
                 !variantsByProduct[
                 variant.product_id
                 ]
             ) {
+
                 variantsByProduct[
                     variant.product_id
                 ] = [];
@@ -135,41 +163,64 @@ export async function getProducts(): Promise<
 
             /*
              * ESTOQUE REALMENTE
-             * DISPONÍVEL PARA VENDA
+             * DISPONÍVEL
              */
 
             const availableStock =
                 Math.max(
                     0,
-                    variant.stock -
-                    variant.reserved_stock
+                    Number(variant.stock) -
+                    Number(
+                        variant.reserved_stock
+                    )
                 );
 
 
             /*
-             * MANTÉM COMPATIBILIDADE
-             * COM O RESTANTE DA APLICAÇÃO
+             * Mantém o formato antigo
+             *
+             * Exemplo:
+             *
+             * stock: {
+             *     P: 2,
+             *     M: 1
+             * }
              */
 
             stockByProduct[
                 variant.product_id
             ][
                 variant.size
-            ] = availableStock;
+            ] =
+                availableStock;
 
 
             /*
-             * GUARDA ID DA VARIANTE
+             * Adiciona a variante
+             *
+             * Exemplo:
+             *
+             * variants: [
+             *     {
+             *         id: 123,
+             *         size: "M",
+             *         stock: 1
+             *     }
+             * ]
              */
 
             variantsByProduct[
                 variant.product_id
             ].push({
-                id: variant.id,
-                size: variant.size,
-                stock: availableStock,
-            });
+                id:
+                    Number(variant.id),
 
+                size:
+                    variant.size,
+
+                stock:
+                    availableStock,
+            });
         }
     );
 
@@ -180,29 +231,47 @@ export async function getProducts(): Promise<
 
     return products.map(
         (product) => ({
-            id: product.id,
-            name: product.name,
-            slug: product.slug,
-            team: product.team,
+            id:
+                product.id,
+
+            name:
+                product.name,
+
+            slug:
+                product.slug,
+
+            team:
+                product.team,
+
             category:
                 product.category,
-            season: product.season,
+
+            season:
+                product.season,
+
             price:
                 Number(product.price),
+
             badge:
                 product.badge ??
                 undefined,
-            image: product.image,
+
+            image:
+                product.image,
+
             description:
                 product.description,
+
             featured:
                 product.featured ??
                 false,
+
             active:
                 product.active,
 
             /*
-             * ESTOQUE DISPONÍVEL
+             * Compatibilidade com
+             * componentes existentes
              */
 
             stock:
@@ -210,9 +279,9 @@ export async function getProducts(): Promise<
                 product.id
                 ] ?? {},
 
-
             /*
-             * VARIANTES COMPLETAS
+             * Necessário para
+             * checkout seguro
              */
 
             variants:
