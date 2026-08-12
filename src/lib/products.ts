@@ -38,7 +38,7 @@ export async function getProducts(): Promise<Product[]> {
         error: variantsError,
     } = await supabase
         .from("product_variants")
-        .select("product_id, size, stock")
+        .select("product_id, size, stock, reserved_stock")
         .in("product_id", productIds);
 
     if (variantsError) {
@@ -62,8 +62,15 @@ export async function getProducts(): Promise<Product[]> {
             stockByProduct[variant.product_id] = {};
         }
 
+        const availableStock =
+            Math.max(
+                0,
+                variant.stock -
+                variant.reserved_stock
+            );
+
         stockByProduct[variant.product_id][variant.size] =
-            variant.stock;
+            availableStock;
     });
 
     return products.map((product) => ({

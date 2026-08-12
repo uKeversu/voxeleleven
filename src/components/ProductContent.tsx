@@ -528,6 +528,13 @@ export default function ProductContent({
                                             "0 0 35px rgba(0,255,64,0.4)",
                                     },
                                 }}
+                                onClick={() => {
+                                    addToCart(product, selectedSize);
+
+                                    showSnackbar(
+                                        "Finalize a compra no carrinho!"
+                                    );
+                                }}
                             >
                                 {estoqueTotal === 0
                                     ? "Produto esgotado"
