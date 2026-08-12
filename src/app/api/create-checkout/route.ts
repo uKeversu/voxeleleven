@@ -55,6 +55,22 @@ export async function POST(
             body.items.map(
                 (item: any) => {
 
+                    if (
+                        !item.product ||
+                        !Array.isArray(
+                            item.product.variants
+                        )
+                    ) {
+                        console.error(
+                            "Produto recebido sem variants:",
+                            item
+                        );
+
+                        throw new Error(
+                            `Produto ${item.product?.name || "desconhecido"} não possui variantes válidas.`
+                        );
+                    }
+
                     const variant =
                         item.product.variants.find(
                             (variant: any) =>
@@ -63,6 +79,20 @@ export async function POST(
                         );
 
                     if (!variant) {
+                        console.error(
+                            "Variante não encontrada:",
+                            {
+                                product:
+                                    item.product.name,
+
+                                size:
+                                    item.size,
+
+                                variants:
+                                    item.product.variants,
+                            }
+                        );
+
                         throw new Error(
                             `Variante não encontrada para ${item.product.name} tamanho ${item.size}`
                         );
