@@ -234,13 +234,13 @@ export async function POST(
                 "https://voxeleleven.vercel.app/api/webhook/infinitepay",
 
             /*
-             * Referência do pedido
-             * interno.
+             * ID do pedido no nosso sistema.
              *
-             * Vamos utilizar no webhook.
+             * A InfinitePay devolverá este
+             * mesmo valor no webhook.
              */
 
-            external_reference:
+            order_nsu:
                 String(orderId),
 
             items:
@@ -253,7 +253,7 @@ export async function POST(
 
                         /*
                          * InfinitePay recebe
-                         * centavos.
+                         * o valor em centavos.
                          */
 
                         price:
