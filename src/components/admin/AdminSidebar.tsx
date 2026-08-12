@@ -19,9 +19,7 @@ import {
 
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import Inventory2RoundedIcon from "@mui/icons-material/Inventory2Rounded";
-import WarehouseRoundedIcon from "@mui/icons-material/WarehouseRounded";
 import ShoppingBagRoundedIcon from "@mui/icons-material/ShoppingBagRounded";
-import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import StorefrontRoundedIcon from "@mui/icons-material/StorefrontRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
@@ -58,23 +56,59 @@ export default function AdminSidebar() {
         <Box
             component="aside"
             sx={{
-                width: 260,
-                flexShrink: 0,
-                minHeight: "100vh",
-                position: "fixed",
-                left: 0,
-                top: 0,
-                bottom: 0,
-                display: {
-                    xs: "none",
-                    md: "flex",
+                width: {
+                    xs: "100%",
+                    md: 260,
                 },
+
+                flexShrink: 0,
+
+                minHeight: {
+                    xs: "auto",
+                    md: "100vh",
+                },
+
+                position: {
+                    xs: "relative",
+                    md: "fixed",
+                },
+
+                left: {
+                    xs: "auto",
+                    md: 0,
+                },
+
+                top: {
+                    xs: "auto",
+                    md: 0,
+                },
+
+                bottom: {
+                    xs: "auto",
+                    md: 0,
+                },
+
+                display: "flex",
+
                 flexDirection: "column",
+
                 background:
                     "linear-gradient(180deg, #080808 0%, #050505 100%)",
-                borderRight:
-                    "1px solid rgba(255,255,255,.07)",
-                zIndex: 1200,
+
+                borderRight: {
+                    xs: "none",
+                    md: "1px solid rgba(255,255,255,.07)",
+                },
+
+                borderBottom: {
+                    xs: "1px solid rgba(255,255,255,.07)",
+                    md: "none",
+                },
+
+                zIndex: {
+                    xs: 1,
+                    md: 1200,
+                },
             }}
         >
             {/* LOGO / MARCA */}
