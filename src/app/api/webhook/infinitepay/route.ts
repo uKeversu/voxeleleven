@@ -1,18 +1,27 @@
-//api/webhook/infinitepay/route.ts
+// src/app/api/webhook/infinitepay/route.ts
 
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(
+    req: Request
+) {
     try {
         const body = await req.json();
 
         console.log(
-            "WEBHOOK INFINITEPAY:",
+            "========== WEBHOOK INFINITEPAY =========="
+        );
+
+        console.log(
             JSON.stringify(
                 body,
                 null,
                 2
             )
+        );
+
+        console.log(
+            "========================================"
         );
 
         return NextResponse.json({

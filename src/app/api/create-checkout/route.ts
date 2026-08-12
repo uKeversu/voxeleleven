@@ -98,6 +98,8 @@ export async function POST(
             "create_online_order",
             {
                 p_items: orderItems,
+                p_customer_name: "Cliente Online",
+
             }
         );
 
