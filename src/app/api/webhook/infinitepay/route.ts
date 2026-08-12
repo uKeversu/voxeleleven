@@ -6,17 +6,23 @@ export async function POST(req: Request) {
     try {
         const body = await req.json();
 
-        console.log("Pagamento aprovado:", body);
-
-        // salvar pedido no banco aqui
-
-        // enviar email aqui
+        console.log(
+            "WEBHOOK INFINITEPAY:",
+            JSON.stringify(
+                body,
+                null,
+                2
+            )
+        );
 
         return NextResponse.json({
             success: true,
         });
     } catch (error) {
-        console.error(error);
+        console.error(
+            "Erro no webhook InfinitePay:",
+            error
+        );
 
         return NextResponse.json(
             {

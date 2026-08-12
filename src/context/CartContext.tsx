@@ -96,12 +96,29 @@ export function CartProvider({
             JSON.parse(storedCart);
 
         const carrinhoValido =
-            parsed.filter((item) => {
-                const estoque =
-                    item.product.stock[item.size] ?? 0;
+            parsed
+                .map((item) => {
+                    const estoque =
+                        item.product.stock[item.size] ?? 0;
 
-                return estoque > 0;
-            });
+                    if (estoque <= 0) {
+                        return null;
+                    }
+
+                    return {
+                        ...item,
+                        quantity: Math.min(
+                            item.quantity,
+                            estoque
+                        ),
+                    };
+                })
+                .filter(
+                    (
+                        item
+                    ): item is CartItem =>
+                        item !== null
+                );
 
         setCartItems(carrinhoValido);
     }, []);

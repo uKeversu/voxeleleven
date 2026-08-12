@@ -1,5 +1,11 @@
 // src/types/product.ts
 
+export interface ProductVariant {
+    id: number;
+    size: string;
+    stock: number;
+}
+
 export interface Product {
     id: number;
     name: string;
@@ -15,4 +21,6 @@ export interface Product {
     active?: boolean;
 
     stock: Record<string, number>;
+
+    variants: ProductVariant[];
 }
