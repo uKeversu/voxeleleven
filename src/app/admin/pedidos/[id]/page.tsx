@@ -571,7 +571,10 @@ export default async function PedidoPage({
                                                 : order.payment_method ===
                                                     "fiado"
                                                     ? "Fiado"
-                                                    : "Não informado"}
+                                                    : order.payment_method ===
+                                                        "PIX"
+                                                        ? "PIX - INFINITE PAY"
+                                                        : "Não informado"}
                                     </Typography>
                                 </Stack>
 
