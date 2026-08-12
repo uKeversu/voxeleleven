@@ -2,7 +2,7 @@
 
 import { Product } from "@/types/product";
 
-const estoque = (
+/*const estoque = (
     P = 0,
     M = 0,
     G = 0,
@@ -1217,3 +1217,4 @@ export const products: Product[] = [
     },
 
 ];
+*/

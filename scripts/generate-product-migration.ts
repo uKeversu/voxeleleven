@@ -1,5 +1,6 @@
 // scripts/generate-product-migration.ts
 
+/*
 import fs from "fs";
 import path from "path";
 
@@ -135,3 +136,4 @@ console.log(`Produtos: ${products.length}`);
 console.log(`Variantes: ${variantValues.length}`);
 console.log(`Arquivo: ${outputPath}`);
 console.log("======================================");
+*/
