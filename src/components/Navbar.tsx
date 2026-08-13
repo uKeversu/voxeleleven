@@ -40,6 +40,7 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 
 import { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
@@ -86,6 +87,11 @@ export default function Navbar({
         loading,
         signOut,
     } = useAuth();
+
+    const isAdmin =
+        !loading &&
+        !!user &&
+        profile?.role === "admin";
 
     const [accountMenuAnchor, setAccountMenuAnchor] =
         useState<null | HTMLElement>(null);
@@ -478,6 +484,46 @@ export default function Navbar({
 
                                             Meus pedidos
                                         </MenuItem>
+
+                                        {profile?.role === "admin" && (
+                                            <>
+                                                <Divider
+                                                    sx={{
+                                                        my: 1,
+                                                        borderColor:
+                                                            "rgba(255,255,255,.07)",
+                                                    }}
+                                                />
+
+                                                <MenuItem
+                                                    onClick={() => {
+                                                        setAccountMenuAnchor(null);
+                                                        router.push("/admin");
+                                                    }}
+                                                    sx={{
+                                                        mx: 1,
+                                                        my: 0.5,
+                                                        borderRadius: 2,
+
+                                                        color: "primary.main",
+
+                                                        "&:hover": {
+                                                            bgcolor:
+                                                                "rgba(0,255,64,.08)",
+                                                        },
+                                                    }}
+                                                >
+                                                    <AdminPanelSettingsOutlinedIcon
+                                                        fontSize="small"
+                                                        sx={{
+                                                            mr: 1.5,
+                                                        }}
+                                                    />
+
+                                                    Painel administrativo
+                                                </MenuItem>
+                                            </>
+                                        )}
 
                                         <Divider
                                             sx={{
