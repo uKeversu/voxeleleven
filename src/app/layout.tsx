@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 import TopBar from "@/components/TopBar";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import ConditionalFooter from "@/components/ConditionalFooter";
 
 import { CartProvider } from "@/context/CartContext";
 import { SnackbarProvider } from "@/context/SnackbarContext";
@@ -45,7 +45,7 @@ export default async function RootLayout({
 
                 {children}
 
-                <Footer />
+                <ConditionalFooter />
 
               </CartProvider>
             </AuthProvider>
