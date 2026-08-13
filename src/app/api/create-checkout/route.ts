@@ -5,12 +5,16 @@ import { NextResponse } from "next/server";
 import { createClient } from
     "@/lib/supabase/server";
 
+
 export async function POST(
     req: Request
 ) {
+
     try {
 
-        const body = await req.json();
+        const body =
+            await req.json();
+
 
         /*
          * VALIDAÇÃO DO CARRINHO
@@ -20,6 +24,7 @@ export async function POST(
             !Array.isArray(body.items) ||
             body.items.length === 0
         ) {
+
             return NextResponse.json(
                 {
                     success: false,
@@ -30,6 +35,7 @@ export async function POST(
                     status: 400,
                 }
             );
+
         }
 
 
@@ -50,13 +56,16 @@ export async function POST(
                 user,
             },
             error: userError,
-        } = await supabase.auth.getUser();
+        } = await supabase
+            .auth
+            .getUser();
 
 
         if (
             userError ||
             !user
         ) {
+
             return NextResponse.json(
                 {
                     success: false,
@@ -67,14 +76,15 @@ export async function POST(
                     status: 401,
                 }
             );
+
         }
 
 
         /*
          * BUSCA O PERFIL
          *
-         * O nome do cliente será
-         * obtido diretamente do perfil
+         * O nome do pedido continua
+         * sendo obtido do perfil
          * do usuário autenticado.
          */
 
@@ -113,6 +123,90 @@ export async function POST(
                     status: 400,
                 }
             );
+
+        }
+
+
+        /*
+         * DADOS DO FRETE
+         *
+         * Normaliza os valores antes
+         * de enviá-los para o banco.
+         */
+
+        const customerPhone =
+            typeof body.customer_phone === "string"
+                ? body.customer_phone.trim()
+                : "";
+
+        const shippingZipCode =
+            typeof body.shipping_zip_code === "string"
+                ? body.shipping_zip_code.trim()
+                : "";
+
+        const shippingAddress =
+            typeof body.shipping_address === "string"
+                ? body.shipping_address.trim()
+                : "";
+
+        const shippingNumber =
+            typeof body.shipping_number === "string"
+                ? body.shipping_number.trim()
+                : "";
+
+        const shippingComplement =
+            typeof body.shipping_complement === "string"
+                ? body.shipping_complement.trim()
+                : "";
+
+        const shippingNeighborhood =
+            typeof body.shipping_neighborhood === "string"
+                ? body.shipping_neighborhood.trim()
+                : "";
+
+        const shippingCity =
+            typeof body.shipping_city === "string"
+                ? body.shipping_city.trim()
+                : "";
+
+        const shippingState =
+            typeof body.shipping_state === "string"
+                ? body.shipping_state.trim()
+                : "";
+
+
+        /*
+         * VALIDAÇÃO BÁSICA
+         *
+         * O banco também valida.
+         *
+         * Esta validação existe para
+         * devolver um erro mais rápido
+         * antes de iniciar a criação
+         * do pedido.
+         */
+
+        if (
+            !customerPhone ||
+            !shippingZipCode ||
+            !shippingAddress ||
+            !shippingNumber ||
+            !shippingNeighborhood ||
+            !shippingCity ||
+            !shippingState
+        ) {
+
+            return NextResponse.json(
+                {
+                    success: false,
+                    message:
+                        "Preencha todos os dados obrigatórios de contato e entrega.",
+                },
+                {
+                    status: 400,
+                }
+            );
+
         }
 
 
@@ -136,6 +230,7 @@ export async function POST(
                             item.product.variants
                         )
                     ) {
+
                         console.error(
                             "Produto recebido sem variants:",
                             item
@@ -144,7 +239,9 @@ export async function POST(
                         throw new Error(
                             `Produto ${item.product?.name || "desconhecido"} não possui variantes válidas.`
                         );
+
                     }
+
 
                     const variant =
                         item.product.variants.find(
@@ -153,7 +250,9 @@ export async function POST(
                                 item.size
                         );
 
+
                     if (!variant) {
+
                         console.error(
                             "Variante não encontrada:",
                             {
@@ -171,7 +270,9 @@ export async function POST(
                         throw new Error(
                             `Variante não encontrada para ${item.product.name} tamanho ${item.size}`
                         );
+
                     }
+
 
                     return {
                         variant_id:
@@ -180,6 +281,7 @@ export async function POST(
                         quantity:
                             Number(item.quantity),
                     };
+
                 }
             );
 
@@ -189,8 +291,12 @@ export async function POST(
          *
          * A RPC:
          *
+         * - exige usuário autenticado
+         * - grava user_id
          * - valida estoque
          * - reserva estoque
+         * - grava dados do cliente
+         * - grava endereço de entrega
          * - cria orders
          * - cria order_items
          * - calcula valores reais
@@ -207,6 +313,35 @@ export async function POST(
 
                 p_customer_name:
                     profile.name.trim(),
+
+                p_customer_email:
+                    user.email ||
+                    null,
+
+                p_customer_phone:
+                    customerPhone,
+
+                p_shipping_zip_code:
+                    shippingZipCode,
+
+                p_shipping_address:
+                    shippingAddress,
+
+                p_shipping_number:
+                    shippingNumber,
+
+                p_shipping_complement:
+                    shippingComplement ||
+                    null,
+
+                p_shipping_neighborhood:
+                    shippingNeighborhood,
+
+                p_shipping_city:
+                    shippingCity,
+
+                p_shipping_state:
+                    shippingState,
             }
         );
 
@@ -229,6 +364,7 @@ export async function POST(
                     status: 400,
                 }
             );
+
         }
 
 
@@ -236,8 +372,8 @@ export async function POST(
          * BUSCA OS ITENS REAIS
          * DO PEDIDO
          *
-         * Agora usamos os valores
-         * calculados pelo banco.
+         * Usamos exclusivamente os
+         * valores calculados pelo banco.
          */
 
         const {
@@ -246,12 +382,12 @@ export async function POST(
         } = await supabase
             .from("order_items")
             .select(`
-            quantity,
-            unit_price,
-            products (
-                name
-            )
-        `)
+                quantity,
+                unit_price,
+                products (
+                    name
+                )
+            `)
             .eq(
                 "order_id",
                 orderId
@@ -269,6 +405,7 @@ export async function POST(
                 itemsError
             );
 
+
             /*
              * O pedido já foi criado.
              *
@@ -284,6 +421,7 @@ export async function POST(
                 }
             );
 
+
             return NextResponse.json(
                 {
                     success: false,
@@ -294,6 +432,7 @@ export async function POST(
                     status: 500,
                 }
             );
+
         }
 
 
@@ -302,7 +441,9 @@ export async function POST(
          */
 
         const payload = {
-            handle: "voxelkore",
+
+            handle:
+                "voxelkore",
 
             redirect_url:
                 `https://voxeleleven.vercel.app/pagamento/sucesso?order_id=${orderId}`,
@@ -310,11 +451,9 @@ export async function POST(
             webhook_url:
                 "https://voxeleleven.vercel.app/api/webhook/infinitepay",
 
+
             /*
              * ID do pedido no nosso sistema.
-             *
-             * A InfinitePay devolverá este
-             * mesmo valor no webhook.
              */
 
             order_nsu:
@@ -323,6 +462,7 @@ export async function POST(
             items:
                 orderItemsFromDatabase.map(
                     (item: any) => ({
+
                         quantity:
                             Number(
                                 item.quantity
@@ -341,10 +481,17 @@ export async function POST(
                             ),
 
                         description:
-                            item.products?.name ||
-                            "Produto",
+                            Array.isArray(
+                                item.products
+                            )
+                                ? item.products[0]?.name ||
+                                "Produto"
+                                : item.products?.name ||
+                                "Produto",
+
                     })
                 ),
+
         };
 
 
@@ -401,6 +548,7 @@ export async function POST(
                 data
             );
 
+
             const {
                 error: cancelError,
             } = await supabase.rpc(
@@ -411,12 +559,16 @@ export async function POST(
                 }
             );
 
+
             if (cancelError) {
+
                 console.error(
                     "Erro ao cancelar pedido após falha no checkout:",
                     cancelError
                 );
+
             }
+
 
             return NextResponse.json(
                 {
@@ -429,6 +581,7 @@ export async function POST(
                         response.status || 500,
                 }
             );
+
         }
 
 
@@ -437,12 +590,14 @@ export async function POST(
          */
 
         return NextResponse.json({
+
             success: true,
 
             order_id:
                 orderId,
 
             ...data,
+
         });
 
     } catch (error) {
@@ -451,6 +606,7 @@ export async function POST(
             "Erro ao criar checkout:",
             error
         );
+
 
         return NextResponse.json(
             {
@@ -465,6 +621,7 @@ export async function POST(
                 status: 500,
             }
         );
+
     }
 
 }
