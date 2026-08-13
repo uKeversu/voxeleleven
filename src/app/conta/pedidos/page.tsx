@@ -1,5 +1,7 @@
 // src/app/conta/pedidos/page.tsx
 
+import Link from "next/link";
+
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
@@ -11,6 +13,7 @@ import {
     Paper,
     Stack,
     Divider,
+    Chip,
 } from "@mui/material";
 
 export default async function MeusPedidosPage() {
@@ -93,6 +96,87 @@ export default async function MeusPedidosPage() {
 
     }
 
+    const orderStatusMap: Record<
+        string,
+        {
+            label: string;
+            description: string;
+            color:
+            | "default"
+            | "primary"
+            | "success"
+            | "error"
+            | "warning";
+        }
+    > = {
+
+        reserved: {
+            label: "Pedido reservado",
+            description:
+                "Seu pedido foi reservado e aguarda preparação.",
+            color: "default",
+        },
+
+        packing: {
+            label: "Preparando seu pedido",
+            description:
+                "Seu pedido está sendo preparado para envio.",
+            color: "warning",
+        },
+
+        delivered: {
+            label: "Pedido entregue",
+            description:
+                "Seu pedido foi entregue com sucesso.",
+            color: "primary",
+        },
+
+        cancelled: {
+            label: "Pedido cancelado",
+            description:
+                "Este pedido foi cancelado.",
+            color: "error",
+        },
+
+    };
+
+
+    const paymentStatusMap: Record<
+        string,
+        {
+            label: string;
+            description: string;
+            color:
+            | "default"
+            | "primary"
+            | "success"
+            | "error"
+            | "warning";
+        }
+    > = {
+
+        pending: {
+            label: "Pagamento pendente",
+            description:
+                "Aguardando confirmação do pagamento.",
+            color: "default",
+        },
+
+        approved: {
+            label: "Pagamento aprovado",
+            description:
+                "Pagamento confirmado com sucesso.",
+            color: "primary",
+        },
+
+        refunded: {
+            label: "Pagamento estornado",
+            description:
+                "O pagamento deste pedido foi estornado.",
+            color: "error",
+        },
+
+    };
 
     return (
 
@@ -256,179 +340,315 @@ export default async function MeusPedidosPage() {
                         <Stack spacing={2}>
 
                             {orders.map(
-                                (order) => (
+                                (order) => {
 
-                                    <Paper
-                                        key={order.id}
-                                        elevation={0}
-                                        sx={{
-                                            p: {
-                                                xs: 2.5,
-                                                md: 3,
-                                            },
+                                    const orderStatus =
+                                        orderStatusMap[order.status] || {
+                                            label: "Status não informado",
+                                            description:
+                                                "Não foi possível identificar o status deste pedido.",
+                                            color: "default" as const,
+                                        };
 
-                                            borderRadius: 4,
 
-                                            bgcolor:
-                                                "rgba(255,255,255,.025)",
+                                    const paymentStatus =
+                                        paymentStatusMap[
+                                        order.payment_status
+                                        ] || {
+                                            label: "Pagamento não informado",
+                                            description:
+                                                "Não foi possível identificar o status do pagamento.",
+                                            color: "default" as const,
+                                        };
 
-                                            border:
-                                                "1px solid rgba(255,255,255,.07)",
 
-                                            transition:
-                                                ".25s",
+                                    return (
 
-                                            "&:hover": {
-                                                borderColor:
-                                                    "rgba(0,255,64,.3)",
-
-                                                transform:
-                                                    "translateY(-2px)",
-                                            },
-                                        }}
-                                    >
-
-                                        <Stack
-                                            spacing={2}
+                                        <Link
+                                            key={order.id}
+                                            href={`/conta/pedidos/${order.id}`}
+                                            style={{
+                                                textDecoration: "none",
+                                                color: "inherit",
+                                                display: "block",
+                                            }}
                                         >
 
-                                            <Stack
-                                                sx={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
-                                            >
-
-                                                <Box>
-
-                                                    <Typography
-                                                        sx={{
-                                                            fontWeight: 900,
-                                                            fontSize: 17,
-                                                        }}
-                                                    >
-                                                        Pedido #{order.id}
-                                                    </Typography>
-
-                                                    <Typography
-                                                        sx={{
-                                                            mt: 0.4,
-
-                                                            color:
-                                                                "text.secondary",
-
-                                                            fontSize: 13,
-                                                        }}
-                                                    >
-                                                        {new Intl.DateTimeFormat(
-                                                            "pt-BR",
-                                                            {
-                                                                dateStyle:
-                                                                    "medium",
-
-                                                                timeStyle:
-                                                                    "short",
-                                                            }
-                                                        ).format(
-                                                            new Date(
-                                                                order.created_at
-                                                            )
-                                                        )}
-                                                    </Typography>
-
-                                                </Box>
-
-
-                                                <Typography
-                                                    sx={{
-                                                        color:
-                                                            "primary.main",
-
-                                                        fontWeight:
-                                                            900,
-
-                                                        fontSize:
-                                                            18,
-                                                    }}
-                                                >
-                                                    R$ {Number(
-                                                        order.total
-                                                    ).toFixed(2).replace(
-                                                        ".",
-                                                        ","
-                                                    )}
-                                                </Typography>
-
-                                            </Stack>
-
-
-                                            <Divider
+                                            <Paper
+                                                elevation={0}
                                                 sx={{
-                                                    borderColor:
-                                                        "rgba(255,255,255,.07)",
-                                                }}
-                                            />
+                                                    p: {
+                                                        xs: 2.5,
+                                                        md: 3,
+                                                    },
 
+                                                    borderRadius: 4,
 
-                                            <Stack
-                                                direction={{
-                                                    xs: "column",
-                                                    sm: "row",
+                                                    bgcolor:
+                                                        "rgba(255,255,255,.025)",
+
+                                                    border:
+                                                        "1px solid rgba(255,255,255,.07)",
+
+                                                    cursor: "pointer",
+
+                                                    transition: ".25s",
+
+                                                    "&:hover": {
+                                                        borderColor:
+                                                            "rgba(0,255,64,.3)",
+
+                                                        transform:
+                                                            "translateY(-2px)",
+
+                                                        bgcolor:
+                                                            "rgba(0,255,64,.025)",
+                                                    },
                                                 }}
-                                                spacing={2}
                                             >
 
-                                                <Box>
+                                                <Stack spacing={2}>
 
-                                                    <Typography
-                                                        variant="caption"
+                                                    <Stack
                                                         sx={{
-                                                            color:
-                                                                "text.secondary",
+                                                            flexDirection: "row",
+
+                                                            justifyContent:
+                                                                "space-between",
+
+                                                            alignItems:
+                                                                "center",
                                                         }}
                                                     >
-                                                        Status do pedido
-                                                    </Typography>
 
-                                                    <Typography
+                                                        <Box>
+
+                                                            <Typography
+                                                                sx={{
+                                                                    fontWeight: 900,
+                                                                    fontSize: 17,
+                                                                }}
+                                                            >
+                                                                Pedido #{order.id}
+                                                            </Typography>
+
+
+                                                            <Typography
+                                                                sx={{
+                                                                    mt: 0.4,
+
+                                                                    color:
+                                                                        "text.secondary",
+
+                                                                    fontSize: 13,
+                                                                }}
+                                                            >
+                                                                {new Intl.DateTimeFormat(
+                                                                    "pt-BR",
+                                                                    {
+                                                                        dateStyle:
+                                                                            "medium",
+
+                                                                        timeStyle:
+                                                                            "short",
+                                                                    }
+                                                                ).format(
+                                                                    new Date(
+                                                                        order.created_at
+                                                                    )
+                                                                )}
+                                                            </Typography>
+
+                                                        </Box>
+
+
+                                                        <Typography
+                                                            sx={{
+                                                                color:
+                                                                    "primary.main",
+
+                                                                fontWeight: 900,
+
+                                                                fontSize: 18,
+                                                            }}
+                                                        >
+                                                            {Number(
+                                                                order.total
+                                                            ).toLocaleString(
+                                                                "pt-BR",
+                                                                {
+                                                                    style:
+                                                                        "currency",
+
+                                                                    currency:
+                                                                        "BRL",
+                                                                }
+                                                            )}
+                                                        </Typography>
+
+                                                    </Stack>
+
+
+                                                    <Divider
                                                         sx={{
-                                                            mt: 0.4,
-                                                            fontWeight: 700,
+                                                            borderColor:
+                                                                "rgba(255,255,255,.07)",
                                                         }}
-                                                    >
-                                                        {order.status}
-                                                    </Typography>
-
-                                                </Box>
+                                                    />
 
 
-                                                <Box>
-
-                                                    <Typography
-                                                        variant="caption"
-                                                        sx={{
-                                                            color:
-                                                                "text.secondary",
+                                                    <Stack
+                                                        direction={{
+                                                            xs: "column",
+                                                            sm: "row",
                                                         }}
+                                                        spacing={3}
                                                     >
-                                                        Pagamento
-                                                    </Typography>
 
-                                                    <Typography
-                                                        sx={{
-                                                            mt: 0.4,
-                                                            fontWeight: 700,
-                                                        }}
-                                                    >
-                                                        {order.payment_status}
-                                                    </Typography>
+                                                        <Box sx={{ flex: 1 }}>
 
-                                                </Box>
+                                                            <Typography
+                                                                variant="caption"
+                                                                sx={{
+                                                                    color:
+                                                                        "text.secondary",
 
-                                            </Stack>
+                                                                    fontWeight: 700,
 
-                                        </Stack>
+                                                                    textTransform:
+                                                                        "uppercase",
 
-                                    </Paper>
+                                                                    letterSpacing:
+                                                                        0.5,
+                                                                }}
+                                                            >
+                                                                Status do pedido
+                                                            </Typography>
 
-                                )
+
+                                                            <Stack
+                                                                direction="row"
+                                                                spacing={1}
+                                                                sx={{
+                                                                    alignItems:
+                                                                        "center",
+
+                                                                    mt: 0.7,
+                                                                }}
+                                                            >
+
+                                                                <Chip
+                                                                    label={
+                                                                        orderStatus.label
+                                                                    }
+                                                                    color={
+                                                                        orderStatus.color
+                                                                    }
+                                                                    size="small"
+                                                                    sx={{
+                                                                        fontWeight: 800,
+                                                                        borderRadius: 2,
+                                                                    }}
+                                                                />
+
+                                                            </Stack>
+
+
+                                                            <Typography
+                                                                sx={{
+                                                                    mt: 0.7,
+
+                                                                    color:
+                                                                        "text.secondary",
+
+                                                                    fontSize: 12,
+                                                                }}
+                                                            >
+                                                                {
+                                                                    orderStatus.description
+                                                                }
+                                                            </Typography>
+
+                                                        </Box>
+
+
+                                                        <Box sx={{ flex: 1 }}>
+
+                                                            <Typography
+                                                                variant="caption"
+                                                                sx={{
+                                                                    color:
+                                                                        "text.secondary",
+
+                                                                    fontWeight: 700,
+
+                                                                    textTransform:
+                                                                        "uppercase",
+
+                                                                    letterSpacing:
+                                                                        0.5,
+                                                                }}
+                                                            >
+                                                                Pagamento
+                                                            </Typography>
+
+
+                                                            <Stack
+                                                                direction="row"
+                                                                spacing={1}
+                                                                sx={{
+                                                                    alignItems:
+                                                                        "center",
+
+                                                                    mt: 0.7,
+                                                                }}
+                                                            >
+
+                                                                <Chip
+                                                                    label={
+                                                                        paymentStatus.label
+                                                                    }
+                                                                    color={
+                                                                        paymentStatus.color
+                                                                    }
+                                                                    size="small"
+                                                                    sx={{
+                                                                        fontWeight: 800,
+                                                                        borderRadius: 2,
+                                                                    }}
+                                                                />
+
+                                                            </Stack>
+
+
+                                                            <Typography
+                                                                sx={{
+                                                                    mt: 0.7,
+
+                                                                    color:
+                                                                        "text.secondary",
+
+                                                                    fontSize: 12,
+                                                                }}
+                                                            >
+                                                                {
+                                                                    paymentStatus.description
+                                                                }
+                                                            </Typography>
+
+                                                        </Box>
+
+                                                    </Stack>
+
+                                                </Stack>
+
+                                            </Paper>
+
+                                        </Link>
+
+                                    );
+
+                                }
                             )}
 
                         </Stack>
