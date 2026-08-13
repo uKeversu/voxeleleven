@@ -39,6 +39,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 
 import { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
@@ -457,6 +458,25 @@ export default function Navbar({
                                             />
 
                                             Minha conta
+                                        </MenuItem>
+
+                                        <MenuItem
+                                            onClick={() => {
+                                                setAccountMenuAnchor(null);
+                                                router.push("/conta/pedidos");
+                                            }}
+                                            sx={{
+                                                mx: 1,
+                                                my: 0.5,
+                                                borderRadius: 2,
+                                            }}
+                                        >
+                                            <ReceiptLongOutlinedIcon
+                                                fontSize="small"
+                                                sx={{ mr: 1.5 }}
+                                            />
+
+                                            Meus pedidos
                                         </MenuItem>
 
                                         <Divider
