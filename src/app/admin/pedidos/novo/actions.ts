@@ -20,17 +20,17 @@ type CreateManualOrderInput = {
     customer_email: string | null;
 
     payment_method:
-        | "pix"
-        | "card"
-        | "fiado";
+    | "pix"
+    | "card"
+    | "fiado";
 
     payment_due_date:
-        | string
-        | null;
+    | string
+    | null;
 
     payment_notes:
-        | string
-        | null;
+    | string
+    | null;
 
     subtotal: number;
     shipping_cost: number;
@@ -88,7 +88,7 @@ export async function createManualOrder(
 
     if (
         input.payment_method ===
-            "fiado" &&
+        "fiado" &&
         !input.payment_due_date
     ) {
         return {

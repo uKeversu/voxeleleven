@@ -42,6 +42,81 @@ export async function POST(
 
 
         /*
+         * USUÁRIO AUTENTICADO
+         */
+
+        const {
+            data: {
+                user,
+            },
+            error: userError,
+        } = await supabase.auth.getUser();
+
+
+        if (
+            userError ||
+            !user
+        ) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message:
+                        "Você precisa estar logado para finalizar o pedido.",
+                },
+                {
+                    status: 401,
+                }
+            );
+        }
+
+
+        /*
+         * BUSCA O PERFIL
+         *
+         * O nome do cliente será
+         * obtido diretamente do perfil
+         * do usuário autenticado.
+         */
+
+        const {
+            data: profile,
+            error: profileError,
+        } = await supabase
+            .from("profiles")
+            .select("name")
+            .eq(
+                "id",
+                user.id
+            )
+            .single();
+
+
+        if (
+            profileError ||
+            !profile ||
+            !profile.name ||
+            !profile.name.trim()
+        ) {
+
+            console.error(
+                "Erro ao buscar perfil do cliente:",
+                profileError
+            );
+
+            return NextResponse.json(
+                {
+                    success: false,
+                    message:
+                        "Não foi possível identificar o cliente.",
+                },
+                {
+                    status: 400,
+                }
+            );
+        }
+
+
+        /*
          * MONTA OS ITENS
          *
          * Não enviamos preço.
@@ -127,9 +202,11 @@ export async function POST(
         } = await supabase.rpc(
             "create_online_order",
             {
-                p_items: orderItems,
-                p_customer_name: "Cliente Online",
+                p_items:
+                    orderItems,
 
+                p_customer_name:
+                    profile.name.trim(),
             }
         );
 
@@ -169,12 +246,12 @@ export async function POST(
         } = await supabase
             .from("order_items")
             .select(`
-                quantity,
-                unit_price,
-                products (
-                    name
-                )
-            `)
+            quantity,
+            unit_price,
+            products (
+                name
+            )
+        `)
             .eq(
                 "order_id",
                 orderId
@@ -389,4 +466,5 @@ export async function POST(
             }
         );
     }
+
 }
