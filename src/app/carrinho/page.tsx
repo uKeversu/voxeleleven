@@ -1016,258 +1016,6 @@ export default function CarrinhoPage() {
                         >
                             Adicionar mais produtos
                         </Button>
-                    </Stack>
-                </Grid>
-
-
-                {/* LATERAL */}
-
-                <Grid
-                    size={{
-                        xs: 12,
-                        lg: 5,
-                    }}
-                >
-                    <Stack
-                        spacing={3}
-                    >
-
-                        {/* RESUMO */}
-
-                        <Paper
-                            sx={{
-                                p: {
-                                    xs:
-                                        3,
-
-                                    md:
-                                        4,
-                                },
-
-                                borderRadius:
-                                    5,
-
-                                border:
-                                    "1px solid",
-
-                                borderColor:
-                                    "divider",
-                            }}
-                        >
-                            <Stack
-                                spacing={2.5}
-                            >
-                                <Stack
-                                    direction="row"
-                                    spacing={1.5}
-                                    sx={{
-                                        alignItems:
-                                            "center",
-                                    }}
-                                >
-                                    <ShoppingBagOutlinedIcon
-                                        sx={{
-                                            color:
-                                                "primary.main",
-                                        }}
-                                    />
-
-                                    <Typography
-                                        variant="h5"
-                                        sx={{
-                                            fontWeight:
-                                                900,
-                                        }}
-                                    >
-                                        Resumo do pedido
-                                    </Typography>
-                                </Stack>
-
-
-                                <Divider />
-
-
-                                <Stack
-                                    direction="row"
-                                    sx={{
-                                        justifyContent:
-                                            "space-between",
-
-                                        alignItems:
-                                            "center",
-                                    }}
-                                >
-                                    <Typography
-                                        sx={{
-                                            color:
-                                                "text.secondary",
-                                        }}
-                                    >
-                                        Produtos
-                                    </Typography>
-
-                                    <Typography
-                                        sx={{
-                                            fontWeight:
-                                                700,
-                                        }}
-                                    >
-                                        {cartItems.length}
-                                    </Typography>
-                                </Stack>
-
-
-                                <Stack
-                                    direction="row"
-                                    sx={{
-                                        justifyContent:
-                                            "space-between",
-
-                                        alignItems:
-                                            "center",
-                                    }}
-                                >
-                                    <Stack
-                                        direction="row"
-                                        spacing={1}
-                                        sx={{
-                                            alignItems:
-                                                "center",
-                                        }}
-                                    >
-                                        <LocalShippingOutlinedIcon
-                                            sx={{
-                                                fontSize:
-                                                    18,
-
-                                                color:
-                                                    "text.secondary",
-                                            }}
-                                        />
-
-                                        <Typography
-                                            sx={{
-                                                color:
-                                                    "text.secondary",
-                                            }}
-                                        >
-                                            Frete
-                                        </Typography>
-                                    </Stack>
-
-                                    <Typography
-                                        sx={{
-                                            fontWeight:
-                                                700,
-                                        }}
-                                    >
-                                        Grátis
-                                    </Typography>
-                                </Stack>
-
-
-                                <Divider />
-
-
-                                <Stack
-                                    direction="row"
-                                    sx={{
-                                        justifyContent:
-                                            "space-between",
-
-                                        alignItems:
-                                            "center",
-                                    }}
-                                >
-                                    <Typography
-                                        variant="h6"
-                                        sx={{
-                                            fontWeight:
-                                                800,
-                                        }}
-                                    >
-                                        Total
-                                    </Typography>
-
-                                    <Typography
-                                        variant="h4"
-                                        sx={{
-                                            color:
-                                                "primary.main",
-
-                                            fontWeight:
-                                                900,
-                                        }}
-                                    >
-                                        {totalPrice.toLocaleString(
-                                            "pt-BR",
-                                            {
-                                                style:
-                                                    "currency",
-
-                                                currency:
-                                                    "BRL",
-                                            }
-                                        )}
-                                    </Typography>
-                                </Stack>
-
-
-                                <Box
-                                    sx={{
-                                        pt:
-                                            1,
-                                    }}
-                                >
-                                    <Typography
-                                        variant="subtitle2"
-                                        sx={{
-                                            fontWeight:
-                                                800,
-
-                                            mb:
-                                                1.25,
-                                        }}
-                                    >
-                                        Cupom de desconto
-                                    </Typography>
-
-                                    <TextField
-                                        fullWidth
-                                        placeholder="Digite seu cupom"
-                                        slotProps={{
-                                            input: {
-                                                startAdornment: (
-                                                    <InputAdornment
-                                                        position="start"
-                                                    >
-                                                        <LocalOfferOutlinedIcon
-                                                            fontSize="small"
-                                                        />
-                                                    </InputAdornment>
-                                                ),
-
-                                                endAdornment: (
-                                                    <InputAdornment
-                                                        position="end"
-                                                    >
-                                                        <Button
-                                                            size="small"
-                                                            sx={{
-                                                                fontWeight: 800,
-                                                            }}
-                                                        >
-                                                            Aplicar
-                                                        </Button>
-                                                    </InputAdornment>
-                                                ),
-                                            },
-                                        }}
-                                    />
-                                </Box>
-                            </Stack>
-                        </Paper>
-
 
                         {/* DADOS DE ENTREGA */}
 
@@ -1552,7 +1300,257 @@ export default function CarrinhoPage() {
                                 </Grid>
                             </Stack>
                         </Paper>
+                    </Stack>
+                </Grid>
 
+
+                {/* LATERAL */}
+
+                <Grid
+                    size={{
+                        xs: 12,
+                        lg: 5,
+                    }}
+                >
+                    <Stack
+                        spacing={3}
+                    >
+
+                        {/* RESUMO */}
+
+                        <Paper
+                            sx={{
+                                p: {
+                                    xs:
+                                        3,
+
+                                    md:
+                                        4,
+                                },
+
+                                borderRadius:
+                                    5,
+
+                                border:
+                                    "1px solid",
+
+                                borderColor:
+                                    "divider",
+                            }}
+                        >
+                            <Stack
+                                spacing={2.5}
+                            >
+                                <Stack
+                                    direction="row"
+                                    spacing={1.5}
+                                    sx={{
+                                        alignItems:
+                                            "center",
+                                    }}
+                                >
+                                    <ShoppingBagOutlinedIcon
+                                        sx={{
+                                            color:
+                                                "primary.main",
+                                        }}
+                                    />
+
+                                    <Typography
+                                        variant="h5"
+                                        sx={{
+                                            fontWeight:
+                                                900,
+                                        }}
+                                    >
+                                        Resumo do pedido
+                                    </Typography>
+                                </Stack>
+
+
+                                <Divider />
+
+
+                                <Stack
+                                    direction="row"
+                                    sx={{
+                                        justifyContent:
+                                            "space-between",
+
+                                        alignItems:
+                                            "center",
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            color:
+                                                "text.secondary",
+                                        }}
+                                    >
+                                        Produtos
+                                    </Typography>
+
+                                    <Typography
+                                        sx={{
+                                            fontWeight:
+                                                700,
+                                        }}
+                                    >
+                                        {cartItems.length}
+                                    </Typography>
+                                </Stack>
+
+
+                                <Stack
+                                    direction="row"
+                                    sx={{
+                                        justifyContent:
+                                            "space-between",
+
+                                        alignItems:
+                                            "center",
+                                    }}
+                                >
+                                    <Stack
+                                        direction="row"
+                                        spacing={1}
+                                        sx={{
+                                            alignItems:
+                                                "center",
+                                        }}
+                                    >
+                                        <LocalShippingOutlinedIcon
+                                            sx={{
+                                                fontSize:
+                                                    18,
+
+                                                color:
+                                                    "text.secondary",
+                                            }}
+                                        />
+
+                                        <Typography
+                                            sx={{
+                                                color:
+                                                    "text.secondary",
+                                            }}
+                                        >
+                                            Frete
+                                        </Typography>
+                                    </Stack>
+
+                                    <Typography
+                                        sx={{
+                                            fontWeight:
+                                                700,
+                                        }}
+                                    >
+                                        Grátis
+                                    </Typography>
+                                </Stack>
+
+
+                                <Divider />
+
+
+                                <Stack
+                                    direction="row"
+                                    sx={{
+                                        justifyContent:
+                                            "space-between",
+
+                                        alignItems:
+                                            "center",
+                                    }}
+                                >
+                                    <Typography
+                                        variant="h6"
+                                        sx={{
+                                            fontWeight:
+                                                800,
+                                        }}
+                                    >
+                                        Total
+                                    </Typography>
+
+                                    <Typography
+                                        variant="h4"
+                                        sx={{
+                                            color:
+                                                "primary.main",
+
+                                            fontWeight:
+                                                900,
+                                        }}
+                                    >
+                                        {totalPrice.toLocaleString(
+                                            "pt-BR",
+                                            {
+                                                style:
+                                                    "currency",
+
+                                                currency:
+                                                    "BRL",
+                                            }
+                                        )}
+                                    </Typography>
+                                </Stack>
+
+
+                                <Box
+                                    sx={{
+                                        pt:
+                                            1,
+                                    }}
+                                >
+                                    <Typography
+                                        variant="subtitle2"
+                                        sx={{
+                                            fontWeight:
+                                                800,
+
+                                            mb:
+                                                1.25,
+                                        }}
+                                    >
+                                        Cupom de desconto
+                                    </Typography>
+
+                                    <TextField
+                                        fullWidth
+                                        placeholder="Digite seu cupom"
+                                        slotProps={{
+                                            input: {
+                                                startAdornment: (
+                                                    <InputAdornment
+                                                        position="start"
+                                                    >
+                                                        <LocalOfferOutlinedIcon
+                                                            fontSize="small"
+                                                        />
+                                                    </InputAdornment>
+                                                ),
+
+                                                endAdornment: (
+                                                    <InputAdornment
+                                                        position="end"
+                                                    >
+                                                        <Button
+                                                            size="small"
+                                                            sx={{
+                                                                fontWeight: 800,
+                                                            }}
+                                                        >
+                                                            Aplicar
+                                                        </Button>
+                                                    </InputAdornment>
+                                                ),
+                                            },
+                                        }}
+                                    />
+                                </Box>
+                            </Stack>
+                        </Paper>
 
                         {/* AÇÕES */}
 
@@ -1632,7 +1630,6 @@ export default function CarrinhoPage() {
                                 >
                                     Finalizar no WhatsApp
                                 </Button>
-
 
                                 <Button
                                     component={Link}
