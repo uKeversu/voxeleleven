@@ -208,6 +208,25 @@ export default function PedidoAcoes({
 
         setError(null);
 
+        if (!customerPhone) {
+
+            setError(
+                "Este cliente não possui telefone cadastrado."
+            );
+
+            return;
+        }
+
+        const phone = formatPhone(customerPhone);
+
+        if (!phone) {
+
+            setError(
+                "O telefone do cliente é inválido."
+            );
+
+            return;
+        }
 
         setMensagemCobranca(
             criarMensagemCobranca(
@@ -218,9 +237,7 @@ export default function PedidoAcoes({
             )
         );
 
-
         setCobrancaDialogOpen(true);
-
     }
 
 
@@ -316,10 +333,7 @@ export default function PedidoAcoes({
                         startIcon={
                             <WhatsApp />
                         }
-                        disabled={
-                            loading ||
-                            !customerPhone
-                        }
+                        disabled={loading}
                         onClick={
                             handleAbrirCobranca
                         }
