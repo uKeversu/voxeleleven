@@ -870,6 +870,11 @@ export default async function PedidoPage({
                         <PedidoAcoes
                             orderId={order.id}
                             status={order.status}
+                            paymentStatus={order.payment_status}
+                            customerName={order.customer_name}
+                            customerPhone={order.customer_phone}
+                            items={order.items}
+                            total={order.total}
                         />
 
                         <Button
