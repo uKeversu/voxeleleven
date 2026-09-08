@@ -28,6 +28,7 @@ import { useRouter } from "next/navigation";
 import {
     updateOrderDeliveryStatus,
     cancelOrder,
+    updateOrderCustomerPhone,
 } from "./actions";
 
 import type { OrderItem } from "@/lib/orders";
@@ -70,22 +71,26 @@ export default function PedidoAcoes({
 
     const router = useRouter();
 
-
     const [loading, setLoading] =
         useState(false);
-
 
     const [error, setError] =
         useState<string | null>(null);
 
-
     const [cancelDialogOpen, setCancelDialogOpen] =
         useState(false);
-
 
     const [cobrancaDialogOpen, setCobrancaDialogOpen] =
         useState(false);
 
+    const [telefoneDialogOpen, setTelefoneDialogOpen] =
+        useState(false);
+
+    const [telefone, setTelefone] =
+        useState(customerPhone ?? "");
+
+    const [salvandoTelefone, setSalvandoTelefone] =
+        useState(false);
 
     /*
      * MENSAGEM DA COBRANÇA
@@ -208,22 +213,18 @@ export default function PedidoAcoes({
 
         setError(null);
 
-        if (!customerPhone) {
+        if (!telefone) {
 
-            setError(
-                "Este cliente não possui telefone cadastrado."
-            );
+            setTelefoneDialogOpen(true);
 
             return;
         }
 
-        const phone = formatPhone(customerPhone);
+        const phone = formatPhone(telefone);
 
         if (!phone) {
 
-            setError(
-                "O telefone do cliente é inválido."
-            );
+            setTelefoneDialogOpen(true);
 
             return;
         }
@@ -240,6 +241,63 @@ export default function PedidoAcoes({
         setCobrancaDialogOpen(true);
     }
 
+    /*
+     * ABRE MODAL PARA SALVAR TELEFONE
+     */
+    async function handleSalvarTelefone() {
+
+        setError(null);
+
+        const phone = formatPhone(telefone);
+
+        if (!phone) {
+
+            setError(
+                "Informe um número de telefone válido."
+            );
+
+            return;
+        }
+
+        setSalvandoTelefone(true);
+
+        const result =
+            await updateOrderCustomerPhone(
+                orderId,
+                phone
+            );
+
+        if (!result.success) {
+
+            setError(
+                result.error ||
+                "Não foi possível salvar o telefone."
+            );
+
+            setSalvandoTelefone(false);
+
+            return;
+        }
+
+        setTelefone(phone);
+
+        setTelefoneDialogOpen(false);
+
+        setMensagemCobranca(
+            criarMensagemCobranca(
+                orderId,
+                customerName,
+                items,
+                total
+            )
+        );
+
+        setCobrancaDialogOpen(true);
+
+        setSalvandoTelefone(false);
+
+        router.refresh();
+    }
 
     /*
      * ABRE WHATSAPP
@@ -249,8 +307,7 @@ export default function PedidoAcoes({
 
         setError(null);
 
-
-        if (!customerPhone) {
+        if (!telefone) {
 
             setError(
                 "Este cliente não possui telefone cadastrado."
@@ -259,10 +316,8 @@ export default function PedidoAcoes({
             return;
         }
 
-
         const phone =
-            formatPhone(customerPhone);
-
+            formatPhone(telefone);
 
         if (!phone) {
 
@@ -273,33 +328,22 @@ export default function PedidoAcoes({
             return;
         }
 
-
         const url =
             `https://wa.me/${phone}?text=${encodeURIComponent(
                 mensagemCobranca
             )}`;
-
 
         window.open(
             url,
             "_blank"
         );
 
-
         setCobrancaDialogOpen(false);
-
     }
 
 
     /*
      * PEDIDOS CANCELADOS NÃO POSSUEM AÇÕES
-     *
-     * IMPORTANTE:
-     *
-     * Não retornamos mais null para "delivered",
-     * pois um pedido entregue pode continuar
-     * com pagamento pendente, especialmente
-     * nos pedidos feitos no fiado.
      */
 
     if (status === "cancelled") {
@@ -334,9 +378,7 @@ export default function PedidoAcoes({
                             <WhatsApp />
                         }
                         disabled={loading}
-                        onClick={
-                            handleAbrirCobranca
-                        }
+                        onClick={handleAbrirCobranca}
                         sx={{
                             borderRadius: 2.5,
                             fontWeight: 900,
@@ -434,9 +476,7 @@ export default function PedidoAcoes({
             </Stack>
 
 
-            {/* ===================================== */}
             {/* DIALOG DE CANCELAMENTO */}
-            {/* ===================================== */}
 
             <Dialog
                 open={cancelDialogOpen}
@@ -504,9 +544,103 @@ export default function PedidoAcoes({
             </Dialog>
 
 
-            {/* ===================================== */}
+            {/* DIALOG DE TELEFONE */}
+
+            <Dialog
+                open={telefoneDialogOpen}
+                onClose={() =>
+                    !salvandoTelefone &&
+                    setTelefoneDialogOpen(false)
+                }
+                fullWidth
+                maxWidth="xs"
+            >
+
+                <DialogTitle
+                    sx={{
+                        fontWeight: 900,
+                    }}
+                >
+                    📱 Adicionar número
+                </DialogTitle>
+
+
+                <DialogContent>
+
+                    <Stack spacing={2}>
+
+                        <DialogContentText>
+                            Este pedido não possui um número de
+                            WhatsApp cadastrado.
+                        </DialogContentText>
+
+                        <TextField
+                            autoFocus
+                            fullWidth
+                            label="Número do WhatsApp"
+                            placeholder="(47) 99999-9999"
+                            value={telefone}
+                            onChange={(event) =>
+                                setTelefone(
+                                    event.target.value
+                                )
+                            }
+                            disabled={salvandoTelefone}
+                        />
+
+                        <Alert severity="info">
+                            O número será salvo neste pedido e
+                            utilizado para a cobrança via WhatsApp.
+                        </Alert>
+
+                    </Stack>
+
+                </DialogContent>
+
+
+                <DialogActions
+                    sx={{
+                        p: 2,
+                        gap: 1,
+                    }}
+                >
+
+                    <Button
+                        onClick={() =>
+                            setTelefoneDialogOpen(false)
+                        }
+                        disabled={salvandoTelefone}
+                        sx={{
+                            fontWeight: 800,
+                        }}
+                    >
+                        Cancelar
+                    </Button>
+
+
+                    <Button
+                        onClick={handleSalvarTelefone}
+                        variant="contained"
+                        color="success"
+                        disabled={
+                            salvandoTelefone ||
+                            !telefone.trim()
+                        }
+                        sx={{
+                            fontWeight: 900,
+                            borderRadius: 2.5,
+                        }}
+                    >
+                        {salvandoTelefone
+                            ? "Salvando..."
+                            : "Salvar e cobrar"}
+                    </Button>
+
+                </DialogActions>
+
+            </Dialog>
+
             {/* DIALOG DE COBRANÇA */}
-            {/* ===================================== */}
 
             <Dialog
                 open={cobrancaDialogOpen}
@@ -561,7 +695,7 @@ export default function PedidoAcoes({
                                 variant="body2"
                                 color="text.secondary"
                             >
-                                {customerPhone}
+                                {telefone}
                             </Typography>
 
                         </Box>
@@ -871,9 +1005,7 @@ export default function PedidoAcoes({
 
 
 /*
- * ============================================
  * FORMATA TELEFONE
- * ============================================
  */
 
 function formatPhone(
@@ -918,9 +1050,7 @@ function formatPhone(
 
 
 /*
- * ============================================
  * CRIA MENSAGEM DA COBRANÇA
- * ============================================
  */
 
 function criarMensagemCobranca(
@@ -980,7 +1110,7 @@ function criarMensagemCobranca(
 
         `Após realizar o pagamento, envie o comprovante por este WhatsApp para confirmarmos o pagamento e prosseguirmos com o pedido.\n\n` +
 
-        `🏪 *Voxel Eleven*\n` +
+        `*Voxel Eleven*\n` +
 
         `A Paixão Ganha Forma.\n\n` +
 

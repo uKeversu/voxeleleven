@@ -138,3 +138,63 @@ export async function cancelOrder(
         success: true,
     };
 }
+
+export async function updateOrderCustomerPhone(
+    orderId: number,
+    phone: string
+) {
+    try {
+        const supabase = await createClient();
+
+        const telefone = phone.replace(/\D/g, "");
+
+        if (!telefone) {
+            return {
+                success: false,
+                error: "Informe um número de telefone válido.",
+            };
+        }
+
+        if (telefone.length < 10 || telefone.length > 13) {
+            return {
+                success: false,
+                error: "Informe um número de telefone válido.",
+            };
+        }
+
+        const { error } = await supabase
+            .from("orders")
+            .update({
+                customer_phone: telefone,
+            })
+            .eq("id", orderId);
+
+        if (error) {
+            console.error(
+                "Erro ao atualizar telefone do pedido:",
+                error
+            );
+
+            return {
+                success: false,
+                error: "Não foi possível salvar o telefone.",
+            };
+        }
+
+        return {
+            success: true,
+        };
+
+    } catch (error) {
+
+        console.error(
+            "Erro inesperado ao atualizar telefone:",
+            error
+        );
+
+        return {
+            success: false,
+            error: "Ocorreu um erro ao salvar o telefone.",
+        };
+    }
+}
